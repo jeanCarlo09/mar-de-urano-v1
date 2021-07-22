@@ -4,15 +4,21 @@ import { createStore, applyMiddleware } from "redux";
 import thunk from "redux-thunk";
 import { save, load } from "redux-localstorage-simple";
 import { composeWithDevTools } from "redux-devtools-extension";
-import { Link } from "gatsby";
+import { graphql } from "gatsby";
 
+import BlogApp from "../components/BlogApp";
 import rootReducer from "../redux/reducers/rootReducer";
-
 import MarDeUranoApp from "../components/MarDeUranoApp";
-import ShopLayout from "../components/layouts/ShopLayout";
+import { fetchBlogs, postSingleInfo } from "../redux/actions/blogActions";
+
 
 const Blog = ({ data, location }) => {
   let store;
+
+  const posts = data.allContentfulBlogPost.nodes;
+  const categories = data.allContentfulBlogCategories.nodes;
+
+  const handle = location.search.substring(1, location.search.length);
 
   if (typeof window !== `undefined`) {
     store = createStore(
@@ -27,88 +33,57 @@ const Blog = ({ data, location }) => {
     );
   }
 
+  (handle != '' && handle != undefined) ? store.dispatch(postSingleInfo(handle)) : store.dispatch(fetchBlogs(posts));
+
   return (
     <Provider store={store}>
       <MarDeUranoApp>
-        <ShopLayout headerTop="visible">
-          <div className="shop-area pt-95 pb-100">
-            <div className="container">
-              <div className="row">
-                <div className="col-12 d-flex justify-content-start align-items-stretch flex-wrap">
-                  {/* Card 1 */}
-                  <div className="col-12 col-sm-6 col-md-4">
-                    <div className="card p-0">
-                      <img
-                        className="card-img-top"
-                        src={require("../assets/images/misma1.png")}
-                        alt="Card image cap"
-                      />
-
-                      <div className="card-body">
-                        <h5 className="card-title">
-                          NEW WEBSITE & BLOG LAUNCH!
-                        </h5>
-                        <h6 className="card-title">10/10/2020</h6>
-                        <p className="card-text">
-                          Welcome to our new website and blog! <br />
-                          <br />
-                          We are super excited to finally share with you this
-                          new space where you will be able to learn more about
-                          the brand and purchase the products you love very
-                          easy!
-                          <br />
-                          <br />
-                          Thank you so much for supporting us so far. We could
-                          not have done this without you! <br />
-                          <br />
-                          With love,
-                          <br />
-                          <br />
-                          Mar de Urano
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-                  {/* Card 2 */}
-                  <div className="col-12 col-sm-6 col-md-4">
-                    <div className="card p-0">
-                      <img
-                        className="card-img-top"
-                        src={require("../assets/images/misma2.png")}
-                        alt="Card image cap"
-                      />
-
-                      <div className="card-body">
-                        <h5 className="card-title">
-                          MITO. A poem that tells you more about this painting.
-                        </h5>
-                        <h6 className="card-title">11/11/2020</h6>
-                        <p className="card-text">
-                          Mito de creación <br />
-                          <br />
-                          Seres de prisma <br />
-                          Gran Sol <br />
-                          El primer Quetzal Guacamaya
-                          <br /> Del fuego y del agua
-                          <br /> Mito de creación Maya
-                          <br /> En movimiento <br />
-                          Serpiente Jaguar
-                          <br /> Al pie del volcán me acompaña
-                          <br /> El alma dividida al bailar
-                          <br /> Entre el Quetzal de montaña y<br /> La
-                          Guacamaya Del Mar...
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </ShopLayout>
+        <BlogApp categories={categories}></BlogApp>
       </MarDeUranoApp>
     </Provider>
   );
 };
+
+export const query = graphql`
+query BlogPosts {
+  allContentfulBlogPost(sort: { fields: [date] }) {
+    nodes {
+      id
+      title
+      description {
+        description
+        childMarkdownRemark {
+          html
+        }
+      }
+      date
+      handle
+      author {
+       name
+      }
+      image {
+        fixed(width: 840, quality: 100) {
+          src
+        }
+      }
+      categories {
+        handle
+        id
+      }
+    }
+  }
+
+  allContentfulBlogCategories(sort: { fields: [title] }) {
+    nodes {
+      id
+      title
+      handle
+      blog_post {
+        id
+      }
+    }
+  }
+}`;
+
 
 export default Blog;

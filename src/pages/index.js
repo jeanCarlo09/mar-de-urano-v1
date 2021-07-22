@@ -6,6 +6,8 @@ import Diamond from '../components/landing/Diamond';
 import ModalDiamond from '../components/landing/ModalDiamond';
 import Splash from '../components/landing/Splash';
 
+import "../assets/scss/mardeurano.scss";
+
 export default function Index({ data }) {
 
   const imagesDiamonds = useMemo(() => get(data, 'allContentfulImagesLanding.nodes')[0].images);

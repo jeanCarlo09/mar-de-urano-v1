@@ -1,0 +1,338 @@
+query Products {
+  allShopifyProduct {
+    nodes {
+      id
+      shopifyId
+      title
+      availableForSale
+      descriptionHtml
+      publishedAt
+      handle
+      priceRange {
+        minVariantPrice {
+          currencyCode
+          amount
+        }
+        maxVariantPrice {
+          currencyCode
+          amount
+        }
+      }
+      variants {
+        shopifyId
+        availableForSale
+        selectedOptions {
+          name
+          value
+        }
+      }
+      images {
+        localFile {
+          childImageSharp {
+            fixed(width: 600, height: 800) {
+              src
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+query AllProducts {
+  allShopifyProduct {
+    nodes {
+      handle
+    }
+  }
+}
+
+query Product($handle: String!) {
+  shopifyProduct(handle: {eq: $handle}) {
+    shopifyId
+    title
+    availableForSale
+    descriptionHtml
+    handle
+    publishedAt
+    priceRange {
+      minVariantPrice {
+        currencyCode
+        amount
+      }
+      maxVariantPrice {
+        currencyCode
+        amount
+      }
+    }
+    variants {
+      shopifyId
+      availableForSale
+      selectedOptions {
+        name
+        value
+      }
+    }
+    images {
+      localFile {
+        childImageSharp {
+          fixed(width: 600, height: 800) {
+            src
+          }
+        }
+      }
+    }
+  }
+}
+
+query HomeSlider {
+  allContentfulHomeSlider(sort: {order: DESC, fields: createdAt}) {
+    nodes {
+      id
+      title
+      subtitle
+      textoBotn
+      slug
+      url
+      image {
+        title
+        fixed(width: 500, height: 540) {
+          src
+        }
+      }
+    }
+  }
+}
+
+query SiteInfo {
+  contentfulInformacionDelSitio {
+    id
+    nombre
+    logo {
+      fixed(width: 150, height: 30, cropFocus: CENTER) {
+        src
+      }
+    }
+    logoFooter {
+      fixed {
+        src
+      }
+    }
+  }
+}
+
+
+
+query AllProductsHandle {
+  allShopifyProduct {
+    nodes {
+      tags
+    }
+  }
+}
+
+query Pro {
+  allShopifyProduct {
+    nodes {
+      id
+      title
+    }
+  }
+}
+
+query Products {
+  allShopifyProduct(sort: {order: ASC, fields: title}) {
+    nodes {
+      id
+      shopifyId
+      title
+      availableForSale
+      description
+      handle
+      publishedAt
+      tags
+      productType
+      priceRange {
+        minVariantPrice {
+          currencyCode
+          amount
+        }
+        maxVariantPrice {
+          currencyCode
+          amount
+        }
+      }
+      variants {
+        shopifyId
+        availableForSale
+        title
+        selectedOptions {
+          name
+          value
+        }
+      }
+      images {
+        localFile {
+          childImageSharp {
+            fixed(width: 600, height: 800) {
+              src
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+query AllProducts {
+  allShopifyProduct {
+    nodes {
+      handle
+    }
+  }
+}
+
+query Product($handle: String!) {
+  shopifyProduct(handle: {eq: $handle}) {
+    shopifyId
+    title
+    availableForSale
+    descriptionHtml
+    handle
+    publishedAt
+    priceRange {
+      minVariantPrice {
+        currencyCode
+        amount
+      }
+      maxVariantPrice {
+        currencyCode
+        amount
+      }
+    }
+    variants {
+      shopifyId
+      availableForSale
+      selectedOptions {
+        name
+        value
+      }
+    }
+    images {
+      localFile {
+        childImageSharp {
+          fixed(width: 600, height: 800) {
+            src
+          }
+        }
+      }
+    }
+  }
+}
+
+query HomeSlider {
+  allContentfulHomeSlider(sort: {order: DESC, fields: createdAt}) {
+    nodes {
+      id
+      title
+      subtitle
+      textoBotn
+      slug
+      url
+      image {
+        title
+        fixed(width: 500, height: 540) {
+          src
+        }
+      }
+    }
+  }
+}
+
+query SiteInfo {
+  contentfulInformacionDelSitio {
+    id
+    nombre
+    logo {
+      fixed(width: 150, height: 30, cropFocus: CENTER) {
+        src
+      }
+    }
+    logoFooter {
+      fixed {
+        src
+      }
+    }
+  }
+}
+
+query Collections {
+  allShopifyCollection(sort: {fields: [title]}) {
+    nodes {
+      id
+      title
+      handle
+      products {
+        title
+        shopifyId
+        handle
+        description
+        availableForSale
+        priceRange {
+          maxVariantPrice {
+            amount
+          }
+          minVariantPrice {
+            amount
+          }
+        }
+        variants {
+          shopifyId
+          availableForSale
+          title
+          selectedOptions {
+            name
+            value
+          }
+        }
+        images {
+          localFile {
+            childImageSharp {
+              fixed(width: 600, height: 800) {
+                src
+              }
+            }
+          }
+        }
+      }
+      image {
+        localFile {
+          childImageSharp {
+            fixed(width: 600, height: 800) {
+              src
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+query Menu {
+  allContentfulMenu(filter: {visible: {eq: true}, isTop: {eq: true}}, sort: {fields: order, order: ASC}) {
+    nodes {
+      id
+      title
+      menuLink
+      menuChild {
+        title
+        menuLink
+        order
+        subMenu {
+          title
+          url
+        }
+      }
+    }
+  }
+}

@@ -1,3 +1,16 @@
+@import "variables";
+
+html {
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+*,
+*:before,
+*:after {
+  -webkit-box-sizing: inherit;
+  box-sizing: inherit;
+}
+
 body {
   margin: 0;
   padding: 0;
@@ -6,740 +19,873 @@ body {
 }
 
 .index {
-  max-width: 100vw;
-  width: 100vw;
+  background: url(../images/fondo.png) no-repeat center center fixed;
+  background-size: cover;
+  margin: 0;
   max-height: 100vh;
-  height: 100vh;
   overflow: hidden;
-  margin: 0;
-
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-}
-
-.main-section {
-  margin: 0;
-  padding: 0;
-  height: 100vh;
-
-  height: 100vh;
-  max-height: 100vh;
   width: 100vw;
-  overflow: hidden;
-}
-
-.a-shop {
-  text-decoration: none;
-  font-size: 30px;
-  color: rgb(0, 0, 0);
-  font-weight: 900;
-  letter-spacing: 2px;
-}
-
-.a-shop:hover {
-  text-decoration: none;
-  color: rgb(27, 27, 27);
-}
-
-.linkMDU {
-  left: 0;
-  margin: 0;
-  position: absolute;
-  right: 0;
-  text-align: center;
-  top: 10%;
-  z-index: 9;
+  height: 100vh;
+  position: relative;
 }
 
 .link {
-  left: 0;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  bottom: 22%;
   margin: 0;
+  left: 0;
   position: absolute;
   right: 0;
   text-align: center;
-  top: 65%;
-  z-index: 9;
-}
-
-.diamante1 {
-  position: absolute;
-  width: 40px;
-  animation-name: diamantito1;
-  animation-duration: 13s;
-  animation-iteration-count: infinite;
-  animation-delay: 10s;
-  z-index: 10;
-  animation-timing-function: cubic-bezier(0.42, 0, 0.95, 1);
-  top: -20%;
-}
-
-@keyframes diamantito1 {
-  0% {
-    top: -20%;
-    transform: rotate(370deg);
-    left: 3%;
-  }
-  20% {
-    top: 10%;
-    transform: rotate(340deg);
-    left: 6%;
-  }
-  40% {
-    top: 40%;
-    transform: rotate(370deg);
-    left: 3%;
-  }
-  60% {
-    top: 65%;
-    transform: rotate(340deg);
-    left: 6%;
-  }
-  80% {
-    top: 90%;
-    transform: rotate(370deg);
-    left: 3%;
-  }
-  100% {
-    top: 115%;
-    transform: rotate(340deg);
-    left: 6%;
-  }
-}
-
-.diamante2 {
-  position: absolute;
-  width: 40px;
-  animation-name: diamantito2;
-  animation-duration: 20s;
-  animation-iteration-count: infinite;
-  animation-delay: 15s;
-  z-index: 10;
-  animation-timing-function: cubic-bezier(0.42, 0, 0.95, 1);
-  top: -15%;
-}
-
-@keyframes diamantito2 {
-  0% {
-    top: -15%;
-    transform: rotate(420deg);
-    left: 20%;
-  }
-  10% {
-    top: 10%;
-    transform: rotate(275deg);
-    left: 25%;
-  }
-  20% {
-    top: 20%;
-    transform: rotate(330deg);
-    left: 20%;
-  }
-  30% {
-    top: 30%;
-    transform: rotate(280deg);
-    left: 25%;
-  }
-  40% {
-    top: 40%;
-    transform: rotate(330deg);
-    left: 20%;
-  }
-  50% {
-    top: 50%;
-    transform: rotate(280deg);
-    left: 25%;
-  }
-  60% {
-    top: 60%;
-    transform: rotate(330deg);
-    left: 20%;
-  }
-  70% {
-    top: 70%;
-    transform: rotate(280deg);
-    left: 25%;
-  }
-  80% {
-    top: 80%;
-    transform: rotate(330deg);
-    left: 20%;
-  }
-  90% {
-    top: 90%;
-    transform: rotate(280deg);
-    left: 25%;
-  }
-  100% {
-    top: 100%;
-    transform: rotate(330deg);
-    left: 20%;
-  }
-}
-
-.diamante3 {
-  position: absolute;
-  width: 40px;
-  animation-name: diamantito3;
-  animation-duration: 20s;
-  animation-iteration-count: infinite;
-  animation-delay: 10s;
-  z-index: 10;
-  animation-timing-function: cubic-bezier(0.42, 0, 0.95, 1);
-  top: -30%;
-}
-
-@keyframes diamantito3 {
-  0% {
-    top: -25%;
-    transform: rotate(310deg);
-    left: 75%;
-  }
-  35% {
-    top: 60%;
-    transform: rotate(590deg);
-    left: 25%;
-  }
-  45% {
-    top: 80%;
-    transform: rotate(560deg);
-    left: 40%;
-  }
-  55% {
-    top: 100%;
-    transform: rotate(590deg);
-    left: 25%;
-  }
-  65% {
-    top: 110%;
-    transform: rotate(590deg);
-    left: 25%;
-  }
-  100% {
-    top: 120%;
-    transform: rotate(560deg);
-    left: 60%;
-  }
-}
-
-.diamante4 {
-  position: absolute;
-  width: 40px;
-  animation-name: diamantito4;
-  animation-duration: 15s;
-  animation-iteration-count: infinite;
-  animation-delay: 17s;
-  z-index: 10;
-  animation-timing-function: cubic-bezier(0.42, 0, 0.95, 1);
-  top: -20%;
-}
-
-@keyframes diamantito4 {
-  0% {
-    top: -20%;
-    transform: rotate(280deg);
-    left: 85%;
-  }
-  30% {
-    top: 20%;
-    transform: rotate(340deg);
-    left: 35%;
-  }
-  50% {
-    top: 55%;
-    transform: rotate(310deg);
-    left: 60%;
-  }
-  75% {
-    top: 90%;
-    transform: rotate(335deg);
-    left: 35%;
-  }
-  100% {
-    top: 135%;
-    transform: rotate(310deg);
-    left: 60%;
-  }
-}
-
-.diamante5 {
-  position: absolute;
-  width: 40px;
-  animation-name: diamantito5;
-  animation-duration: 15s;
-  animation-iteration-count: infinite;
-  animation-delay: 10s;
-  z-index: 10;
-  animation-timing-function: cubic-bezier(0.42, 0, 0.95, 1);
-  top: -15%;
-}
-
-@keyframes diamantito5 {
-  0% {
-    top: -15%;
-    transform: rotate(390deg);
-    left: 75%;
-  }
-  10% {
-    top: 10%;
-    transform: rotate(350deg);
-    left: 78%;
-  }
-  20% {
-    top: 20%;
-    transform: rotate(390deg);
-    left: 75%;
-  }
-  30% {
-    top: 35%;
-    transform: rotate(350deg);
-    left: 78%;
-  }
-  40% {
-    top: 45%;
-    transform: rotate(390deg);
-    left: 75%;
-  }
-  50% {
-    top: 60%;
-    transform: rotate(350deg);
-    left: 78%;
-  }
-  60% {
-    top: 70%;
-    transform: rotate(390deg);
-    left: 75%;
-  }
-  70% {
-    top: 85%;
-    transform: rotate(350deg);
-    left: 78%;
-  }
-  80% {
-    top: 95%;
-    transform: rotate(390deg);
-    left: 75%;
-  }
-  90% {
-    top: 110%;
-    transform: rotate(350deg);
-    left: 78%;
-  }
-  100% {
-    top: 120%;
-    transform: rotate(390deg);
-    left: 75%;
-  }
-}
-
-.Guacamaya {
-  width: 100%;
-  height: 100%;
-}
-
-.DIVGuacamaya {
-  width: 0%;
-  height: 0%;
-  left: -220px;
-  /* Para que este escondido desde el inicio de la pagina así hace el efecto como que sale */
-  margin-top: 20%;
-  /* Para que salga de abajo de la pagina*/
-  position: relative;
-  z-index: 10;
-  animation-name: Guacamaya;
-  /* Se llama la animación del Keyframes*/
-  animation-duration: 20s;
-  /* le damos una duración de 5 segundo*/
-  /* animation-iteration-count: infinite; */
-  /* Le decimos que se repita infinitas veces*/
-  animation-iteration-count: 1;
-}
-
-@keyframes Guacamaya {
-  /* Creamos la animacion*/
-  0% {
-    left: -220px;
-    margin-top: 20%;
-    width: 20%;
-    height: 20%;
-  }
-  /*Le damos un inicio, tiene que ser igual a su inicio original*/
-  50% {
-    left: 50%;
-    margin-top: 5%;
-    width: 20%;
-    height: 20%;
-  }
-  /* Le decimos que cuando llegue al 50% de la pantalla se ubique en el top 5 porciento o sea arriba*/
-  80% {
-    left: 80%;
-    margin-top: 3%;
-    width: 15%;
-    height: 15%;
-  }
-  100% {
-    left: 100%;
-    margin-top: -3%;
-    width: 0%;
-    height: 0%;
-  }
-  /* Le decimos que cuando llegue al 100% de la pantalla se ubique en el top 30% porciento o sea al medio*/
-}
-
-.tiburcio {
-  top: 95%;
-  position: absolute;
-  width: 0%;
-  left: 75%;
+  -webkit-transition: 0.5s ease-in-out;
+  -o-transition: 0.5s ease-in-out;
+  transition: 0.5s ease-in-out;
   z-index: 5;
-  animation-name: Tiburcito;
-  animation-delay: 5s;
-  animation-duration: 5s;
-  animation-iteration-count: 1;
+  &-img {
+    height: 80px;
+    width: 130px;
+  }
+
+  &-img:hover {
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    -webkit-transition: 0.6s ease;
+    -o-transition: 0.6s ease;
+    transition: 0.6s ease;
+    -webkit-transform: scale(1.15, 1.15);
+    -ms-transform: scale(1.15, 1.15);
+    transform: scale(1.15, 1.15);
+  }
+
+  .promotion {
+    .arrow {
+      color: $white;
+      font-size: 1.2rem;
+      margin-top: 20px;
+      text-align: center;
+    }
+    .bounce {
+      -webkit-animation: bounce 2s infinite;
+      animation: bounce 2s infinite;
+    }
+
+    &-img {
+      margin: 0;
+      max-height: 300px;
+      max-width: 300px;
+      padding: 0;
+    }
+  }
 }
 
-@keyframes Tiburcito {
-  0% {
-    transform: rotate(410deg);
-    left: 70%;
-    top: 100%;
-    width: 15%;
-  }
-  44% {
-    top: 35%;
-    width: 35%;
-  }
-  50% {
-    top: 37%;
-    width: 32%;
-  }
+@-webkit-keyframes bounce {
+  0%,
+  20%,
+  50%,
+  80%,
   100% {
-    transform: rotate(290deg);
-    left: 5%;
-    top: 100%;
-    width: 22%;
+    -webkit-transform: translateY(0);
+    transform: translateY(0);
+  }
+  40% {
+    -webkit-transform: translateY(-20px);
+    transform: translateY(-20px);
+  }
+  60% {
+    -webkit-transform: translateY(-10px);
+    transform: translateY(-10px);
   }
 }
 
-.splash1 {
-  top: -1%;
+@keyframes bounce {
+  0%,
+  20%,
+  50%,
+  80%,
+  100% {
+    -webkit-transform: translateY(0);
+    transform: translateY(0);
+  }
+  40% {
+    -webkit-transform: translateY(-20px);
+    transform: translateY(-20px);
+  }
+  60% {
+    -webkit-transform: translateY(-10px);
+    transform: translateY(-10px);
+  }
+}
+
+.bosque {
+  height: 100%;
   position: absolute;
-  width: 0%;
-  height: 0%;
-  left: 10%;
-  z-index: 6;
-  animation-name: splashito1;
-  animation-delay: 5000ms;
-  animation-duration: 1350ms;
-  visibility: hidden;
+  right: 0;
+  top: 0%;
+  width: 50%;
+  z-index: 4;
 }
 
-.splash2 {
-  top: -5%;
+.helper-landing {
+  border: none;
+  border-radius: 50%;
+  bottom: 15px;
+  -webkit-box-shadow: 3px 3px 2px $black-shadow;
+  box-shadow: 3px 3px 2px $black-shadow;
+  color: $black;
+  font-size: 20px;
+  font-weight: bold;
+  height: 30px;
+  outline: none;
   position: absolute;
-  width: 0%;
-  height: 0%;
-  left: -47%;
+  right: 15px;
+  -webkit-transition: 0.3s ease-in-out;
+  -o-transition: 0.3s ease-in-out;
+  transition: 0.3s ease-in-out;
+  width: 30px;
   z-index: 6;
-  visibility: hidden;
-  animation-name: splashito2;
-  animation-delay: 8000ms;
-  animation-duration: 1250ms;
-}
-
-@keyframes splashito1 {
-  0% {
-    left: 10%;
-    top: -1%;
-    visibility: visible;
-    width: 110%;
-    height: 110%;
-  }
-  100% {
-    left: 10%;
-    top: -1%;
-    visibility: hidden;
-    width: 110%;
-    height: 110%;
-  }
-}
-
-@keyframes splashito2 {
-  0% {
-    left: -48%;
-    top: -5%;
-    visibility: visible;
-    width: 110%;
-    height: 110%;
-  }
-  100% {
-    left: -48%;
-    top: -5%;
-    visibility: hidden;
-    width: 110%;
-    height: 110%;
+  &:hover {
+    -webkit-transform: scale(1.2, 1.2);
+    -ms-transform: scale(1.2, 1.2);
+    transform: scale(1.2, 1.2);
   }
 }
 
 .olas {
+  height: 90%;
   position: absolute;
   top: 10%;
   width: 100%;
-  height: 90%;
 }
 
-.bosque {
-  top: 0%;
+.landing-logo {
+  left: 50%;
+  margin: 0%;
   position: absolute;
+  -webkit-transform: translate(-50%, 0%);
+  -ms-transform: translate(-50%, 0%);
+  transform: translate(-50%, 0%);
+  -webkit-transition: 0.5s ease-in-out;
+  -o-transition: 0.5s ease-in-out;
+  transition: 0.5s ease-in-out;
+  top: 0;
+
+  &-img {
+    height: 150px;
+    width: 500px;
+  }
+}
+
+.diamond {
+  -webkit-animation-duration: 12s, 3s;
+  animation-duration: 12s, 3s;
+  -webkit-animation-iteration-count: infinite, infinite;
+  animation-iteration-count: infinite, infinite;
+  -webkit-animation-play-state: running, running;
+  animation-play-state: running, running;
+  -webkit-animation-timing-function: linear, ease-in-out;
+  animation-timing-function: linear, ease-in-out;
+  display: inline-block;
+  position: absolute;
+  top: -18%;
+  -webkit-transition: 0.5s ease;
+  -o-transition: 0.5s ease;
+  transition: 0.5s ease;
+  z-index: 999;
+
+  &:hover {
+    -webkit-animation-play-state: paused, paused;
+    animation-play-state: paused, paused;
+  }
+
+  &:hover &-img {
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    -webkit-transform: scale(1.1, 1.1);
+    -ms-transform: scale(1.1, 1.1);
+    transform: scale(1.1, 1.1);
+  }
+
+  &-img {
+    cursor: pointer;
+    margin: 0%;
+    width: 2.4rem;
+  }
+
+  &:nth-child(1) {
+    -webkit-animation-name: diamond-fall, diamond-shake-d1;
+    animation-name: diamond-fall, diamond-shake-d1;
+    -webkit-animation-delay: 2s, 2s;
+    animation-delay: 2s, 2s;
+    left: 1%;
+  }
+
+  &:nth-child(2) {
+    -webkit-animation-name: diamond-fall, diamond-shake-d2;
+    animation-name: diamond-fall, diamond-shake-d2;
+    -webkit-animation-delay: 4.5s, 5s;
+    animation-delay: 4.5s, 5s;
+    left: 19%;
+  }
+
+  &:nth-child(3) {
+    -webkit-animation-name: diamond-fall, diamond-shake-d3;
+    animation-name: diamond-fall, diamond-shake-d3;
+    -webkit-animation-delay: 6s, 2.5s;
+    animation-delay: 6s, 2.5s;
+    left: 38%;
+  }
+
+  &:nth-child(4) {
+    -webkit-animation-name: diamond-fall, diamond-shake;
+    animation-name: diamond-fall, diamond-shake;
+    -webkit-animation-delay: 4s, 4s;
+    animation-delay: 4s, 4s;
+    left: 57%;
+  }
+
+  &:nth-child(5) {
+    -webkit-animation-name: diamond-fall, diamond-shake;
+    animation-name: diamond-fall, diamond-shake;
+    -webkit-animation-delay: 8s, 4s;
+    animation-delay: 8s, 4s;
+    left: 76%;
+  }
+
+  &:nth-child(6) {
+    -webkit-animation-name: diamond-fall, diamond-shake;
+    animation-name: diamond-fall, diamond-shake;
+    -webkit-animation-delay: 3s, 2s;
+    animation-delay: 3s, 2s;
+    left: 85%;
+  }
+}
+
+@-webkit-keyframes diamond-fall {
+  0% {
+    top: -10%;
+  }
+
+  100% {
+    top: 100%;
+  }
+}
+
+@keyframes diamond-fall {
+  0% {
+    top: -10%;
+  }
+
+  100% {
+    top: 100%;
+  }
+}
+
+@-webkit-keyframes diamond-shake {
+  0% {
+    -webkit-transform: translateX(0px) rotate(290deg);
+    transform: translateX(0px) rotate(290deg);
+  }
+
+  50% {
+    -webkit-transform: translateX(70px) rotate(330deg);
+    transform: translateX(70px) rotate(330deg);
+  }
+
+  100% {
+    -webkit-transform: translate(0px) rotate(290deg);
+    transform: translate(0px) rotate(290deg);
+  }
+}
+
+@keyframes diamond-shake {
+  0% {
+    -webkit-transform: translateX(0px) rotate(290deg);
+    transform: translateX(0px) rotate(290deg);
+  }
+
+  50% {
+    -webkit-transform: translateX(70px) rotate(330deg);
+    transform: translateX(70px) rotate(330deg);
+  }
+
+  100% {
+    -webkit-transform: translate(0px) rotate(290deg);
+    transform: translate(0px) rotate(290deg);
+  }
+}
+
+@-webkit-keyframes diamond-shake-d1 {
+  0% {
+    -webkit-transform: translateX(0px) rotate(350deg);
+    transform: translateX(0px) rotate(350deg);
+  }
+
+  50% {
+    -webkit-transform: translateX(70px) rotate(330deg);
+    transform: translateX(70px) rotate(330deg);
+  }
+
+  100% {
+    -webkit-transform: translate(0px) rotate(350deg);
+    transform: translate(0px) rotate(350deg);
+  }
+}
+
+@keyframes diamond-shake-d1 {
+  0% {
+    -webkit-transform: translateX(0px) rotate(350deg);
+    transform: translateX(0px) rotate(350deg);
+  }
+
+  50% {
+    -webkit-transform: translateX(70px) rotate(330deg);
+    transform: translateX(70px) rotate(330deg);
+  }
+
+  100% {
+    -webkit-transform: translate(0px) rotate(350deg);
+    transform: translate(0px) rotate(350deg);
+  }
+}
+
+@-webkit-keyframes diamond-shake-d2 {
+  0% {
+    -webkit-transform: translateX(0px) rotate(30deg);
+    transform: translateX(0px) rotate(30deg);
+  }
+
+  50% {
+    -webkit-transform: translateX(70px) rotate(0deg);
+    transform: translateX(70px) rotate(0deg);
+  }
+
+  100% {
+    -webkit-transform: translate(0px) rotate(30deg);
+    transform: translate(0px) rotate(30deg);
+  }
+}
+
+@keyframes diamond-shake-d2 {
+  0% {
+    -webkit-transform: translateX(0px) rotate(30deg);
+    transform: translateX(0px) rotate(30deg);
+  }
+
+  50% {
+    -webkit-transform: translateX(70px) rotate(0deg);
+    transform: translateX(70px) rotate(0deg);
+  }
+
+  100% {
+    -webkit-transform: translate(0px) rotate(30deg);
+    transform: translate(0px) rotate(30deg);
+  }
+}
+
+@-webkit-keyframes diamond-shake-d3 {
+  0% {
+    -webkit-transform: translateX(0px) rotate(290deg);
+    transform: translateX(0px) rotate(290deg);
+  }
+
+  50% {
+    -webkit-transform: translateX(70px) rotate(330deg);
+    transform: translateX(70px) rotate(330deg);
+  }
+
+  100% {
+    -webkit-transform: translate(0px) rotate(290deg);
+    transform: translate(0px) rotate(290deg);
+  }
+}
+
+@keyframes diamond-shake-d3 {
+  0% {
+    -webkit-transform: translateX(0px) rotate(290deg);
+    transform: translateX(0px) rotate(290deg);
+  }
+
+  50% {
+    -webkit-transform: translateX(70px) rotate(330deg);
+    transform: translateX(70px) rotate(330deg);
+  }
+
+  100% {
+    -webkit-transform: translate(0px) rotate(290deg);
+    transform: translate(0px) rotate(290deg);
+  }
+}
+
+.Guacamaya {
   height: 100%;
-  width: 50%;
-  right: 0;
-  z-index: 8;
+  width: 100%;
 }
 
-@media screen and (max-width: 575.98px) {
-  .index {
-    background-image: url(../images/375.png);
-    background-size: 100% 100%;
+.DIVGuacamaya {
+  -webkit-animation: Guacamaya 35s 3s infinite;
+  animation: Guacamaya 35s 3s infinite;
+  height: 0%;
+  left: -220px;
+  margin-top: 20%;
+  position: absolute;
+  visibility: hidden;
+  width: 0%;
+  z-index: 0;
+}
+
+@-webkit-keyframes Guacamaya {
+  0% {
+    height: 20%;
+    left: -220px;
+    margin-top: 20%;
+    visibility: visible;
+    width: 20%;
   }
-  .splash1,
-  .splash2,
-  .tiburcio,
-  .bosque {
-    display: none;
+
+  43% {
+    height: 20%;
+    left: 50%;
+    margin-top: 5%;
+    width: 20%;
   }
-  .DIVGuacamaya {
-    animation-name: Guacamaya;
+
+  64% {
+    height: 0%;
+    left: 100%;
+    margin-top: -3%;
+    visibility: hidden;
+    width: 0%;
   }
-  @keyframes Guacamaya {
-    /* Creamos la animacion*/
-    0% {
-      left: -220px;
-      margin-top: 20%;
-      width: 50%;
-      height: 15%;
-    }
-    30% {
-      left: 30%;
-      margin-top: 5%;
-      width: 40%;
-      height: 20%;
-    }
-    /*Le damos un inicio, tiene que ser igual a su inicio original*/
-    50% {
-      left: 50%;
-      margin-top: 5%;
-      width: 30%;
-      height: 15%;
-    }
-    /* Le decimos que cuando llegue al 50% de la pantalla se ubique en el top 5 porciento o sea arriba*/
-    80% {
+
+  65% {
+    left: -220px;
+    margin-top: 20%;
+    visibility: hidden;
+  }
+}
+
+@keyframes Guacamaya {
+  0% {
+    height: 20%;
+    left: -220px;
+    margin-top: 20%;
+    visibility: visible;
+    width: 20%;
+  }
+
+  43% {
+    height: 20%;
+    left: 50%;
+    margin-top: 5%;
+    width: 20%;
+  }
+
+  64% {
+    height: 0%;
+    left: 100%;
+    margin-top: -3%;
+    visibility: hidden;
+    width: 0%;
+  }
+
+  65% {
+    left: -220px;
+    margin-top: 20%;
+    visibility: hidden;
+  }
+}
+
+.tiburcio {
+  -webkit-animation: Tiburcito 46s infinite 4s;
+  animation: Tiburcito 46s infinite 4s;
+  left: 75%;
+  position: absolute;
+  top: 110%;
+  width: 0%;
+  z-index: 3;
+}
+
+@-webkit-keyframes Tiburcito {
+  89% {
+    left: 75%;
+    top: 110%;
+    width: 0%;
+  }
+
+  90% {
+    left: 70%;
+    -webkit-transform: rotate(410deg);
+    transform: rotate(410deg);
+    top: 100%;
+    width: 15%;
+  }
+
+  94% {
+    top: 35%;
+    width: 35%;
+  }
+
+  96% {
+    top: 37%;
+    width: 32%;
+  }
+
+  100% {
+    left: 5%;
+    -webkit-transform: rotate(290deg);
+    transform: rotate(290deg);
+    top: 110%;
+    width: 22%;
+  }
+}
+
+@keyframes Tiburcito {
+  89% {
+    left: 75%;
+    top: 110%;
+    width: 0%;
+  }
+
+  90% {
+    left: 70%;
+    -webkit-transform: rotate(410deg);
+    transform: rotate(410deg);
+    top: 100%;
+    width: 15%;
+  }
+
+  94% {
+    top: 35%;
+    width: 35%;
+  }
+
+  96% {
+    top: 37%;
+    width: 32%;
+  }
+
+  100% {
+    left: 5%;
+    -webkit-transform: rotate(290deg);
+    transform: rotate(290deg);
+    top: 110%;
+    width: 22%;
+  }
+}
+
+.splash {
+  margin: 0;
+  position: absolute;
+  height: 66%;
+  visibility: hidden;
+  width: 52%;
+  z-index: 1;
+
+  &:nth-child(7) {
+    -webkit-animation: splashito1 46s infinite 4.7s;
+    animation: splashito1 46s infinite 4.7s;
+    bottom: 0;
+    right: 0;
+  }
+
+  &:nth-child(8) {
+    -webkit-animation: splashito2 46s infinite 4.7s;
+    animation: splashito2 46s infinite 4.7s;
+    bottom: 0;
+    left: -8%;
+  }
+}
+
+@-webkit-keyframes splashito1 {
+  0%,
+  89% {
+    visibility: hidden;
+  }
+
+  90% {
+    visibility: visible;
+  }
+
+  91% {
+    visibility: hidden;
+  }
+}
+
+@keyframes splashito1 {
+  0%,
+  89% {
+    visibility: hidden;
+  }
+
+  90% {
+    visibility: visible;
+  }
+
+  91% {
+    visibility: hidden;
+  }
+}
+
+@-webkit-keyframes splashito2 {
+  0%,
+  95% {
+    visibility: hidden;
+  }
+
+  96% {
+    visibility: visible;
+  }
+
+  97% {
+    visibility: hidden;
+  }
+}
+
+@keyframes splashito2 {
+  0%,
+  95% {
+    visibility: hidden;
+  }
+
+  96% {
+    visibility: visible;
+  }
+
+  97% {
+    visibility: hidden;
+  }
+}
+
+@media screen and (max-width: 855px) {
+  .diamond {
+    &:nth-child(6) {
       left: 80%;
-      margin-top: 3%;
-      width: 15%;
-      height: 10%;
-    }
-    100% {
-      left: 100%;
-      margin-top: -3%;
-      width: 0%;
-      height: 0%;
-    }
-    /* Le decimos que cuando llegue al 100% de la pantalla se ubique en el top 30% porciento o sea al medio*/
-  }
-  .olas {
-    position: absolute;
-    top: 51%;
-    width: 100%;
-    height: 49%;
-  }
-  @keyframes splashito1 {
-    0% {
-      left: 10%;
-      top: -1%;
-      visibility: hidden;
-    }
-    100% {
-      left: 10%;
-      top: -1%;
-      visibility: hidden;
-    }
-  }
-  @keyframes splashito2 {
-    0% {
-      left: -48%;
-      top: -5%;
-      visibility: hidden;
-    }
-    100% {
-      left: -48%;
-      top: -5%;
-      visibility: hidden;
     }
   }
 }
 
-@media (min-width: 576px) and (max-width: 767.98px) {
-  .index {
-    background-image: url(../images/fondo1366.png);
-    background-size: 150% 100%;
+@media screen and (max-width: 800px) {
+  .link {
+    bottom: 18%;
   }
-  .splash1,
-  .splash2,
+
+  .bosque,
   .tiburcio,
-  .bosque {
+  .DIVGuacamaya {
     display: none;
   }
+
+  .splash {
+    &:nth-child(7),
+    &:nth-child(8) {
+      display: none;
+    }
+  }
+}
+
+@media screen and (max-width: 767px) {
   .olas {
+    height: 72%;
     position: absolute;
     top: 28%;
     width: 100%;
-    height: 72%;
-  }
-  .DIVGuacamaya {
-    animation-name: Guacamaya;
-  }
-  @keyframes Guacamaya {
-    /* Creamos la animacion*/
-    0% {
-      left: -220px;
-      margin-top: 20%;
-      width: 50%;
-      height: 15%;
-    }
-    30% {
-      left: 30%;
-      margin-top: 5%;
-      width: 40%;
-      height: 20%;
-    }
-    /*Le damos un inicio, tiene que ser igual a su inicio original*/
-    50% {
-      left: 50%;
-      margin-top: 5%;
-      width: 30%;
-      height: 15%;
-    }
-    /* Le decimos que cuando llegue al 50% de la pantalla se ubique en el top 5 porciento o sea arriba*/
-    80% {
-      left: 80%;
-      margin-top: 3%;
-      width: 15%;
-      height: 10%;
-    }
-    100% {
-      left: 100%;
-      margin-top: -3%;
-      width: 0%;
-      height: 0%;
-    }
-    /* Le decimos que cuando llegue al 100% de la pantalla se ubique en el top 30% porciento o sea al medio*/
   }
 }
 
-@media (min-width: 768px) and (max-width: 991.98px) {
-  .index {
-    background-image: url(../images/fondo1366.png);
-    background-size: 130% 100%;
-  }
+@media screen and (max-width: 700px) {
+  .diamond {
+    &:nth-child(2) {
+      display: none;
+    }
+    &:nth-child(3) {
+      left: 19%;
+    }
+    &:nth-child(4) {
+      -webkit-animation-delay: 2.5s, 2.5s;
+      animation-delay: 2.5s, 2.5s;
+    }
 
-  //   .index {
-  //     display: none;
-  //   }
-
-  .DIVGuacamaya {
-    animation-name: Guacamaya;
-  }
-  @keyframes Guacamaya {
-    /* Creamos la animacion*/
-    0% {
-      left: -220px;
-      margin-top: 20%;
-      width: 50%;
-      height: 15%;
+    &-img {
+      width: 2.2rem;
     }
-    30% {
-      left: 30%;
-      margin-top: 5%;
-      width: 40%;
-      height: 20%;
-    }
-    /*Le damos un inicio, tiene que ser igual a su inicio original*/
-    50% {
-      left: 50%;
-      margin-top: 5%;
-      width: 30%;
-      height: 15%;
-    }
-    /* Le decimos que cuando llegue al 50% de la pantalla se ubique en el top 5 porciento o sea arriba*/
-    80% {
-      left: 80%;
-      margin-top: 3%;
-      width: 15%;
-      height: 10%;
-    }
-    100% {
-      left: 100%;
-      margin-top: -3%;
-      width: 0%;
-      height: 0%;
-    }
-    /* Le decimos que cuando llegue al 100% de la pantalla se ubique en el top 30% porciento o sea al medio*/
   }
 }
 
-@media (min-width: 992px) and (max-width: 1199.98px) {
-  .index {
-    background-image: url(../images/fondo1366.png);
-    background-size: 100% 100%;
+@media screen and (max-width: 700px) {
+  .landing-logo {
+    display: none;
   }
 
-  .DIVGuacamaya {
-    animation-name: Guacamaya;
-  }
-  @keyframes Guacamaya {
-    /* Creamos la animacion*/
-    0% {
-      left: -220px;
-      margin-top: 20%;
-      width: 50%;
-      height: 15%;
-    }
-    30% {
-      left: 30%;
-      margin-top: 5%;
-      width: 40%;
-      height: 20%;
-    }
-    /*Le damos un inicio, tiene que ser igual a su inicio original*/
-    50% {
-      left: 50%;
-      margin-top: 5%;
-      width: 30%;
-      height: 15%;
-    }
-    /* Le decimos que cuando llegue al 50% de la pantalla se ubique en el top 5 porciento o sea arriba*/
-    80% {
-      left: 80%;
-      margin-top: 3%;
-      width: 15%;
-      height: 10%;
-    }
-    100% {
-      left: 100%;
-      margin-top: -3%;
-      width: 0%;
-      height: 0%;
-    }
-    /* Le decimos que cuando llegue al 100% de la pantalla se ubique en el top 30% porciento o sea al medio*/
+  .index {
+    background-image: url(../images/fondosmall.png);
   }
 }
 
-@media (min-width: 1200px) {
-  .index {
-    background-image: url(../images/fondo1920.png);
-    background-size: 100% 100%;
+@media screen and (max-width: 620px) {
+  .link {
+    .promotion {
+      .arrow {
+        font-size: 1.2rem;
+      }
+
+      &-img {
+        max-height: 250px;
+        max-width: 250px;
+      }
+    }
+
+    bottom: 14%;
+  }
+
+  .diamond {
+    &:nth-child(6) {
+      display: none;
+    }
+  }
+}
+
+@media screen and (max-height: 620px) {
+  .link {
+    .promotion {
+      &-img {
+        max-height: 250px;
+        max-width: 250px;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 510px) {
+  .diamond {
+    &:nth-child(5) {
+      left: 67%;
+    }
+  }
+  .olas {
+    height: 66%;
+    top: 34%;
+    width: 100%;
+  }
+
+  .diamond {
+    &-img {
+      width: 2.2rem;
+    }
+  }
+}
+
+@media screen and (max-width: 400px) {
+  .link {
+    bottom: 10%;
+  }
+
+  .diamond {
+    &:nth-child(3) {
+      -webkit-animation-delay: 4s, 2s;
+      animation-delay: 4s, 2s;
+      left: 16%;
+    }
+  }
+
+  .olas {
+    height: 56%;
+    top: 44%;
+    width: 100%;
+  }
+}
+
+@media screen and (max-width: 370px) {
+  .diamond {
+    &:nth-child(5) {
+      -webkit-animation-delay: 5s, 5s;
+      animation-delay: 5s, 5s;
+      left: 65%;
+    }
+  }
+}
+
+@media screen and (max-width: 350px) {
+  .diamond {
+    &:nth-child(5) {
+      left: 50%;
+    }
+  }
+}
+
+@media screen and (max-height: 560px) {
+  .link {
+    .promotion {
+      .arrow {
+        font-size: 1rem;
+      }
+
+      &-img {
+        max-height: 230px;
+        max-width: 230px;
+      }
+    }
+  }
+}
+
+@media screen and (max-height: 530px) {
+  .link {
+    bottom: 10%;
+  }
+}
+
+@media screen and (max-height: 460px) {
+  .link {
+    bottom: 4%;
+  }
+}
+
+@media screen and (max-height: 430px) {
+  .link {
+    bottom: 0%;
+  }
+
+  .diamond {
+    &-img {
+      width: 2rem;
+    }
+  }
+}
+
+@media screen and (max-height: 410px) {
+  .link {
+    .promotion {
+      .arrow {
+        font-size: 1rem;
+      }
+
+      &-img {
+        max-height: 210px;
+        max-width: 210px;
+      }
+    }
+
+    &-img {
+      height: 65px;
+      width: 110px;
+    }
+  }
+
+  .landing-logo {
+    top: -5%;
+
+    &-img {
+      height: 120px;
+      width: 400px;
+    }
+  }
+}
+
+@media screen and (max-height: 350px) {
+  .landing-logo {
+    &-img {
+      height: 105px;
+      width: 350px;
+    }
   }
 }

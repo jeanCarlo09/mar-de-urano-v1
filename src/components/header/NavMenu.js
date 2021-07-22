@@ -8,11 +8,10 @@ import NavMenuItem from "./sub-components/NavMenuItem";
 const NavMenu = ({ strings, menuWhiteClass, sidebarMenu, menuOptions }) => {
   return (
     <div
-      className={` ${
-        sidebarMenu
+      className={` ${sidebarMenu
           ? "sidebar-menu"
           : `main-menu ${menuWhiteClass ? menuWhiteClass : ""}`
-      } `}
+        } `}
     >
       <nav>
         <ul>

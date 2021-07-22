@@ -3,7 +3,8 @@ import { Link } from "gatsby";
 import { multilanguage } from "redux-multilanguage";
 
 const MobileMenuItem = ({ item }) => {
-  return item && item.menuChild === null ? (
+
+  return (item.menuChild === null && item.subMenu === null) ? (
     <li>
       <Link to={`/${item.menuLink}`}>{item.title}</Link>
     </li>
@@ -11,7 +12,8 @@ const MobileMenuItem = ({ item }) => {
     <li className="menu-item-has-children">
       <Link to={`/${item.menuLink}`}>{item.title}</Link>
       <ul className="sub-menu">
-        {item.menuChild &&
+
+        {(item.menuChild) ?
           item.menuChild
             .sort((a, b) => (a.order > b.order ? 1 : -1))
             .map((itemSubmenu) => (
@@ -30,7 +32,23 @@ const MobileMenuItem = ({ item }) => {
                     ))}
                 </ul>
               </li>
-            ))}
+            ))
+          :
+          (item.subMenu) &&
+          <>
+
+            {
+              item.subMenu.map((itemSubmenuItem) => (
+                <li key={itemSubmenuItem.id}>
+                  <Link to={`/${item.menuLink}?${itemSubmenuItem.url}`}>
+                    {itemSubmenuItem.title}
+                  </Link>
+                </li>
+              ))
+            }
+
+          </>
+        }
       </ul>
     </li>
   );

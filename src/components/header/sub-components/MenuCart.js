@@ -36,13 +36,24 @@ const MenuCart = ({ cartData, deleteFromCart }) => {
                 ? (cartTotalPrice += finalDiscountedPrice * single.quantity)
                 : (cartTotalPrice += finalProductPrice * single.quantity);
 
+
+              let imageCustomProduct = null;
+
+              if (single.productType === 'Custom') {
+                let customProduct = single.variants.filter((item) =>
+                (item.print === single.selectedProductPrint &&
+                  item.color === single.selectedProductColor &&
+                  item.size === single.selectedProductSize))[0];
+                imageCustomProduct = customProduct.image.localFile.childImageSharp.fixed;
+              }
+
               return (
                 <li className="single-shopping-cart" key={key}>
                   <div className="shopping-cart-img">
                     <Link to={`/${single.handle}`}>
                       <img
                         alt=""
-                        src={imagesProduct[0].src}
+                        src={single.productType === 'Custom' ? imageCustomProduct.src : imagesProduct[0].src}
                         className="img-fluid"
                       />
                     </Link>
@@ -68,6 +79,11 @@ const MenuCart = ({ cartData, deleteFromCart }) => {
                       {single.selectedProductMaterial && (
                         <span>Material: {single.selectedProductSize}</span>
                       )}
+
+                      {single.selectedProductPrint && (
+                        <span>Print: {single.selectedProductPrint}</span>
+                      )}
+
                     </div>
                   </div>
                   <div className="shopping-cart-delete">

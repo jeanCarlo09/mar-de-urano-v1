@@ -14,9 +14,9 @@
       top: 50%;
       transform: translateY(-50%);
       a {
-        background-color: #ff0000;
+        background-color: $bg-red;
         border-radius: 50px;
-        color: #fff;
+        color: $white;
         display: inline-block;
         font-size: 25px;
         height: 60px;
@@ -34,7 +34,7 @@
       display: flex;
       ul {
         li {
-          color: #333;
+          color: $meta-dark-gray;
           display: inline-block;
           font-size: 14px;
           letter-spacing: 1px;
@@ -45,7 +45,7 @@
           display: inline-block;
           line-height: 1;
           &::before {
-            background-color: #555;
+            background-color: $meta-gray;
             content: "";
             height: 2px;
             position: absolute;
@@ -58,7 +58,7 @@
             display: none;
           }
           a {
-            color: #333;
+            color: $meta-dark-gray;
             &:hover {
               color: $theme-color;
             }
@@ -85,7 +85,7 @@
       line-height: 26px;
     }
     blockquote {
-      color: #333;
+      color: $meta-dark-gray;
       font-size: 18px;
       margin: 25px 0 26px;
       line-height: 34px;
@@ -275,7 +275,7 @@
         background: transparent none repeat scroll 0 0;
         border: 1px solid #eaeaea;
         box-shadow: none;
-        color: #333;
+        color: $meta-dark-gray;
         height: 45px;
         margin-bottom: 30px;
         padding-left: 20px;
@@ -286,7 +286,7 @@
         background: transparent none repeat scroll 0 0;
         border: 1px solid #eaeaea;
         box-shadow: none;
-        color: #333;
+        color: $meta-dark-gray;
         height: 250px;
         padding-top: 20px;
         margin-bottom: 20px;
@@ -295,7 +295,7 @@
       input {
         background-color: $theme-color;
         border: medium none;
-        color: #fff;
+        color: $white;
         cursor: pointer;
         display: inline-block;
         font-weight: 500;
@@ -305,7 +305,7 @@
         padding: 14px 30px 13px;
         width: inherit;
         &:hover {
-          background-color: #333;
+          background-color: $meta-dark-gray;
         }
       }
     }

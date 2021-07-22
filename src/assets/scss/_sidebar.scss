@@ -60,9 +60,10 @@
             cursor: pointer;
             z-index: 999;
             width: auto;
+            left: 10px;
             &:checked ~ .checkmark {
-              background-color: #fa6bff;
-              border: 2px solid #fa6bff;
+              background-color: $theme-color;
+              border: 2px solid $theme-color;
             }
             &:checked ~ .checkmark::after {
               display: block;
@@ -70,7 +71,7 @@
           }
           .checkmark {
             position: absolute;
-            left: 0;
+            left: 10px;
             height: 15px;
             width: 15px;
             background-color: #fff;
@@ -98,10 +99,10 @@
         }
         a,
         button {
-          display: block;
+          display: inline;
           background: none;
           padding: 0;
-          padding-left: 30px;
+          padding-left: 34px;
           border: none;
           width: 100%;
           text-align: left;
@@ -121,10 +122,11 @@
             position: absolute;
             top: 50%;
             transform: translateY(-50%);
-            right: 0;
+            margin-left: 10px;
           }
           &:hover,
           &.active {
+            color: $theme-color;
             span {
               color: #fff;
               background-color: $theme-color;

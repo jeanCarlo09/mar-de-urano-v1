@@ -259,6 +259,13 @@
         width: calc(100% - 48px - 48px);
         transition-delay: 0.1s;
       }
+
+      .pro-cart-custom {
+        font-size: 14px;
+        width: 100%;
+        transition-delay: 0.1s;
+      }
+
       .pro-quickview {
         width: 48px;
         border-left: 1px solid rgba(255, 255, 255, 0.2);
@@ -544,8 +551,8 @@
           border-radius: 50px;
           cursor: pointer;
           display: inline-block;
-          height: 14px;
-          width: 14px;
+          height: 30px !important;
+          width: 30px !important;
           margin-right: 15px;
           transition: all 0.4s ease 0s;
           &:last-child {
@@ -556,6 +563,7 @@
             opacity: 0;
             cursor: pointer;
             height: 100%;
+            width: 100%;
 
             &:checked {
               & ~ .checkmark {
@@ -608,8 +616,8 @@
               position: absolute;
               top: -7px;
               left: -4px;
-              width: 20px;
-              height: 20px;
+              width: 32px !important;
+              height: 32px !important;
               border: 2px solid #333;
               border-radius: 50%;
               content: "";
@@ -2303,5 +2311,60 @@
   .modal-dialog {
     padding: 0;
     margin: 5% auto;
+  }
+}
+
+.product-info {
+  display: flex;
+  justify-content: center;
+  padding-top: 75px;
+  border-bottom: 1px solid #d7d7d7;
+
+  li {
+    position: relative;
+    padding: 0;
+    margin: 0;
+    border-radius: 0;
+    border: none;
+
+    &::before {
+      box-shadow: none;
+      border-width: 0;
+    }
+
+    span {
+      padding: 1em 0;
+      display: block;
+      background-color: transparent;
+      border-bottom: 3px solid transparent;
+      font-size: 24px;
+      font-weight: 500;
+      line-height: 1;
+      margin: 0 15px 0;
+      color: #666;
+      cursor: pointer;
+    }
+  }
+
+  li.active {
+    border-bottom: 2px solid #000;
+    background-color: transparent;
+
+    span {
+      color: $black;
+    }
+  }
+}
+
+.product-info-text {
+  pre {
+    margin: 0 0 8px;
+    font-size: 1rem;
+    line-height: 28px;
+    color: #333;
+
+    font-weight: 400;
+    color: #333;
+    font-family: "Poppins", sans-serif;
   }
 }

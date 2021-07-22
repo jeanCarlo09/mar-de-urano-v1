@@ -59,6 +59,11 @@ const HeaderApp = ({
               url
             }
           }
+          subMenu {
+            id
+            title
+            url
+          }
         }
       }
     }
@@ -69,11 +74,9 @@ const HeaderApp = ({
       className={`header-area clearfix ${headerBgClass ? headerBgClass : ""}`}
     >
       <div
-        className={` ${
-          headerPaddingClass ? headerPaddingClass : ""
-        } sticky-bar header-res-padding clearfix ${
-          scroll > headerTop ? "stick" : ""
-        }`}
+        className={` ${headerPaddingClass ? headerPaddingClass : ""
+          } sticky-bar header-res-padding clearfix ${scroll > headerTop ? "stick" : ""
+          }`}
       >
         <div className={layout === "container-fluid" ? layout : "container"}>
           <div className="row">

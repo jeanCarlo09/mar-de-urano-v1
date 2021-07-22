@@ -11,7 +11,7 @@ import get from "lodash/get";
 import MarDeUranoApp from "../components/MarDeUranoApp";
 import ShopLayout from "../components/layouts/ShopLayout";
 import { graphql } from "gatsby";
-import { IdeologyCards } from "../components/our-world/ideologyCards";
+// import { IdeologyCards } from "../components/our-world/ideologyCards";
 
 const OurWorld = ({ data }) => {
 

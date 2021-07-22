@@ -1,7 +1,7 @@
 import React from 'react';
 import parse from "html-react-parser";
 
-export const IdeologyCards = ({ card }) => {
+const IdeologyCards = ({ card }) => {
 
     return (
         <div className="col-md-6  col-sm-12 ideology-cards-item">
@@ -16,3 +16,5 @@ export const IdeologyCards = ({ card }) => {
         </div>
     );
 }
+
+export default IdeologyCards;

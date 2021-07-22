@@ -144,11 +144,11 @@ const OurWorld = ({ data }) => {
               <div className="mt-5 ideology-cards">
                 <div className="row">
 
-                  {
+                  {/* {
                     ideologyCards.map((card, key) => (
                       <IdeologyCards key={key} card={card}></IdeologyCards>
                     ))
-                  }
+                  } */}
 
                 </div>
               </div>

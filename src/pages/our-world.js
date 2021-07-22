@@ -1,17 +1,17 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect } from 'react';
 
-import { Provider } from "react-redux";
-import { createStore, applyMiddleware } from "redux";
-import thunk from "redux-thunk";
-import { save, load } from "redux-localstorage-simple";
-import { composeWithDevTools } from "redux-devtools-extension";
-import rootReducer from "../redux/reducers/rootReducer";
-import get from "lodash/get";
+import { Provider } from 'react-redux';
+import { createStore, applyMiddleware } from 'redux';
+import thunk from 'redux-thunk';
+import { save, load } from 'redux-localstorage-simple';
+import { composeWithDevTools } from 'redux-devtools-extension';
+import rootReducer from '../redux/reducers/rootReducer';
+import get from 'lodash/get';
 
-import MarDeUranoApp from "../components/MarDeUranoApp";
-import ShopLayout from "../components/layouts/ShopLayout";
-import { graphql } from "gatsby";
-// import { IdeologyCards } from "../components/our-world/ideologyCards";
+import MarDeUranoApp from '../components/MarDeUranoApp';
+import ShopLayout from '../components/layouts/ShopLayout';
+import { graphql } from 'gatsby';
+import IdeologyCards from '../components/our-world/IdeologyCards';
 
 const OurWorld = ({ data }) => {
 
@@ -144,11 +144,11 @@ const OurWorld = ({ data }) => {
               <div className="mt-5 ideology-cards">
                 <div className="row">
 
-                  {/* {
+                  {
                     ideologyCards.map((card, key) => (
                       <IdeologyCards key={key} card={card}></IdeologyCards>
                     ))
-                  } */}
+                  }
 
                 </div>
               </div>

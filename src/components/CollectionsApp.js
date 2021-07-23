@@ -1,21 +1,34 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import PropTypes from "prop-types";
-import Paginator from "react-hooks-paginator";
+// import Paginator from "react-hooks-paginator";
+
 import { connect } from "react-redux";
 
 import ShopLayout from "./layouts/ShopLayout";
-import ProductGridContainer from "../components/product/ProductGridContainer";
+import CollectionList from "./collection/CollectionList";
+import CollectionDescriptionSticky from "../wrappers/collection/CollectionDescriptionSticky";
 
-const CollectionsApp = () => {
+
+const CollectionsApp = ({ collectionDetail }) => {
   return (
     <ShopLayout headerTop="visible">
-      <ProductGridContainer
-        spaceTopClass="pt-100"
-        spaceBottomClass="pb-100"
-        category="accessories"
-      />
+      {(collectionDetail)
+        ? <CollectionDescriptionSticky></CollectionDescriptionSticky>
+        : <CollectionList></CollectionList>
+      }
     </ShopLayout>
   );
 };
 
-export default CollectionsApp;
+
+CollectionsApp.propTypes = {
+  collectionDetail: PropTypes.object
+}
+
+const mapStateToProps = (state, ownProps) => {
+  return {
+    collectionDetail: state.collectionData.collectionDetail
+  };
+}
+
+export default connect(mapStateToProps)(CollectionsApp);

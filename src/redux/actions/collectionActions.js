@@ -1,7 +1,8 @@
-export const FETCH_COLLECTIONS_SUCCESS = "FETCH_COLLECTIONS_SUCCESS";
+import { types } from "../../types/types";
+
 
 const fetchCollectionsSuccess = collections => ({
-  type: FETCH_COLLECTIONS_SUCCESS,
+  type: types.fetchCollectionsSuccess,
   payload: collections,
 });
 
@@ -11,3 +12,13 @@ export const fetchCollections = collections => {
     dispatch(fetchCollectionsSuccess(collections));
   };
 };
+
+
+export const fetchCollectionDetails = (handle) => {
+  return dispatch => {
+    dispatch({
+      type: types.fetchCollectionDetails,
+      payload: handle
+    });
+  }
+}

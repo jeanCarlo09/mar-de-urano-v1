@@ -39,8 +39,6 @@ const Collections = ({ data, location }) => {
     :
     store.dispatch(fetchCollections(collections));
 
-  console.log(collections);
-
   return (
     <Provider store={store}>
       <MarDeUranoApp>

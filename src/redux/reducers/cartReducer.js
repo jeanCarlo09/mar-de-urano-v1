@@ -54,8 +54,6 @@ const cartReducer = (state = initState, action) => {
         );
       })[0];
 
-      console.log(cartItems, cartItem, product);
-
       if (cartItem === undefined) {
         return [
           ...cartItems,

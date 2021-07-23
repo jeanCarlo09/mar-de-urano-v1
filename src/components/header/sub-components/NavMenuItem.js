@@ -4,7 +4,6 @@ import { multilanguage } from "redux-multilanguage";
 
 const NavMenuItem = ({ item, sidebarMenu }) => {
 
-  console.log(item);
 
   return (item.menuChild === null && item.subMenu === null) ? (
     <li>

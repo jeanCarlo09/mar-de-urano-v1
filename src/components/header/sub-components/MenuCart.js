@@ -77,7 +77,7 @@ const MenuCart = ({ cartData, deleteFromCart }) => {
                         <span>Size: {single.selectedProductSize}</span>
                       )}
                       {single.selectedProductMaterial && (
-                        <span>Material: {single.selectedProductSize}</span>
+                        <span>Material: {single.selectedProductMaterial}</span>
                       )}
 
                       {single.selectedProductPrint && (

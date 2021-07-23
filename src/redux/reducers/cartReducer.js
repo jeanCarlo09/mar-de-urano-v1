@@ -53,6 +53,9 @@ const cartReducer = (state = initState, action) => {
           && (product.selectedProductPrint ? (product.selectedProductPrint === item.selectedProductPrint) : true)
         );
       })[0];
+
+      console.log(cartItems, cartItem, product);
+
       if (cartItem === undefined) {
         return [
           ...cartItems,
@@ -84,6 +87,10 @@ const cartReducer = (state = initState, action) => {
 
         return cartItems.map(item =>
           item.shopifyId === cartItem.shopifyId
+            && (product.selectedProductColor ? (product.selectedProductColor === item.selectedProductColor) : true)
+            && (product.selectedProductSize ? (product.selectedProductSize === item.selectedProductSize) : true)
+            && (product.selectedProductMaterial ? (product.selectedProductMaterial === item.selectedProductMaterial) : true)
+            && (product.selectedProductPrint ? (product.selectedProductPrint === item.selectedProductPrint) : true)
             ? {
               ...item,
               quantity: product.quantity

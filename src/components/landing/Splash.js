@@ -7,7 +7,7 @@ const Splash = ({ img, onLoadImgages }) => {
             className="splash"
             src={img}
             alt="splash"
-            onLoad={onLoadImgages(img)}
+            onLoad={onLoadImgages}
         />
     );
 }

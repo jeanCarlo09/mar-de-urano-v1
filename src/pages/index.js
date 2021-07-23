@@ -55,7 +55,7 @@ export default function Index({ data }) {
 
   const imagesLength = useRef(Object.keys(images).length + 1); // count of images in landing (+1 is because splash is two)
 
-  const onLoadImgages = (img) => { // when images in landing is charged, set state to stop charging in landing
+  const onLoadImgages = () => { // when images in landing is charged, set state to stop charging in landing
     (imagesLength.current - 1 < 0) ? setTimeout(() => { setloadingImages(false); }, 2000) : imagesLength.current--;
   }
 
@@ -82,14 +82,14 @@ export default function Index({ data }) {
       <Splash img={images.splash} onLoadImgages={onLoadImgages} />
 
       <div className="landing-logo">
-        <img src={images.landingLogo} alt="logo mar de urano" className="landing-logo-img" onLoad={onLoadImgages(images.landingLogo)}></img>
+        <img src={images.landingLogo} alt="logo mar de urano" className="landing-logo-img" onLoad={onLoadImgages}></img>
       </div>
 
 
       <div className="link">
         {(promotion) &&
           <div className="promotion">
-            <img src={images.promotion} alt="instructions" className="promotion-img" onLoad={onLoadImgages(images.promotion)} />
+            <img src={images.promotion} alt="instructions" className="promotion-img" onLoad={onLoadImgages} />
             <div className="arrow bounce">
               <i className="fa fa-arrow-down fa-2x"></i>
             </div>
@@ -97,7 +97,7 @@ export default function Index({ data }) {
         }
 
         <Link to="/home">
-          <img src={images.shopImg} alt="img" className="link-img" onLoad={onLoadImgages(images.shopImg)} />
+          <img src={images.shopImg} alt="img" className="link-img" onLoad={onLoadImgages} />
         </Link>
       </div>
 
@@ -106,7 +106,7 @@ export default function Index({ data }) {
           className="olas"
           src={images.olasImg}
           alt="waves"
-          onLoad={onLoadImgages(images.olasImg)}
+          onLoad={onLoadImgages}
         />
       </div>
 
@@ -116,7 +116,7 @@ export default function Index({ data }) {
           className="bosque"
           src={images.forest}
           alt="bosque"
-          onLoad={onLoadImgages(images.forest)}
+          onLoad={onLoadImgages}
         />
       </div>
 
@@ -125,7 +125,7 @@ export default function Index({ data }) {
           className="Guacamaya"
           src={images.macaw}
           alt="Guacamaya"
-          onLoad={onLoadImgages(images.macaw)}
+          onLoad={onLoadImgages}
         />
       </div>
 
@@ -134,7 +134,7 @@ export default function Index({ data }) {
           className="tiburcio"
           src={images.shark}
           alt="shark"
-          onLoad={onLoadImgages(images.shark)}
+          onLoad={onLoadImgages}
         />
       </div>
 

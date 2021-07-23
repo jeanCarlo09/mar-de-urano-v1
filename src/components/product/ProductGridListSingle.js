@@ -35,13 +35,12 @@ const ProductGridListSingle = ({
     }
   });
 
-  console.log(product);
 
   const finalProductPrice = parseFloat(price);
 
   const availableForSale = get(product, "availableForSale");
 
-  const shortDescription = get(product, "description");
+  // const shortDescription = get(product, "description");
 
   const discount = false;
   const newProduct = moment(product.publishedAt).isAfter(
@@ -51,9 +50,8 @@ const ProductGridListSingle = ({
   return (
     <Fragment>
       <div
-        className={`col-xl-3 col-sm-6 ${
-          sliderClassName ? sliderClassName : ""
-        }`}
+        className={`col-xl-3 col-sm-6 ${sliderClassName ? sliderClassName : ""
+          }`}
       >
         <div
           className={`product-wrap ${spaceBottomClass ? spaceBottomClass : ""}`}
@@ -77,7 +75,7 @@ const ProductGridListSingle = ({
             )}
 
             <div className="product-action">
-              <div className="pro-same-action pro-cart">
+              <div className={`pro-same-action ${(product.productType != 'Custom') ? 'pro-cart' : 'pro-cart-custom'}`}>
                 {availableForSale ? (
                   <Link to={url}>Select Option</Link>
                 ) : product.stock && product.stock > 0 ? (
@@ -105,11 +103,16 @@ const ProductGridListSingle = ({
                   </button>
                 )}
               </div>
-              <div className="pro-same-action pro-quickview">
-                <button onClick={() => setModalShow(true)} title="Quick View">
-                  <i className="pe-7s-look" />
-                </button>
-              </div>
+
+              {
+                (product.productType != 'Custom') &&
+                <div className="pro-same-action pro-quickview">
+                  <button onClick={() => setModalShow(true)} title="Quick View">
+                    <i className="pe-7s-look" />
+                  </button>
+                </div>
+              }
+
             </div>
           </div>
           <div className="product-content text-center">
@@ -123,7 +126,7 @@ const ProductGridListSingle = ({
             </div>
           </div>
         </div>
-        <div className="shop-list-wrap mb-30">
+        {/* <div className="shop-list-wrap mb-30">
           <div className="row">
             <div className="col-xl-4 col-md-5 col-sm-6">
               <div className="product-list-image-wrap">
@@ -191,7 +194,7 @@ const ProductGridListSingle = ({
               </div>
             </div>
           </div>
-        </div>
+        </div> */}
       </div>
 
       <ProductModal

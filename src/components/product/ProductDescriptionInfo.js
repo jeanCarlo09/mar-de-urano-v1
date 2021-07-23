@@ -1,15 +1,16 @@
 import PropTypes from "prop-types";
-import React, { Fragment, useState, useEffect } from "react";
+import React, { Fragment, useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import get from "lodash/get";
 import truncate from "lodash/truncate";
 import uniq from "lodash/uniq";
 
-import { getProductCartQuantity } from "../../helpers/product";
+import { getProductQuantity } from "../../helpers/product";
 import { addToCart } from "../../redux/actions/cartActions";
 import { addToWishlist } from "../../redux/actions/wishlistActions";
 import { addToCompare } from "../../redux/actions/compareActions";
+import { SocialMedia } from "../social-media/social-media";
 
 const ProductDescriptionInfo = ({
   product,
@@ -25,11 +26,17 @@ const ProductDescriptionInfo = ({
   addToWishlist,
   addToCompare,
   images,
+  print,
+  setImageCustomActive
 }) => {
+
+
+
   const variants = {
     colors: [],
     sizes: [],
     materials: [],
+    prints: []
   };
 
   product.variants.forEach((variant, index) => {
@@ -47,6 +54,11 @@ const ProductDescriptionInfo = ({
           variants.materials.push(option.value);
           product.variants[index].material = option.value;
           break;
+
+        case 'Print':
+          variants.prints.push(option.value);
+          product.variants[index].print = option.value;
+
         default:
           break;
       }
@@ -56,6 +68,10 @@ const ProductDescriptionInfo = ({
   variants.colors = uniq(variants.colors);
   variants.sizes = uniq(variants.sizes);
   variants.materials = uniq(variants.materials);
+  variants.prints = uniq(variants.prints);
+
+  let prints = print.filter((single) => variants.prints.includes(single.printId)).sort((a, b) => (b.printId === 'None' ? 1 : -1));
+
 
   const allVariants = { ...variants };
 
@@ -65,18 +81,18 @@ const ProductDescriptionInfo = ({
   const [selectedProductColor, setSelectedProductColor] = useState("");
   const [selectedProductSize, setSelectedProductSize] = useState("");
   const [selectedProductMaterial, setSelectedProductMaterial] = useState("");
+  const [selectedProductPrint, setSelectedProductPrint] = useState("");
 
   const [productStock, setProductStock] = useState(
     product.variation ? product.variation[0].size[0].stock : product.stock
   );
+
   const [quantityCount, setQuantityCount] = useState(1);
 
-  const productCartQty = getProductCartQuantity(
-    cartItems,
-    product,
-    selectedProductColor,
-    selectedProductSize
-  );
+
+  const [productCartQty, setProductCartQty] = useState(0);
+  const maxQuantity = useRef((product.availableForSale) ? 6 : 0);
+  product.maxQuantity = maxQuantity.current;
 
   const availableForSale = get(product, "availableForSale");
   const shortDescription = get(product, "descriptionHtml")
@@ -87,16 +103,16 @@ const ProductDescriptionInfo = ({
     // 1 = color
     // 2 = size
     // 3 = material
+    // 4 = Print
 
     const variantsType = {
-      colors:
-        type === 1 && allVariants.colors.length > 0 ? allVariants.colors : [],
-      sizes:
-        type === 2 && allVariants.sizes.length > 0 ? allVariants.sizes : [],
-      materials:
-        type === 3 && allVariants.materials.length > 0
-          ? allVariants.materials
-          : [],
+      colors: type === 1 && allVariants.colors.length > 0 ? allVariants.colors : [],
+
+      sizes: type === 2 && allVariants.sizes.length > 0 ? allVariants.sizes : [],
+
+      materials: type === 3 && allVariants.materials.length > 0 ? allVariants.materials : [],
+
+      prints: type === 4 && allVariants.prints.length > 0 ? allVariants.prints : [],
     };
 
     const variantes = productVariants.filter((variant) => {
@@ -112,6 +128,10 @@ const ProductDescriptionInfo = ({
         return variant.material === value;
       }
 
+      if (type === 4) {
+        return variant.print === value;
+      }
+
       return false;
     });
 
@@ -124,6 +144,11 @@ const ProductDescriptionInfo = ({
         if (variant.material !== undefined) {
           variantsType.materials.push(variant.material);
         }
+
+        if (variant.print !== undefined) {
+          variantsType.prints.push(variant.print);
+        }
+
       } else if (type === 2) {
         if (variant.color !== undefined) {
           variantsType.colors.push(variant.color);
@@ -132,6 +157,11 @@ const ProductDescriptionInfo = ({
         if (variant.material !== undefined) {
           variantsType.materials.push(variant.material);
         }
+
+        if (variant.print !== undefined) {
+          variantsType.prints.push(variant.print);
+        }
+
       } else if (type === 3) {
         if (variant.color !== undefined) {
           variantsType.colors.push(variant.color);
@@ -140,12 +170,32 @@ const ProductDescriptionInfo = ({
         if (variant.size !== undefined) {
           variantsType.sizes.push(variant.size);
         }
+
+        if (variant.print !== undefined) {
+          variantsType.prints.push(variant.print);
+        }
+
+      } else if (type === 4) {
+
+        if (variant.color !== undefined) {
+          variantsType.colors.push(variant.color);
+        }
+
+        if (variant.size !== undefined) {
+          variantsType.sizes.push(variant.size);
+        }
+
+        if (variant.material !== undefined) {
+          variantsType.materials.push(variant.material);
+        }
+
       }
     });
 
     variantsType.colors = uniq(variantsType.colors);
     variantsType.sizes = uniq(variantsType.sizes);
     variantsType.materials = uniq(variantsType.materials);
+    variantsType.prints = uniq(variantsType.prints);
 
     setSelectedProductColor(
       type !== 1
@@ -169,15 +219,37 @@ const ProductDescriptionInfo = ({
         : selectedProductMaterial
     );
 
+    setSelectedProductPrint(
+      type !== 4
+        ? variantsType.prints[0]
+          ? variantsType.prints[0]
+          : ""
+        : selectedProductPrint
+    );
+
     setProductVariant(variantsType);
   };
 
   const [firstLoad, setFisrtLoad] = useState(true);
+  const notInitialRender = useRef(true);
+
+  const updateAddCart = () => {
+    setProductCartQty(productCartQty + quantityCount);
+    setQuantityCount(1);
+  }
+
+
+  useEffect(() => {
+    setProductCartQty(getProductQuantity(cartItems, product, selectedProductColor,
+      selectedProductSize, selectedProductMaterial, selectedProductPrint));
+    setQuantityCount(1);
+  }, [cartItems]);
 
   useEffect(() => {
     if (firstLoad && productVariant !== null) {
       setSelectedProductColor(
-        productVariant.colors[0] ? productVariant.colors[0] : null
+        // productVariant.colors[0] ? productVariant.colors[0] : 
+        null
       );
       setSelectedProductSize(
         productVariant.sizes[0] ? productVariant.sizes[0] : null
@@ -185,8 +257,32 @@ const ProductDescriptionInfo = ({
       setSelectedProductMaterial(
         productVariant.materials[0] ? productVariant.materials[0] : null
       );
+      setSelectedProductPrint(
+        productVariant.prints[0] ? productVariant.prints[0] : null
+      );
+
     }
   }, [productVariant, firstLoad]);
+
+  useEffect(() => {
+
+    if (product.productType === 'Custom') {
+      if (selectedProductPrint && selectedProductColor && selectedProductSize != null) {
+        let customProduct = product.variants.filter((item) =>
+          (item.print === selectedProductPrint && item.color === selectedProductColor && item.size === selectedProductSize))[0];
+
+        (customProduct) && setImageCustomActive(customProduct.image.localFile.childImageSharp.fixed);
+
+      } else if (selectedProductPrint != null && selectedProductColor === null && !notInitialRender.current) {
+        setSelectedProductColor(productVariant.colors[0]);
+      }
+    }
+
+    setProductCartQty(getProductQuantity(cartItems, product, selectedProductColor,
+      selectedProductSize, selectedProductMaterial, selectedProductPrint));
+
+  }, [selectedProductPrint, selectedProductColor, selectedProductSize, selectedProductMaterial]);
+
 
   return (
     <div className="product-details-content ml-70">
@@ -235,15 +331,15 @@ const ProductDescriptionInfo = ({
                       name="product-color"
                       checked={
                         productVariant.colors.length === 1 ||
-                        single === selectedProductColor
+                          single === selectedProductColor
                           ? "checked"
                           : ""
                       }
                       onChange={() => {
                         setFisrtLoad(false);
-                        filterByType(1, single);
+                        // filterByType(1, single);
                         setQuantityCount(1);
-
+                        notInitialRender.current = false;
                         setSelectedProductColor(single);
                       }}
                     />
@@ -254,6 +350,54 @@ const ProductDescriptionInfo = ({
             </div>
           </div>
         )}
+
+        {
+          prints.length > 0 && (
+            <div className="pro-details-color-wrap">
+              <span>Print</span>
+              <div className="pro-details-color-content">
+                {prints.map((single, key) => {
+                  let style;
+
+                  style = {
+                    backgroundImage: `url(${single.image.fixed.src})`,
+                    backgroundPosition: "center",
+                    backgroundSize: "contain",
+                  };
+
+
+                  return (
+                    <label
+                      className={`pro-details-color-content--single ${single.printId}`}
+                      key={key}
+                      style={style}
+                    >
+                      <input
+                        type="radio"
+                        value={single.printId}
+                        name="product-print"
+                        checked={
+                          productVariant.prints.length === 1 ||
+                            single.printId === selectedProductPrint
+                            ? "checked"
+                            : ""
+                        }
+                        onChange={() => {
+                          setFisrtLoad(false);
+                          // filterByType(4, single.printId);
+                          setQuantityCount(1);
+                          notInitialRender.current = false;
+                          setSelectedProductPrint(single.printId);
+                        }}
+                      />
+                      <span className="checkmark"></span>
+                    </label>
+                  );
+                })}
+              </div>
+            </div>
+          )
+        }
 
         {productVariant.sizes.length > 0 && (
           <div className="pro-details-size">
@@ -270,13 +414,13 @@ const ProductDescriptionInfo = ({
                       value={single}
                       checked={
                         productVariant.sizes.length === 1 ||
-                        single === selectedProductSize
+                          single === selectedProductSize
                           ? "checked"
                           : ""
                       }
                       onChange={() => {
                         setFisrtLoad(false);
-                        filterByType(2, single);
+                        // filterByType(2, single);
                         setQuantityCount(1);
 
                         setSelectedProductSize(single);
@@ -305,15 +449,14 @@ const ProductDescriptionInfo = ({
                       value={single}
                       checked={
                         productVariant.materials.length === 1 ||
-                        single === selectedProductMaterial
+                          single === selectedProductMaterial
                           ? "checked"
                           : ""
                       }
                       onChange={() => {
                         setFisrtLoad(false);
-                        filterByType(3, single);
+                        // filterByType(3, single);
                         setQuantityCount(1);
-
                         setSelectedProductMaterial(single);
                       }}
                     />
@@ -345,7 +488,7 @@ const ProductDescriptionInfo = ({
           <button
             onClick={() =>
               setQuantityCount(
-                quantityCount < 5 ? quantityCount + 1 : quantityCount
+                (quantityCount + productCartQty) < maxQuantity.current ? quantityCount + 1 : quantityCount
               )
             }
             className="inc qtybutton"
@@ -364,10 +507,15 @@ const ProductDescriptionInfo = ({
                   selectedProductColor,
                   selectedProductSize,
                   selectedProductMaterial,
-                  images
+                  selectedProductPrint,
+                  images,
                 );
+                updateAddCart();
+
               }}
-              disabled={!product.availableForSale}
+              disabled={(!product.availableForSale || productCartQty >= maxQuantity.current
+                || product.productType === 'Custom' && (selectedProductColor === null || selectedProductPrint === null)
+              )}
             >
               {" "}
               Add To Cart{" "}
@@ -396,6 +544,9 @@ const ProductDescriptionInfo = ({
       ) : (
         ""
       )}
+
+      <SocialMedia></SocialMedia>
+
     </div>
   );
 };
@@ -424,6 +575,7 @@ const mapDispatchToProps = (dispatch) => {
       selectedProductColor,
       selectedProductSize,
       selectedProductMaterial,
+      selectedProductPrint,
       images
     ) => {
       dispatch(
@@ -434,6 +586,7 @@ const mapDispatchToProps = (dispatch) => {
           selectedProductColor,
           selectedProductSize,
           selectedProductMaterial,
+          selectedProductPrint,
           images
         )
       );

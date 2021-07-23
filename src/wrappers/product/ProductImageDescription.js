@@ -1,21 +1,33 @@
 import PropTypes from "prop-types";
-import React from "react";
-import { connect } from "react-redux";
+import React, { useState } from "react";
+import { connect, useSelector } from "react-redux";
 import { useToasts } from "react-toast-notifications";
 import get from "lodash/get";
 
 import ProductDescriptionInfo from "../../components/product/ProductDescriptionInfo";
 import ProductImageGallerySideThumb from "../../components/product/ProductImageGallerySideThumb";
+import ProductgridList from "../../components/product/ProductgridList";
+import RelatedProducts from "./RelatedProducts";
+import { relatedProductsShop } from "../../helpers/relatedProducts";
+
+import parse from 'html-react-parser';
 
 const ProductImageDescription = ({
   spaceTopClass,
   spaceBottomClass,
   galleryType,
-  product,
+  productActive,
   cartItems,
   wishlistItems,
   compareItems,
+  print,
 }) => {
+
+  const product = productActive.product[0];
+  let relatedProducts = productActive.relatedProducts;
+
+  relatedProducts = relatedProductsShop(relatedProducts, product);
+
   const wishlistItem = wishlistItems.filter(
     wishlistItem => wishlistItem.id === product.shopifyId
   )[0];
@@ -45,11 +57,27 @@ const ProductImageDescription = ({
 
   const finalDiscountedPrice = 0;
 
+  const [description, setDescription] = useState(true);
+
+  const [imageCustomActive, setImageCustomActive] = useState((product.productType === 'Custom' ? imagesArray[0] : null));
+
+  const checkDescription = () => {
+    if (!description) {
+      setDescription(true);
+    }
+  }
+
+  const uncheckDescription = () => {
+    if (description) {
+      setDescription(false);
+    }
+
+  }
+
   return (
     <div
-      className={`shop-area ${spaceTopClass ? spaceTopClass : ""} ${
-        spaceBottomClass ? spaceBottomClass : ""
-      }`}
+      className={`shop-area ${spaceTopClass ? spaceTopClass : ""} ${spaceBottomClass ? spaceBottomClass : ""
+        }`}
     >
       <div className="container">
         <div className="row">
@@ -58,6 +86,7 @@ const ProductImageDescription = ({
               product={product}
               thumbPosition="left"
               images={imagesArray}
+              imageCustomActive={imageCustomActive}
             />
           </div>
           <div className="col-lg-6 col-md-6">
@@ -72,8 +101,49 @@ const ProductImageDescription = ({
               compareItem={compareItem}
               addToast={addToast}
               images={imagesArray}
+              print={print}
+              setImageCustomActive={setImageCustomActive}
             />
           </div>
+
+          <div className="col-12">
+            <ul className="product-info" role="tablist">
+              <li className={`product-info-description ${description && 'active'}`} onClick={checkDescription}>
+                <span>Description</span>
+              </li>
+              <li className={`product-info-additional-information ${!description && 'active'}`} onClick={uncheckDescription}>
+                <span>Additional information</span>
+              </li>
+            </ul>
+
+            <div className="product-info-text mt-20">
+              {/* <p>
+                {productInfo}
+              </p> */}
+
+              {
+                description
+                  ?
+                  parse(product.descriptionHtml)
+                  :
+                  // <table>
+
+                  //   <tr>
+                  //     <th>Weight</th>
+                  //     <td><br /> 20,5 g</td>
+                  //   </tr>
+
+                  // </table>
+
+                  <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book</p>
+              }
+
+            </div>
+
+            <RelatedProducts relatedProducts={relatedProducts}></RelatedProducts>
+
+          </div>
+
         </div>
       </div>
     </div>

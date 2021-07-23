@@ -1,5 +1,6 @@
 export const ADD_TO_CART = "ADD_TO_CART";
 export const DECREASE_QUANTITY = "DECREASE_QUANTITY";
+export const INCREASE_QUANTITY = "INCREASE_QUANTITY";
 export const DELETE_FROM_CART = "DELETE_FROM_CART";
 export const DELETE_ALL_FROM_CART = "DELETE_ALL_FROM_CART";
 
@@ -11,8 +12,10 @@ export const addToCart = (
   selectedProductColor,
   selectedProductSize,
   selectedProductMaterial,
-  images
+  selectedProductPrint,
+  images,
 ) => {
+
   return dispatch => {
     if (addToast) {
       addToast("Added To Cart", { appearance: "success", autoDismiss: true });
@@ -25,22 +28,28 @@ export const addToCart = (
         selectedProductColor: selectedProductColor
           ? selectedProductColor
           : item.selectedProductColor
-          ? item.selectedProductColor
-          : null,
+            ? item.selectedProductColor
+            : null,
         selectedProductSize: selectedProductSize
           ? selectedProductSize
           : item.selectedProductSize
-          ? item.selectedProductSize
-          : null,
+            ? item.selectedProductSize
+            : null,
         selectedProductMaterial: selectedProductMaterial
           ? selectedProductMaterial
           : item.selectedProductMaterial
-          ? item.selectedProductMaterial
-          : null,
+            ? item.selectedProductMaterial
+            : null,
+        selectedProductPrint: selectedProductPrint
+          ? selectedProductPrint
+          : item.selectedProductPrint
+            ? item.selectedProductPrint
+            : null,
         images: images,
       },
     });
   };
+
 };
 //decrease from cart
 export const decreaseQuantity = (item, addToast) => {
@@ -54,6 +63,20 @@ export const decreaseQuantity = (item, addToast) => {
     dispatch({ type: DECREASE_QUANTITY, payload: item });
   };
 };
+
+//decrease from cart
+export const increaseQuantity = (item, addToast) => {
+  return dispatch => {
+    if (addToast) {
+      addToast("Item Incremented From Cart", {
+        appearance: "warning",
+        autoDismiss: true,
+      });
+    }
+    dispatch({ type: INCREASE_QUANTITY, payload: item });
+  };
+};
+
 //delete from cart
 export const deleteFromCart = (item, addToast) => {
   return dispatch => {

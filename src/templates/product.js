@@ -1,7 +1,7 @@
 import React from "react";
 
 import { graphql } from "gatsby";
-import { Provider } from "react-redux";
+import { Provider, useSelector } from "react-redux";
 import { createStore, applyMiddleware } from "redux";
 import thunk from "redux-thunk";
 import { composeWithDevTools } from "redux-devtools-extension";
@@ -10,13 +10,20 @@ import { save, load } from "redux-localstorage-simple";
 
 import rootReducer from "../redux/reducers/rootReducer";
 
-import { fetchProducts } from "../redux/actions/productActions";
+import { fetchProducts, fetchProductSingle } from "../redux/actions/productActions";
 
 import MarDeUranoApp from "../components/MarDeUranoApp";
 import ShopProduct from "../components/ShopProduct";
+import { getProductsOutCustom } from "../helpers/product";
 
 const Shop = ({ data }) => {
+
+
   const product = get(data, "shopifyProduct");
+
+  let relatedProducts = getProductsOutCustom(get(data, "allShopifyProduct.nodes"));
+
+  const print = product.productType === 'Custom' ? get(data, 'allContentfulPrintCustom.nodes') : [];
 
   let store;
 
@@ -32,12 +39,13 @@ const Shop = ({ data }) => {
       composeWithDevTools(applyMiddleware(thunk))
     );
   }
-  store.dispatch(fetchProducts([product]));
+
+  store.dispatch(fetchProductSingle({ product: [product], relatedProducts }));
 
   return (
     <Provider store={store}>
       <MarDeUranoApp>
-        <ShopProduct></ShopProduct>
+        <ShopProduct print={print}></ShopProduct>
       </MarDeUranoApp>
     </Provider>
   );
@@ -51,6 +59,7 @@ export const query = graphql`
       availableForSale
       descriptionHtml
       handle
+      productType
       publishedAt
       tags
       priceRange {
@@ -71,6 +80,15 @@ export const query = graphql`
           name
           value
         }
+        image {
+          localFile {
+            childImageSharp {
+              fixed {
+                src
+              }
+            }
+          }
+        }
       }
       images {
         localFile {
@@ -78,6 +96,60 @@ export const query = graphql`
             fixed(width: 600, height: 800) {
               src
             }
+          }
+        }
+      }
+    }
+
+
+    allShopifyProduct(sort: { order: ASC, fields: title }) {
+      nodes {
+        id
+        shopifyId
+        title
+        availableForSale
+        description
+        handle
+        publishedAt
+        tags
+        productType
+        priceRange {
+          minVariantPrice {
+            currencyCode
+            amount
+          }
+          maxVariantPrice {
+            currencyCode
+            amount
+          }
+        }
+        variants {
+          shopifyId
+          availableForSale
+          title
+          selectedOptions {
+            name
+            value
+          }
+        }
+        images {
+          localFile {
+            childImageSharp {
+              fixed(width: 600, height: 800) {
+                src
+              }
+            }
+          }
+        }
+      }
+    }
+
+    allContentfulPrintCustom {
+      nodes {
+        printId
+        image {
+          fixed(width: 80, height: 80) {
+            src
           }
         }
       }

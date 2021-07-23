@@ -20,7 +20,6 @@ const ProductGridSingleCollection = ({
   sliderClassName,
   spaceBottomClass,
 }) => {
-  console.log(product);
 
   const [modalShow, setModalShow] = useState(false);
   const { addToast } = useToasts();
@@ -36,14 +35,12 @@ const ProductGridSingleCollection = ({
   return (
     <Fragment>
       <div
-        className={`col-xl-3 col-lg-4 col-md-6 col-sm-6 col-12 ${
-          sliderClassName ? sliderClassName : ""
-        }`}
+        className={`col-xl-3 col-lg-4 col-md-6 col-sm-6 col-12 ${sliderClassName ? sliderClassName : ""
+          }`}
       >
         <div
-          className={`product-wrap-3 scroll-zoom ${
-            spaceBottomClass ? spaceBottomClass : ""
-          }`}
+          className={`product-wrap-3 scroll-zoom ${spaceBottomClass ? spaceBottomClass : ""
+            }`}
         >
           <div className="product-img">
             <Link to={`/${product.handle}`}>

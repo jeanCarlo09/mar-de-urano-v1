@@ -4,7 +4,7 @@ import React from "react";
 import ProductgridList from "../../components/product/ProductgridList";
 
 const ShopProducts = ({ products, layout }) => (
-  <div className="shop-bottom-area mt-35">
+  <div className="shop-bottom-area">
     <div className={`row ${layout ? layout : ""}`}>
       {products.length && products.length > 0 ? (
         <ProductgridList products={products} spaceBottomClass="mb-25" />

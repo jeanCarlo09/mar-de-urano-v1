@@ -1,7 +1,7 @@
 import PropTypes from "prop-types";
-import React, { Fragment, useState, useEffect } from "react";
+import React, { Fragment, useState, useEffect, useRef } from "react";
 import Swiper from "react-id-swiper";
-import { getProductCartQuantity } from "../../helpers/product";
+import { getProductCartQuantity, getProductQuantity } from "../../helpers/product";
 import { Modal } from "react-bootstrap";
 import { connect } from "react-redux";
 import truncate from "lodash/truncate";
@@ -33,6 +33,10 @@ function ProductModal(props) {
 
   const [quantityCount, setQuantityCount] = useState(1);
 
+  const [productCartQty, setProductCartQty] = useState(0);
+  const maxQuantity = useRef((product.availableForSale) ? 6 : 0);
+  product.maxQuantity = maxQuantity.current;
+
   const wishlistItem = props.wishlistitem;
 
   const addToCart = props.addtocart;
@@ -41,13 +45,13 @@ function ProductModal(props) {
   const addToast = props.addtoast;
   const cartItems = props.cartitems;
 
-  const productCartQty = getProductCartQuantity(
-    cartItems,
-    product,
-    selectedProductColor,
-    selectedProductSize,
-    selectedProductMaterial
-  );
+  // const productCartQty = getProductCartQuantity(
+  //   cartItems,
+  //   product,
+  //   selectedProductColor,
+  //   selectedProductSize,
+  //   selectedProductMaterial
+  // );
 
   const shortDescription = get(product, "description");
 
@@ -88,6 +92,20 @@ function ProductModal(props) {
   const [productVariants, setProductVariants] = useState(product.variants);
 
   const [firstLoad, setFisrtLoad] = useState(true);
+
+
+  useEffect(() => {
+    setProductCartQty(getProductQuantity(cartItems, product, selectedProductColor,
+      selectedProductSize, selectedProductMaterial, null));
+    setQuantityCount(1);
+  }, [cartItems]);
+
+
+  useEffect(() => {
+    setProductCartQty(getProductQuantity(cartItems, product, selectedProductColor,
+      selectedProductSize, selectedProductMaterial, null));
+  }, [selectedProductColor, selectedProductSize, selectedProductMaterial]);
+
 
   useEffect(() => {
     if (
@@ -150,8 +168,6 @@ function ProductModal(props) {
     // 2 = size
     // 3 = material
 
-    console.log({ type, value });
-
     const variantsType = {
       colors:
         type === 1 && allVariants.colors.length > 0 ? allVariants.colors : [],
@@ -211,11 +227,6 @@ function ProductModal(props) {
     variantsType.sizes = uniq(variantsType.sizes);
     variantsType.materials = uniq(variantsType.materials);
 
-    console.log({
-      selectedProductColor,
-      selectedProductSize,
-      selectedProductMaterial,
-    });
 
     setSelectedProductColor(
       type !== 1
@@ -340,7 +351,7 @@ function ProductModal(props) {
                                 name="product-color"
                                 checked={
                                   productVariant.colors.length === 1 ||
-                                  single === selectedProductColor
+                                    single === selectedProductColor
                                     ? "checked"
                                     : ""
                                 }
@@ -375,12 +386,11 @@ function ProductModal(props) {
                                 value={single}
                                 checked={
                                   productVariant.sizes.length === 1 ||
-                                  single === selectedProductSize
+                                    single === selectedProductSize
                                     ? "checked"
                                     : ""
                                 }
                                 onChange={() => {
-                                  console.log("click");
                                   setFisrtLoad(false);
                                   filterByType(2, single);
                                   setQuantityCount(1);
@@ -411,7 +421,7 @@ function ProductModal(props) {
                                 value={single}
                                 checked={
                                   productVariant.materials.length === 1 ||
-                                  single === selectedProductMaterial
+                                    single === selectedProductMaterial
                                     ? "checked"
                                     : ""
                                 }
@@ -453,7 +463,7 @@ function ProductModal(props) {
                     <button
                       onClick={() =>
                         setQuantityCount(
-                          quantityCount < 5 ? quantityCount + 1 : quantityCount
+                          (quantityCount + productCartQty) < maxQuantity.current ? quantityCount + 1 : quantityCount
                         )
                       }
                       className="inc qtybutton"
@@ -472,10 +482,11 @@ function ProductModal(props) {
                             selectedProductColor,
                             selectedProductSize,
                             selectedProductMaterial,
+                            null,
                             images
                           );
                         }}
-                        disabled={!product.availableForSale}
+                        disabled={!product.availableForSale || productCartQty >= maxQuantity.current}
                       >
                         {" "}
                         Add To Cart{" "}

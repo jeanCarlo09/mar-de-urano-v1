@@ -73,6 +73,7 @@ const mapDispatchToProps = dispatch => {
       selectedProductColor,
       selectedProductSize,
       selectedProductMaterial,
+      selectedProductPrint,
       images
     ) => {
       dispatch(
@@ -83,6 +84,7 @@ const mapDispatchToProps = dispatch => {
           selectedProductColor,
           selectedProductSize,
           selectedProductMaterial,
+          selectedProductPrint,
           images
         )
       );

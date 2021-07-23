@@ -5,6 +5,7 @@ import {
   DECREASE_QUANTITY,
   DELETE_FROM_CART,
   DELETE_ALL_FROM_CART,
+  INCREASE_QUANTITY
 } from "../actions/cartActions";
 
 const initState = [];
@@ -14,10 +15,12 @@ const cartReducer = (state = initState, action) => {
     product = action.payload;
 
   if (action.type === ADD_TO_CART) {
+
     if (product.variants === undefined) {
       const cartItem = cartItems.filter(
         item => item.shopifyId === product.shopifyId
       )[0];
+
       if (cartItem === undefined) {
         return [
           ...cartItems,
@@ -32,28 +35,24 @@ const cartReducer = (state = initState, action) => {
         return cartItems.map(item =>
           item.cartItemId === cartItem.cartItemId
             ? {
-                ...item,
-                quantity: product.quantity
-                  ? item.quantity + product.quantity
-                  : item.quantity + 1,
-              }
+              ...item,
+              quantity: product.quantity
+                ? item.quantity + product.quantity
+                : item.quantity + 1,
+            }
             : item
         );
       }
     } else {
       const cartItem = cartItems.filter(item => {
         return (
-          item.shopifyId === product.shopifyId &&
-          product.selectedProductColor &&
-          product.selectedProductColor === item.selectedProductColor &&
-          product.selectedProductSize &&
-          product.selectedProductSize === item.selectedProductSize &&
-          product.selectedProductMaterial &&
-          product.selectedProductMaterial === item.selectedProductMaterial &&
-          (product.shopifyId ? product.shopifyId === item.shopifyId : true)
+          item.shopifyId === product.shopifyId
+          && (product.selectedProductColor ? (product.selectedProductColor === item.selectedProductColor) : true)
+          && (product.selectedProductSize ? (product.selectedProductSize === item.selectedProductSize) : true)
+          && (product.selectedProductMaterial ? (product.selectedProductMaterial === item.selectedProductMaterial) : true)
+          && (product.selectedProductPrint ? (product.selectedProductPrint === item.selectedProductPrint) : true)
         );
       })[0];
-
       if (cartItem === undefined) {
         return [
           ...cartItems,
@@ -64,37 +63,37 @@ const cartReducer = (state = initState, action) => {
             uuid: uuid(),
           },
         ];
-      } else if (
-        cartItem !== undefined &&
-        (cartItem.selectedProductColor !== product.selectedProductColor ||
-          cartItem.selectedProductSize !== product.selectedProductSize ||
-          cartItem.selectedProductMaterial !== product.selectedProductMaterial)
-      ) {
-        console.log("cartItem !== undefined", cartItem);
-
-        return [
-          ...cartItems,
-          {
-            ...product,
-            quantity: product.quantity ? product.quantity : 1,
-            cartItemId: product.shopifyId,
-          },
-        ];
+        // } else if (
+        //   ((cartItem.selectedProductColor ? cartItem.selectedProductColor !== product.selectedProductColor : false) ||
+        //     cartItem.selectedProductSize !== product.selectedProductSize ||
+        //     cartItem.selectedProductMaterial !== product.selectedProductMaterial)
+        // ) {
+        //   return [
+        //     ...cartItems,
+        //     {
+        //       ...product,
+        //       quantity: product.quantity ? product.quantity : 1,
+        //       cartItemId: product.shopifyId,
+        //     },
+        //   ];
       } else {
+
+        if (cartItem.quantity >= 6) {
+          return state;
+        }
+
         return cartItems.map(item =>
-          item.shopifyId === cartItem.shopifyId &&
-          cartItem.selectedProductColor === item.selectedProductColor &&
-          cartItem.selectedProductSize === item.selectedProductSize &&
-          cartItem.selectedProductMaterial === item.selectedProductMaterial
+          item.shopifyId === cartItem.shopifyId
             ? {
-                ...item,
-                quantity: product.quantity
-                  ? item.quantity + product.quantity
-                  : item.quantity + 1,
-                selectedProductColor: product.selectedProductColor,
-                selectedProductSize: product.selectedProductSize,
-                selectedProductMaterial: product.selectedProductMaterial,
-              }
+              ...item,
+              quantity: product.quantity
+                ? item.quantity + product.quantity
+                : item.quantity + 1,
+              selectedProductColor: product.selectedProductColor,
+              selectedProductSize: product.selectedProductSize,
+              selectedProductMaterial: product.selectedProductMaterial,
+              selectedProductPrint: product.selectedProductPrint
+            }
             : item
         );
       }
@@ -116,6 +115,17 @@ const cartReducer = (state = initState, action) => {
       );
     }
   }
+
+  if (action.type === INCREASE_QUANTITY) {
+    if (product.quantity <= 10) {
+      return cartItems.map(item =>
+        item.cartItemId === product.cartItemId
+          ? { ...item, quantity: item.quantity + 1 }
+          : item
+      );
+    }
+  }
+
 
   if (action.type === DELETE_FROM_CART) {
     const remainingItems = (cartItems, product) =>

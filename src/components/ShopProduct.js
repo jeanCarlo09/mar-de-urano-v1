@@ -8,14 +8,16 @@ import ShopLayout from "../components/layouts/ShopLayout";
 // import ProductDescriptionTab from "../wrappers/product/ProductDescriptionTab";
 import ProductImageDescription from "../wrappers/product/ProductImageDescription";
 
-const ProductTabLeft = ({ product }) => {
+const ProductTabLeft = ({ productActive, print }) => {
+
   return (
     <ShopLayout headerTop="visible">
       <ProductImageDescription
-        spaceTopClass="pt-100"
+        spaceTopClass="pt-95"
         spaceBottomClass="pb-100"
-        product={product}
+        productActive={productActive}
         galleryType="leftThumb"
+        print={print}
       />
       {/* <ProductDescriptionTab
         spaceBottomClass="pb-90"
@@ -32,7 +34,7 @@ ProductTabLeft.propTypes = {
 
 const mapStateToProps = (state, ownProps) => {
   return {
-    product: state.productData.products[0],
+    productActive: state.productData.productActive,
   };
 };
 

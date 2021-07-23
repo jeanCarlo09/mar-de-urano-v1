@@ -4,7 +4,7 @@ import { LightgalleryProvider, LightgalleryItem } from "react-lightgallery";
 import Swiper from "react-id-swiper";
 import moment from "moment";
 
-const ProductImageGalleryLeftThumb = ({ product, thumbPosition, images }) => {
+const ProductImageGalleryLeftThumb = ({ product, thumbPosition, images, imageCustomActive }) => {
   const [gallerySwiper, getGallerySwiper] = useState(null);
   const [thumbnailSwiper, getThumbnailSwiper] = useState(null);
 
@@ -19,6 +19,9 @@ const ProductImageGalleryLeftThumb = ({ product, thumbPosition, images }) => {
       thumbnailSwiper.controller.control = gallerySwiper;
     }
   }, [gallerySwiper, thumbnailSwiper]);
+
+  (product.productType === 'Custom') && (images = [imageCustomActive]);
+
 
   // swiper slider settings
   const gallerySwiperParams = {
@@ -72,11 +75,10 @@ const ProductImageGalleryLeftThumb = ({ product, thumbPosition, images }) => {
     <Fragment>
       <div className="row row-5">
         <div
-          className={` ${
-            thumbPosition && thumbPosition === "left"
-              ? "col-xl-10 order-1 order-xl-2"
-              : "col-xl-10"
-          }`}
+          className={` ${thumbPosition && thumbPosition === "left"
+            ? "col-xl-10 order-1 order-xl-2"
+            : "col-xl-10"
+            }`}
         >
           <div className="product-large-image-wrapper">
             {discount || newProduct ? (
@@ -108,28 +110,29 @@ const ProductImageGalleryLeftThumb = ({ product, thumbPosition, images }) => {
             </LightgalleryProvider>
           </div>
         </div>
-        <div
-          className={` ${
-            thumbPosition && thumbPosition === "left"
+        {product.productType != 'Custom' && (
+          <div
+            className={` ${thumbPosition && thumbPosition === "left"
               ? "col-xl-2 order-2 order-xl-1"
               : "col-xl-2"
-          }`}
-        >
-          <div className="product-small-image-wrapper product-small-image-wrapper--side-thumb">
-            <Swiper {...thumbnailSwiperParams}>
-              {images &&
-                images.map((single, key) => {
-                  return (
-                    <div key={key}>
-                      <div className="single-image">
-                        <img src={single.src} className="img-fluid" alt="" />
+              }`}
+          >
+            <div className="product-small-image-wrapper product-small-image-wrapper--side-thumb">
+              <Swiper {...thumbnailSwiperParams}>
+                {images &&
+                  images.map((single, key) => {
+                    return (
+                      <div key={key}>
+                        <div className="single-image">
+                          <img src={single.src} className="img-fluid" alt="" />
+                        </div>
                       </div>
-                    </div>
-                  );
-                })}
-            </Swiper>
+                    );
+                  })}
+              </Swiper>
+            </div>
           </div>
-        </div>
+        )}
       </div>
     </Fragment>
   );

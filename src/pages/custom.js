@@ -1,26 +1,30 @@
-import React, { useState } from "react";
-
-import { graphql } from "gatsby";
-import { Provider } from "react-redux";
-import { createStore, applyMiddleware } from "redux";
-import thunk from "redux-thunk";
+import React from 'react';
+import { applyMiddleware, createStore } from 'redux';
+import rootReducer from '../redux/reducers/rootReducer';
 import { save, load } from "redux-localstorage-simple";
 import { composeWithDevTools } from "redux-devtools-extension";
-import get from "lodash/get";
+import { Provider } from 'react-redux';
+import thunk from "redux-thunk";
 
-import rootReducer from "../redux/reducers/rootReducer";
+import MarDeUranoApp from '../components/MarDeUranoApp';
+import CustomApp from '../components/CustomApp';
+import { graphql } from 'gatsby';
+import { getProductsWithCustom } from '../helpers/product';
+import { get } from 'lodash';
+import { fetchProducts } from '../redux/actions/productActions';
 
-import { fetchProducts } from "../redux/actions/productActions";
+const Custom = ({ data, location }) => {
 
-import { accentFold } from "../helpers/utils";
 
-import MarDeUranoApp from "../components/MarDeUranoApp";
-import ShopApp from "../components/ShopApp";
-import { getProductsOutCustom } from "../helpers/product";
+  const nodes = get(data, "allShopifyProduct.nodes");
+  let products = getProductsWithCustom(nodes);
 
-const Shop = ({ data, location }) => {
-
-  let products = getProductsOutCustom(get(data, "allShopifyProduct.nodes"));
+  if (location.search !== "") {
+    const custom = location.search.substring(1, location.search.length).split('-');
+    products = products.filter((product) =>
+      product.tags.some((tag) => tag === custom[1])
+    );
+  }
 
   let store;
 
@@ -37,39 +41,19 @@ const Shop = ({ data, location }) => {
     );
   }
 
-  let searchText = "";
-
-  if (location.search !== "") {
-    const searchQuery = location.search.substring(1, location.search.length);
-
-    products = products.filter((product) =>
-      product.tags.some((tag) => tag === searchQuery)
-    );
-  } else if (location.state) {
-    searchText = location.state;
-    if (searchText && searchText.querySearch) {
-      searchText = accentFold(searchText.querySearch).toUpperCase();
-
-      products = products.filter((product) => {
-        const title = accentFold(product.title).toUpperCase();
-        return title.indexOf(searchText) > -1;
-      });
-    }
-  }
-
   store.dispatch(fetchProducts(products));
 
   return (
     <Provider store={store}>
       <MarDeUranoApp>
-        <ShopApp></ShopApp>
+        <CustomApp relatedProducts={nodes.slice(0, 4)}></CustomApp>
       </MarDeUranoApp>
     </Provider>
   );
-};
+}
 
 export const query = graphql`
-  query Products {
+  query ProductsCustom {
     allShopifyProduct(sort: { order: ASC, fields: title }) {
       nodes {
         id
@@ -111,6 +95,9 @@ export const query = graphql`
         }
       }
     }
-  } 
+  }
 `;
-export default Shop;
+
+
+
+export default Custom;

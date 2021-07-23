@@ -2,8 +2,8 @@
 export const getProducts = (products, category, type, limit) => {
   const finalProducts = category
     ? products.filter(
-        product => product.category.filter(single => single === category)[0]
-      )
+      product => product.category.filter(single => single === category)[0]
+    )
     : products;
 
   if (type && type === "new") {
@@ -63,6 +63,30 @@ export const getProductCartQuantity = (
     return 0;
   }
 };
+
+
+export const getProductQuantity = (cartItems, product, color, size, material, print) => {
+
+  // console.log(product, color, size, material, print);
+
+  if (cartItems.length === 0) {
+    return 0;
+  }
+
+  let productInCart = cartItems.filter(
+    single => single.shopifyId === product.shopifyId &&
+      (single.selectedProductColor ? single.selectedProductColor === color : true) &&
+      (single.selectedProductSize ? single.selectedProductSize === size : true) &&
+      (single.selectedProductMaterial ? single.selectedProductMaterial === material : true) &&
+      (single.selectedProductPrint ? single.selectedProductPrint === print : true)
+  )[0];
+
+  if (productInCart) {
+    return productInCart.quantity;
+  } else {
+    return 0;
+  }
+}
 
 //get products based on category
 export const getSortedProducts = (products, sortType, sortValue) => {
@@ -234,3 +258,12 @@ export const toggleShopTopFilter = e => {
   }
   e.currentTarget.classList.toggle("active");
 };
+
+
+export const getProductsOutCustom = (products) => {
+  return products.filter((product) => product.productType != 'Custom');
+}
+
+export const getProductsWithCustom = (products) => {
+  return products.filter((product) => product.productType === 'Custom');
+}

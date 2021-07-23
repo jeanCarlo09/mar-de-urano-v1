@@ -1,18 +1,34 @@
-import { FETCH_PRODUCTS_SUCCESS } from "../actions/productActions";
+import { types } from "../../types/types";
+
 
 const initState = {
   products: [],
+  productActive: {}
 };
 
 const productReducer = (state = initState, action) => {
-  if (action.type === FETCH_PRODUCTS_SUCCESS) {
-    return {
-      ...state,
-      products: action.payload,
-    };
+
+
+  switch (action.type) {
+    case types.fetchProductsSuccess:
+      return {
+        ...state,
+        products: action.payload,
+        productActive: {}
+      };
+
+    case types.fetchProductSingle:
+      return {
+        ...state,
+        productActive: action.payload
+      }
+
+    default:
+      return state;
+
   }
 
-  return state;
 };
+
 
 export default productReducer;

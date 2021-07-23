@@ -15,12 +15,12 @@ import {
   deleteFromCart,
   cartItemStock,
   deleteAllFromCart,
+  increaseQuantity
 } from "../redux/actions/cartActions";
 
 import ShopLayout from "./layouts/ShopLayout";
 
 const Cart = props => {
-  //   console.log(props);
 
   let {
     cartItems,
@@ -29,6 +29,7 @@ const Cart = props => {
     addToCart,
     deleteFromCart,
     deleteAllFromCart,
+    increaseQuantity
   } = props;
 
   const [quantityCount] = useState(1);
@@ -72,6 +73,18 @@ const Cart = props => {
                               "priceRange.maxVariantPrice.currencyCode"
                             );
 
+                            let imageCustomProduct = null;
+
+                            if (cartItem.productType === 'Custom') {
+                              let customProduct = cartItem.variants.filter((item) =>
+                              (item.print === cartItem.selectedProductPrint &&
+                                item.color === cartItem.selectedProductColor &&
+                                item.size === cartItem.selectedProductSize))[0];
+
+                              imageCustomProduct = customProduct.image.localFile.childImageSharp.fixed;
+
+                            }
+
                             const discountedPrice = null;
 
                             const price = get(
@@ -83,20 +96,20 @@ const Cart = props => {
                             );
                             const finalDiscountedPrice = 0;
 
-                            cartItem.stock = 2;
+                            cartItem.stock = 2; //THIS IS THE PROBLEM
 
                             discountedPrice != null
                               ? (cartTotalPrice +=
-                                  finalDiscountedPrice * cartItem.quantity)
+                                finalDiscountedPrice * cartItem.quantity)
                               : (cartTotalPrice +=
-                                  finalProductPrice * cartItem.quantity);
+                                finalProductPrice * cartItem.quantity);
                             return (
                               <tr key={key}>
                                 <td className="product-thumbnail">
                                   <Link to={`/${cartItem.handle}`}>
                                     <img
                                       className="img-fluid"
-                                      src={imagesProduct[0].src}
+                                      src={cartItem.productType === 'Custom' ? imageCustomProduct.src : imagesProduct[0].src}
                                       alt=""
                                     />
                                   </Link>
@@ -134,6 +147,18 @@ const Cart = props => {
                                   ) : (
                                     ""
                                   )}
+
+                                  {cartItem.selectedProductPrint ? (
+                                    <div className="cart-item-variation">
+                                      <span>
+                                        Print:{" "}
+                                        {cartItem.selectedProductPrint}
+                                      </span>
+                                    </div>
+                                  ) : (
+                                    ""
+                                  )}
+
                                 </td>
 
                                 <td className="product-price-cart">
@@ -172,21 +197,18 @@ const Cart = props => {
                                     <button
                                       className="inc qtybutton"
                                       onClick={() =>
-                                        addToCart(
-                                          cartItem,
-                                          addToast,
-                                          quantityCount
-                                        )
+                                        increaseQuantity(cartItem, addToast)
                                       }
                                       disabled={
                                         cartItem !== undefined &&
                                         cartItem.quantity &&
                                         cartItem.quantity >=
-                                          cartItemStock(
-                                            cartItem,
-                                            cartItem.selectedProductColor,
-                                            cartItem.selectedProductSize
-                                          )
+                                        cartItem.maxQuantity
+                                        // cartItemStock(
+                                        //   cartItem,
+                                        //   cartItem.selectedProductColor,
+                                        //   cartItem.selectedProductSize
+                                        // )
                                       }
                                     >
                                       +
@@ -196,13 +218,13 @@ const Cart = props => {
                                 <td className="product-subtotal">
                                   {discountedPrice !== null
                                     ? currency +
-                                      (
-                                        finalDiscountedPrice * cartItem.quantity
-                                      ).toFixed(2)
+                                    (
+                                      finalDiscountedPrice * cartItem.quantity
+                                    ).toFixed(2)
                                     : currency +
-                                      (
-                                        finalProductPrice * cartItem.quantity
-                                      ).toFixed(2)}
+                                    (
+                                      finalProductPrice * cartItem.quantity
+                                    ).toFixed(2)}
                                 </td>
 
                                 <td className="product-remove">
@@ -291,6 +313,7 @@ Cart.propTypes = {
   location: PropTypes.object,
   deleteAllFromCart: PropTypes.func,
   deleteFromCart: PropTypes.func,
+  increaseQuantity: PropTypes.func
 };
 
 const mapStateToProps = state => {
@@ -307,6 +330,9 @@ const mapDispatchToProps = dispatch => {
     },
     decreaseQuantity: (item, addToast) => {
       dispatch(decreaseQuantity(item, addToast));
+    },
+    increaseQuantity: (item, addToast) => {
+      dispatch(increaseQuantity(item, addToast))
     },
     deleteFromCart: (item, addToast) => {
       dispatch(deleteFromCart(item, addToast));

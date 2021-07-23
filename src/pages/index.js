@@ -57,7 +57,7 @@ export default function Index({ data }) {
 
   const onLoadImgages = (img) => { // when images in landing is charged, set state to stop charging in landing
     console.log(imagesLength.current, img);
-    (imagesLength.current - 1 <= 0) ? setTimeout(() => { setloadingImages(false); }, 2000) : imagesLength.current--;
+    (imagesLength.current - 1 < 0) ? setTimeout(() => { setloadingImages(false); }, 2000) : imagesLength.current--;
   }
 
   const changeStatePromotion = () => { // set the state to hide the instructions of diamonds and bottom shop
@@ -141,7 +141,7 @@ export default function Index({ data }) {
 
 
       {(!promotion) && <button className="helper-landing" onClick={changeStatePromotion}><i className="fa fa-question"></i></button>}
-      {(loading) &&
+      {(loadingImages || loading) &&
         <div className={`loader ${loadingImages ? 'loader-content-images' : 'loader-content-diamonds'}`}>
           <div className="loader-box"></div>
           <div className="loader-shadow"></div>

@@ -3,41 +3,42 @@ import React from "react";
 import Sticky from "react-sticky-el";
 import { connect } from "react-redux";
 import { graphql, useStaticQuery } from "gatsby";
-import Swiper from "react-id-swiper";
+// import Swiper from "react-id-swiper";
 
 import CollectionImageGallerySticky from "../../components/collection/CollectionImageGallerySticky";
 import CollectionDescriptionInfo from "../../components/collection/CollectionDescriptionInfo";
 // import SliderCollection from "../slider/sliderCollection";
 import SliderCollectionSingle from "../../components/slider/SliderCollectionSingle";
+import SliderCollection from "../../components/slider/SliderCollection";
 
 const CollectionDescriptionSticky = ({
   collection,
 }) => {
 
-  const params = {
-    effect: "fade",
-    loop: true,
-    speed: 1500,
-    autoplay: {
-      delay: 10000,
-      disableOnInteraction: false
-    },
-    watchSlidesVisibility: true,
-    navigation: {
-      nextEl: ".swiper-button-next",
-      prevEl: ".swiper-button-prev"
-    },
-    renderPrevButton: () => (
-      <button className="swiper-button-prev ht-swiper-button-nav">
-        <i className="pe-7s-angle-left" />
-      </button>
-    ),
-    renderNextButton: () => (
-      <button className="swiper-button-next ht-swiper-button-nav">
-        <i className="pe-7s-angle-right" />
-      </button>
-    )
-  };
+  // const params = {
+  //   effect: "fade",
+  //   loop: true,
+  //   speed: 1500,
+  //   autoplay: {
+  //     delay: 10000,
+  //     disableOnInteraction: false
+  //   },
+  //   watchSlidesVisibility: true,
+  //   navigation: {
+  //     nextEl: ".swiper-button-next",
+  //     prevEl: ".swiper-button-prev"
+  //   },
+  //   renderPrevButton: () => (
+  //     <button className="swiper-button-prev ht-swiper-button-nav">
+  //       <i className="pe-7s-angle-left" />
+  //     </button>
+  //   ),
+  //   renderNextButton: () => (
+  //     <button className="swiper-button-next ht-swiper-button-nav">
+  //       <i className="pe-7s-angle-right" />
+  //     </button>
+  //   )
+  // };
 
 
   const { allContentfulSliderCollection } = useStaticQuery(graphql`
@@ -78,9 +79,9 @@ const CollectionDescriptionSticky = ({
           </div>
         </div>
 
-        {/* <SliderCollection sliderCollection={allContentfulSliderCollection.nodes}></SliderCollection> */}
+        <SliderCollection sliderCollection={allContentfulSliderCollection.nodes}></SliderCollection>
 
-        <div className="slider-area mt-80">
+        {/* <div className="slider-area mt-80">
           <div className="slider-active nav-style-1">
             <Swiper {...params}>
               {allContentfulSliderCollection.nodes &&
@@ -91,7 +92,7 @@ const CollectionDescriptionSticky = ({
                 })}
             </Swiper>
           </div>
-        </div>
+        </div> */}
 
       </div>
 

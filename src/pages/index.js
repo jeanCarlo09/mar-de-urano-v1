@@ -53,11 +53,11 @@ export default function Index({ data }) {
     promotion: require('../assets/images/Instrucciones.png')
   }
 
-  let imagesLength = Object.keys(images).length + 1; // count of images in landing (+1 is because splash is two)
+  const imagesLength = useRef(Object.keys(images).length + 1); // count of images in landing (+1 is because splash is two)
 
-  const onLoadImgages = () => { // when images in landing is charged, set state to stop charging in landing
-    console.log(imagesLength);
-    (--imagesLength < 0) && setTimeout(() => { setloadingImages(false); }, 2000);
+  const onLoadImgages = (img) => { // when images in landing is charged, set state to stop charging in landing
+    console.log(imagesLength.current, img);
+    (imagesLength.current - 1 <= 0) ? setTimeout(() => { setloadingImages(false); }, 2000) : imagesLength.current--;
   }
 
   const changeStatePromotion = () => { // set the state to hide the instructions of diamonds and bottom shop
@@ -83,14 +83,14 @@ export default function Index({ data }) {
       <Splash img={images.splash} onLoadImgages={onLoadImgages} />
 
       <div className="landing-logo">
-        <img src={images.landingLogo} alt="logo mar de urano" className="landing-logo-img" onLoad={onLoadImgages}></img>
+        <img src={images.landingLogo} alt="logo mar de urano" className="landing-logo-img" onLoad={onLoadImgages(images.landingLogo)}></img>
       </div>
 
 
       <div className="link">
         {(promotion) &&
           <div className="promotion">
-            <img src={images.promotion} alt="instructions" className="promotion-img" onLoad={onLoadImgages} />
+            <img src={images.promotion} alt="instructions" className="promotion-img" onLoad={onLoadImgages(images.promotion)} />
             <div className="arrow bounce">
               <i className="fa fa-arrow-down fa-2x"></i>
             </div>
@@ -98,7 +98,7 @@ export default function Index({ data }) {
         }
 
         <Link to="/home">
-          <img src={images.shopImg} alt="img" className="link-img" onLoad={onLoadImgages} />
+          <img src={images.shopImg} alt="img" className="link-img" onLoad={onLoadImgages(images.shopImg)} />
         </Link>
       </div>
 
@@ -107,7 +107,7 @@ export default function Index({ data }) {
           className="olas"
           src={images.olasImg}
           alt="waves"
-          onLoad={onLoadImgages}
+          onLoad={onLoadImgages(images.olasImg)}
         />
       </div>
 
@@ -117,7 +117,7 @@ export default function Index({ data }) {
           className="bosque"
           src={images.forest}
           alt="bosque"
-          onLoad={onLoadImgages}
+          onLoad={onLoadImgages(images.forest)}
         />
       </div>
 
@@ -126,7 +126,7 @@ export default function Index({ data }) {
           className="Guacamaya"
           src={images.macaw}
           alt="Guacamaya"
-          onLoad={onLoadImgages}
+          onLoad={onLoadImgages(images.macaw)}
         />
       </div>
 
@@ -135,19 +135,19 @@ export default function Index({ data }) {
           className="tiburcio"
           src={images.shark}
           alt="shark"
-          onLoad={onLoadImgages}
+          onLoad={onLoadImgages(images.shark)}
         />
       </div>
 
 
       {(!promotion) && <button className="helper-landing" onClick={changeStatePromotion}><i className="fa fa-question"></i></button>}
-      {/* {(loading || loadingImages) &&
+      {(loading) &&
         <div className={`loader ${loadingImages ? 'loader-content-images' : 'loader-content-diamonds'}`}>
           <div className="loader-box"></div>
           <div className="loader-shadow"></div>
           {(loadingImages) ? <img className="loader-logo" src={require('../assets/images/Urano600.png')} alt='MarDeUrano' /> : <div className="loader-text"></div>}
         </div>
-      } */}
+      }
 
       <ModalDiamond handleClose={handleClose} show={show} loadingImg={loadingImg} loading={loading} currentImage={currentImage} />
     </div >

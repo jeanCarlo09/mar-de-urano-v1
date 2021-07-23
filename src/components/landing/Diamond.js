@@ -10,7 +10,7 @@ const Diamond = ({ img, selectDiamond, onLoadImgages }) => {
                     className="diamond-img"
                     src={img}
                     alt="diamond"
-                    onLoad={onLoadImgages}
+                    onLoad={onLoadImgages(img)}
                 />
             </a>
         </div>

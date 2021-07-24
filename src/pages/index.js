@@ -17,7 +17,7 @@ export default function Index({ data }) {
   const imagesDiamonds = useMemo(() => get(landingPage, 'imageLandingArtDiamonds.images'));
   const macaw = useMemo(() => get(landingPage, 'macaw.fluid.src'));
   const splash = useMemo(() => get(landingPage, 'splash.fluid.src'));
-  // const waves = useMemo(() => get(landingPage, 'waves.fluid.src'));
+  const waves = useMemo(() => get(landingPage, 'waves.fluid.src'));
   const countImages = useRef(0);
 
 
@@ -48,7 +48,7 @@ export default function Index({ data }) {
     cristaleslluvia05: require('../assets/images/cristaleslluvia05.png'),
     landingLogo: require('../assets/images/Urano600.png'),
     shopImg: require('../assets/images/Shop.png'),
-    olasImg: require('../assets/images/olas.gif'),
+    olasImg: waves,
     splash: splash,
     forest: require('../assets/images/bosque.png'),
     macaw: macaw,
@@ -150,6 +150,11 @@ query ImagesLanding {
       }
       splash {
         fluid(maxWidth: 500, quality: 80) {
+          src
+        }
+      }
+      waves {
+        fluid(maxWidth: 1300, quality: 100) {
           src
         }
       }

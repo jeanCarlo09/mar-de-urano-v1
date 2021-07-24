@@ -8,7 +8,7 @@ export const ImageRef = ({ ...props }) => {
     useEffect(() => {
         ref.current.complete &&
             // console.log('Cargado');
-            props.onLoad(props.src);
+            props.onLoad();
     }, []);
 
     return (

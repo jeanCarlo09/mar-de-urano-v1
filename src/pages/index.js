@@ -52,8 +52,7 @@ export default function Index({ data }) {
   const imagesLength = useRef(Object.keys(images).length + diamonds.length);
   // const [imagesLength, setImagesLength] = useState(Object.keys(images).length);
 
-  const onLoadImgages = (ii = '') => { // when images in landing is charged, set state to stop charging in landing
-    console.log(imagesLength.current, ii);
+  const onLoadImgages = () => { // when images in landing is charged, set state to stop charging in landing
     (imagesLength.current <= 0) ? setTimeout(() => { setloadingImages(false); }, 2000) : imagesLength.current--;
     // count of images in landing (+1 is because splash is two)
   }
@@ -121,7 +120,7 @@ export default function Index({ data }) {
         <div className={`loader ${loadingImages ? 'loader-content-images' : 'loader-content-diamonds'}`}>
           <div className="loader-box"></div>
           <div className="loader-shadow"></div>
-          {(loadingImages) ? <img className="loader-logo" src={require('../assets/images/Urano600.png')} alt='MarDeUrano' /> : <div className="loader-text"></div>}
+          {(loadingImages) ? <img className="loader-logo" src={images.landingLogo} alt='MarDeUrano' /> : <div className="loader-text"></div>}
         </div>
       }
 

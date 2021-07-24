@@ -12,9 +12,12 @@ import { ImageRef } from '../components/landing/ImageRef';
 export default function Index({ data }) {
 
 
-  const diamonds = useMemo(() => get(data, 'allContentfulRainDiamond.nodes')[0].diamonds);
-  const imagesDiamonds = useMemo(() => get(data, 'allContentfulImagesLanding.nodes')[0].images);
-
+  const landingPage = useMemo(() => get(data, 'allContentfulLandingPage.nodes')[0]);
+  const diamonds = useMemo(() => get(landingPage, 'imageDiamonds.diamonds'));
+  const imagesDiamonds = useMemo(() => get(landingPage, 'imageLandingArtDiamonds.images'));
+  const macaw = useMemo(() => get(landingPage, 'macaw.fluid.src'));
+  const splash = useMemo(() => get(landingPage, 'splash.fluid.src'));
+  // const waves = useMemo(() => get(landingPage, 'waves.fluid.src'));
   const countImages = useRef(0);
 
 
@@ -46,9 +49,9 @@ export default function Index({ data }) {
     landingLogo: require('../assets/images/Urano600.png'),
     shopImg: require('../assets/images/Shop.png'),
     olasImg: require('../assets/images/olas.gif'),
-    splash: require('../assets/images/Splash_GIFF.gif'),
+    splash: splash,
     forest: require('../assets/images/bosque.png'),
-    macaw: require('../assets/images/Guacamaya.gif'),
+    macaw: macaw,
     shark: require('../assets/images/tiburcio.png'),
     promotion: require('../assets/images/Instrucciones.png')
   }
@@ -79,17 +82,10 @@ export default function Index({ data }) {
         ))
       }
 
-      {/* <Diamond img={images.cristaleslluvia01} selectDiamond={handleOnClick} onLoadImgages={onLoadImgages} />
-      <Diamond img={images.cristaleslluvia02} selectDiamond={handleOnClick} onLoadImgages={onLoadImgages} />
-      <Diamond img={images.cristaleslluvia03} selectDiamond={handleOnClick} onLoadImgages={onLoadImgages} />
-      <Diamond img={images.cristaleslluvia04} selectDiamond={handleOnClick} onLoadImgages={onLoadImgages} />
-      <Diamond img={images.cristaleslluvia05} selectDiamond={handleOnClick} onLoadImgages={onLoadImgages} /> */}
-
       <Splash img={images.splash} onLoadImgages={onLoadImgages} />
       <Splash img={images.splash} onLoadImgages={onLoadImgages} />
 
       <div className="landing-logo">
-        {/* <img src={images.landingLogo} alt="logo mar de urano" className="landing-logo-img" onLoad={onLoadImgages}></img> */}
         <ImageRef src={images.landingLogo} alt="logo mar de urano" className="landing-logo-img" onLoad={onLoadImgages} />
       </div>
 
@@ -97,7 +93,6 @@ export default function Index({ data }) {
       <div className="link">
         {(promotion) &&
           <div className="promotion">
-            {/* <img src={images.promotion} alt="instructions" className="promotion-img" onLoad={onLoadImgages} /> */}
             <ImageRef src={images.promotion} alt="instructions" className="promotion-img" onLoad={onLoadImgages} />
             <div className="arrow bounce">
               <i className="fa fa-arrow-down fa-2x"></i>
@@ -106,57 +101,25 @@ export default function Index({ data }) {
         }
 
         <Link to="/home">
-          {/* <img src={images.shopImg} alt="img" className="link-img" onLoad={onLoadImgages} /> */}
           <ImageRef src={images.shopImg} alt="img" className="link-img" onLoad={onLoadImgages} />
         </Link>
       </div>
 
       <div className="contentOlas">
-        {/* <img
-          className="olas"
-          src={images.olasImg}
-          alt="waves"
-          onLoad={onLoadImgages}
-        /> */}
         <ImageRef className="olas" src={images.olasImg} alt="waves" onLoad={onLoadImgages} />
-
       </div>
 
 
       <div className="contentBosque">
-        {/* <img
-          className="bosque"
-          src={images.forest}
-          alt="bosque"
-          onLoad={onLoadImgages}
-        /> */}
-
         <ImageRef className="bosque" src={images.forest} alt="bosque" onLoad={onLoadImgages} />
-
       </div>
 
       <div className="DIVGuacamaya">
-        {/* <img
-          className="Guacamaya"
-          src={images.macaw}
-          alt="Guacamaya"
-          onLoad={onLoadImgages}
-        /> */}
-
         <ImageRef className="Guacamaya" src={images.macaw} alt="Guacamaya" onLoad={onLoadImgages} />
-
       </div>
 
       <div className="contentTiburcio">
-        {/* <img
-          className="tiburcio"
-          src={images.shark}
-          alt="shark"
-          onLoad={onLoadImgages}
-        /> */}
-
         <ImageRef className="tiburcio" src={images.shark} alt="shark" onLoad={onLoadImgages} />
-
       </div>
 
 
@@ -177,26 +140,36 @@ export default function Index({ data }) {
 
 export const query = graphql`
 query ImagesLanding {
-  allContentfulImagesLanding {
+
+  allContentfulLandingPage {
     nodes {
-      id
-      images {
-        image {
-          fixed(width: 700, height: 700) {
-           src
+      macaw {
+        fluid(maxWidth: 500,quality: 80) {
+          src
+        }
+      }
+      splash {
+        fluid(maxWidth: 500, quality: 80) {
+          src
+        }
+      }
+      imageDiamonds {
+        diamonds {
+          order
+          image {
+            fluid(quality: 100) { 
+              ...GatsbyContentfulFluid
+            }
           }
         }
       }
-    }
-  }
-
-  allContentfulRainDiamond {
-    nodes {
-      diamonds {
-        order
-        image {
-          fluid(quality: 100) { 
-            ...GatsbyContentfulFluid
+      imageLandingArtDiamonds {
+        id
+        images {
+          image {
+            fixed(width: 700, height: 700) {
+             src
+            }
           }
         }
       }

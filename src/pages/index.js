@@ -37,7 +37,7 @@ export default function Index({ data }) {
     setLoading(false);
   }
 
-  const images = { //images in landing
+  const images = {
     cristaleslluvia01: require('../assets/images/cristaleslluvia01.png'),
     cristaleslluvia02: require('../assets/images/cristaleslluvia02.png'),
     cristaleslluvia03: require('../assets/images/cristaleslluvia03.png'),
@@ -52,6 +52,8 @@ export default function Index({ data }) {
     shark: require('../assets/images/tiburcio.png'),
     promotion: require('../assets/images/Instrucciones.png')
   }
+
+  const [imagesLoad, setImagesLoad] = useState({});
 
   const imagesLength = useRef(Object.keys(images).length + 1); // count of images in landing (+1 is because splash is two)
 
@@ -140,7 +142,7 @@ export default function Index({ data }) {
 
 
       {(!promotion) && <button className="helper-landing" onClick={changeStatePromotion}><i className="fa fa-question"></i></button>}
-      {(loadingImages || loading) &&
+      {(loading) &&
         <div className={`loader ${loadingImages ? 'loader-content-images' : 'loader-content-diamonds'}`}>
           <div className="loader-box"></div>
           <div className="loader-shadow"></div>

@@ -15,9 +15,7 @@ export default function Index({ data }) {
   const landingPage = useMemo(() => get(data, 'allContentfulLandingPage.nodes')[0]);
   const diamonds = useMemo(() => get(landingPage, 'imageDiamonds.diamonds'));
   const imagesDiamonds = useMemo(() => get(landingPage, 'imageLandingArtDiamonds.images'));
-  const macaw = useMemo(() => get(landingPage, 'macaw.fluid.src'));
-  const splash = useMemo(() => get(landingPage, 'splash.fluid.src'));
-  const waves = useMemo(() => get(landingPage, 'waves.fluid.src'));
+
   const countImages = useRef(0);
 
 
@@ -41,22 +39,17 @@ export default function Index({ data }) {
   }
 
   const images = {
-    cristaleslluvia01: require('../assets/images/cristaleslluvia01.png'),
-    cristaleslluvia02: require('../assets/images/cristaleslluvia02.png'),
-    cristaleslluvia03: require('../assets/images/cristaleslluvia03.png'),
-    cristaleslluvia04: require('../assets/images/cristaleslluvia04.png'),
-    cristaleslluvia05: require('../assets/images/cristaleslluvia05.png'),
-    landingLogo: require('../assets/images/Urano600.png'),
-    shopImg: require('../assets/images/Shop.png'),
-    olasImg: waves,
-    splash: splash,
-    forest: require('../assets/images/bosque.png'),
-    macaw: macaw,
-    shark: require('../assets/images/tiburcio.png'),
-    promotion: require('../assets/images/Instrucciones.png')
+    landingLogo: landingPage.landingLogo.fluid.src,
+    shopImg: landingPage.shopImg.fluid.src,
+    olasImg: landingPage.waves.fluid.src,
+    splash: landingPage.splash.fluid.src,
+    forest: landingPage.forest.fluid.src,
+    macaw: landingPage.macaw.fluid.src,
+    shark: landingPage.shark.fluid.src,
+    promotion: landingPage.promotion.fluid.src
   }
 
-  const imagesLength = useRef(Object.keys(images).length + 1);
+  const imagesLength = useRef(Object.keys(images).length + diamonds.length);
   // const [imagesLength, setImagesLength] = useState(Object.keys(images).length);
 
   const onLoadImgages = (ii = '') => { // when images in landing is charged, set state to stop charging in landing
@@ -144,7 +137,7 @@ query ImagesLanding {
   allContentfulLandingPage {
     nodes {
       macaw {
-        fluid(maxWidth: 500,quality: 80) {
+        fluid(maxWidth: 500, quality: 80) {
           src
         }
       }
@@ -162,8 +155,8 @@ query ImagesLanding {
         diamonds {
           order
           image {
-            fluid(quality: 100) { 
-              ...GatsbyContentfulFluid
+            fluid(quality: 80) {
+              src
             }
           }
         }
@@ -173,13 +166,37 @@ query ImagesLanding {
         images {
           image {
             fixed(width: 700, height: 700) {
-             src
+              src
             }
           }
         }
       }
+      shark {
+        fluid {
+          src
+        }
+      }
+      promotion {
+        fluid(maxWidth: 500, quality: 80) {
+          src
+        }
+      }
+      landingLogo {
+        fluid(maxWidth: 600, quality: 80) {
+          src
+        }
+      }
+      forest {
+        fluid {
+          src
+        }
+      }
+      shopImg {
+        fluid(maxWidth: 99, quality: 100) {
+          src
+        }
+      }
     }
   }
-
 }
 `;

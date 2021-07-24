@@ -53,12 +53,12 @@ export default function Index({ data }) {
     promotion: require('../assets/images/Instrucciones.png')
   }
 
-  // const imagesLength = useRef(0); 
-  const [imagesLength, setImagesLength] = useState(Object.keys(images).length);
+  const imagesLength = useRef(Object.keys(images).length + 1);
+  // const [imagesLength, setImagesLength] = useState(Object.keys(images).length);
 
-  const onLoadImgages = () => { // when images in landing is charged, set state to stop charging in landing
-    console.log(imagesLength);
-    (imagesLength <= 0) ? setTimeout(() => { setloadingImages(false); }, 2000) : setImagesLength(imagesLength - 1);
+  const onLoadImgages = (ii = '') => { // when images in landing is charged, set state to stop charging in landing
+    console.log(imagesLength.current, ii);
+    (imagesLength.current <= 0) ? setTimeout(() => { setloadingImages(false); }, 2000) : imagesLength.current--;
     // count of images in landing (+1 is because splash is two)
   }
 

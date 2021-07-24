@@ -51,11 +51,11 @@ export default function Index({ data }) {
   }
 
   // const imagesLength = useRef(0); 
-  const [imagesLength, setImagesLength] = useState(0);
+  const [imagesLength, setImagesLength] = useState(Object.keys(images).length + 1);
 
   const onLoadImgages = () => { // when images in landing is charged, set state to stop charging in landing
     console.log(imagesLength);
-    (imagesLength + 1 >= (Object.keys(images).length + 1)) ? setTimeout(() => { setloadingImages(false); }, 2000) : setImagesLength(imagesLength + 1);
+    (imagesLength <= 0) ? setTimeout(() => { setloadingImages(false); }, 2000) : setImagesLength(imagesLength - 1);
     // count of images in landing (+1 is because splash is two)
   }
 

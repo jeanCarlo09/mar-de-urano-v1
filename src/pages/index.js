@@ -161,7 +161,7 @@ export default function Index({ data }) {
 
 
       {(!promotion) && <button className="helper-landing" onClick={changeStatePromotion}><i className="fa fa-question"></i></button>}
-      {(loading) &&
+      {(loadingImages || loading) &&
         <div className={`loader ${loadingImages ? 'loader-content-images' : 'loader-content-diamonds'}`}>
           <div className="loader-box"></div>
           <div className="loader-shadow"></div>

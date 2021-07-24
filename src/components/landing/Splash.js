@@ -1,14 +1,16 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { ImageRef } from './ImageRef';
 
 const Splash = ({ img, onLoadImgages }) => {
     return (
-        <img
-            className="splash"
-            src={img}
-            alt="splash"
-            onLoad={onLoadImgages}
-        />
+        // <img
+        //     className="splash"
+        //     src={img}
+        //     alt="splash"
+        //     onLoad={onLoadImgages}
+        // />
+        <ImageRef className="splash" src={img} alt="splash" onLoad={onLoadImgages} />
     );
 }
 

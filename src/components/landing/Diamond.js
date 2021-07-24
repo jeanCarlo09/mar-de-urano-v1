@@ -1,26 +1,13 @@
-import React, { useEffect, useRef } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
+import { ImageRef } from './ImageRef';
 
 const Diamond = ({ selectDiamond, onLoadImgages, diamond }) => {
-
-    const ref = useRef(null);
-
-    useEffect(() => {
-        ref.current.complete &&
-            console.log('Cargado');
-    }, []);
 
     return (
         <div className="diamond">
             <a href="/#" onClick={selectDiamond}>
-                <img
-                    className="diamond-img"
-                    src={diamond.image.fluid.src}
-                    alt="diamond"
-                    onLoad={onLoadImgages}
-                    ref={ref}
-                />
-
+                <ImageRef className="diamond-img" src={diamond.image.fluid.src} alt="diamond" onLoad={onLoadImgages} />
             </a>
         </div>
     )

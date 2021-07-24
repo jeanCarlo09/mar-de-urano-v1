@@ -7,6 +7,7 @@ import ModalDiamond from '../components/landing/ModalDiamond';
 import Splash from '../components/landing/Splash';
 
 import "../assets/scss/mardeurano.scss";
+import { ImageRef } from '../components/landing/ImageRef';
 
 export default function Index({ data }) {
 
@@ -88,14 +89,16 @@ export default function Index({ data }) {
       <Splash img={images.splash} onLoadImgages={onLoadImgages} />
 
       <div className="landing-logo">
-        <img src={images.landingLogo} alt="logo mar de urano" className="landing-logo-img" onLoad={onLoadImgages}></img>
+        {/* <img src={images.landingLogo} alt="logo mar de urano" className="landing-logo-img" onLoad={onLoadImgages}></img> */}
+        <ImageRef src={images.landingLogo} alt="logo mar de urano" className="landing-logo-img" onLoad={onLoadImgages} />
       </div>
 
 
       <div className="link">
         {(promotion) &&
           <div className="promotion">
-            <img src={images.promotion} alt="instructions" className="promotion-img" onLoad={onLoadImgages} />
+            {/* <img src={images.promotion} alt="instructions" className="promotion-img" onLoad={onLoadImgages} /> */}
+            <ImageRef src={images.promotion} alt="instructions" className="promotion-img" onLoad={onLoadImgages} />
             <div className="arrow bounce">
               <i className="fa fa-arrow-down fa-2x"></i>
             </div>
@@ -103,51 +106,62 @@ export default function Index({ data }) {
         }
 
         <Link to="/home">
-          <img src={images.shopImg} alt="img" className="link-img" onLoad={onLoadImgages} />
-
+          {/* <img src={images.shopImg} alt="img" className="link-img" onLoad={onLoadImgages} /> */}
+          <ImageRef src={images.shopImg} alt="img" className="link-img" onLoad={onLoadImgages} />
         </Link>
       </div>
 
       <div className="contentOlas">
-        <img
+        {/* <img
           className="olas"
           src={images.olasImg}
           alt="waves"
           onLoad={onLoadImgages}
-        />
+        /> */}
+        <ImageRef className="olas" src={images.olasImg} alt="waves" onLoad={onLoadImgages} />
+
       </div>
 
 
       <div className="contentBosque">
-        <img
+        {/* <img
           className="bosque"
           src={images.forest}
           alt="bosque"
           onLoad={onLoadImgages}
-        />
+        /> */}
+
+        <ImageRef className="bosque" src={images.forest} alt="bosque" onLoad={onLoadImgages} />
+
       </div>
 
       <div className="DIVGuacamaya">
-        <img
+        {/* <img
           className="Guacamaya"
           src={images.macaw}
           alt="Guacamaya"
           onLoad={onLoadImgages}
-        />
+        /> */}
+
+        <ImageRef className="Guacamaya" src={images.macaw} alt="Guacamaya" onLoad={onLoadImgages} />
+
       </div>
 
       <div className="contentTiburcio">
-        <img
+        {/* <img
           className="tiburcio"
           src={images.shark}
           alt="shark"
           onLoad={onLoadImgages}
-        />
+        /> */}
+
+        <ImageRef className="tiburcio" src={images.shark} alt="shark" onLoad={onLoadImgages} />
+
       </div>
 
 
       {(!promotion) && <button className="helper-landing" onClick={changeStatePromotion}><i className="fa fa-question"></i></button>}
-      {(loadingImages || loading) &&
+      {(loading) &&
         <div className={`loader ${loadingImages ? 'loader-content-images' : 'loader-content-diamonds'}`}>
           <div className="loader-box"></div>
           <div className="loader-shadow"></div>

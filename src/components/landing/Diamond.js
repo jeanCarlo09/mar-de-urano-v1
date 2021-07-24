@@ -1,17 +1,26 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
 
-const Diamond = ({ img, selectDiamond, onLoadImgages }) => {
+const Diamond = ({ selectDiamond, onLoadImgages, diamond }) => {
+
+    const ref = useRef(null);
+
+    useEffect(() => {
+        ref.current.complete &&
+            console.log('Cargado');
+    }, []);
 
     return (
         <div className="diamond">
             <a href="/#" onClick={selectDiamond}>
                 <img
                     className="diamond-img"
-                    src={img}
+                    src={diamond.image.fluid.src}
                     alt="diamond"
                     onLoad={onLoadImgages}
+                    ref={ref}
                 />
+
             </a>
         </div>
     )
@@ -20,7 +29,6 @@ const Diamond = ({ img, selectDiamond, onLoadImgages }) => {
 export default Diamond;
 
 Diamond.propTypes = {
-    img: PropTypes.string.isRequired,
     selectDiamond: PropTypes.func.isRequired,
     onLoadImgages: PropTypes.func.isRequired
 }

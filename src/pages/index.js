@@ -10,6 +10,8 @@ import "../assets/scss/mardeurano.scss";
 
 export default function Index({ data }) {
 
+
+  const diamonds = useMemo(() => get(data, 'allContentfulRainDiamond.nodes')[0].diamonds);
   const imagesDiamonds = useMemo(() => get(data, 'allContentfulImagesLanding.nodes')[0].images);
 
   const countImages = useRef(0);
@@ -51,7 +53,7 @@ export default function Index({ data }) {
   }
 
   // const imagesLength = useRef(0); 
-  const [imagesLength, setImagesLength] = useState(Object.keys(images).length + 1);
+  const [imagesLength, setImagesLength] = useState(Object.keys(images).length);
 
   const onLoadImgages = () => { // when images in landing is charged, set state to stop charging in landing
     console.log(imagesLength);
@@ -70,13 +72,17 @@ export default function Index({ data }) {
 
   return (
     <div className="index">
-      <Diamond img={images.cristaleslluvia01} selectDiamond={handleOnClick} onLoadImgages={onLoadImgages} />
-      <Diamond img={images.cristaleslluvia01} selectDiamond={handleOnClick} onLoadImgages={onLoadImgages} />
+      {
+        diamonds.map((diamond, key) => (
+          <Diamond key={key} selectDiamond={handleOnClick} onLoadImgages={onLoadImgages} diamond={diamond} />
+        ))
+      }
+
+      {/* <Diamond img={images.cristaleslluvia01} selectDiamond={handleOnClick} onLoadImgages={onLoadImgages} />
       <Diamond img={images.cristaleslluvia02} selectDiamond={handleOnClick} onLoadImgages={onLoadImgages} />
       <Diamond img={images.cristaleslluvia03} selectDiamond={handleOnClick} onLoadImgages={onLoadImgages} />
       <Diamond img={images.cristaleslluvia04} selectDiamond={handleOnClick} onLoadImgages={onLoadImgages} />
-      <Diamond img={images.cristaleslluvia05} selectDiamond={handleOnClick} onLoadImgages={onLoadImgages} />
-
+      <Diamond img={images.cristaleslluvia05} selectDiamond={handleOnClick} onLoadImgages={onLoadImgages} /> */}
 
       <Splash img={images.splash} onLoadImgages={onLoadImgages} />
       <Splash img={images.splash} onLoadImgages={onLoadImgages} />
@@ -98,6 +104,7 @@ export default function Index({ data }) {
 
         <Link to="/home">
           <img src={images.shopImg} alt="img" className="link-img" onLoad={onLoadImgages} />
+
         </Link>
       </div>
 
@@ -168,5 +175,19 @@ query ImagesLanding {
       }
     }
   }
+
+  allContentfulRainDiamond {
+    nodes {
+      diamonds {
+        order
+        image {
+          fluid(quality: 100) { 
+            ...GatsbyContentfulFluid
+          }
+        }
+      }
+    }
+  }
+
 }
 `;

@@ -50,11 +50,13 @@ export default function Index({ data }) {
     promotion: require('../assets/images/Instrucciones.png')
   }
 
-  const imagesLength = useRef(0); // count of images in landing (+1 is because splash is two)
+  // const imagesLength = useRef(0); 
+  const [imagesLength, setImagesLength] = useState(0);
 
   const onLoadImgages = () => { // when images in landing is charged, set state to stop charging in landing
-    console.log(imagesLength.current);
-    (imagesLength.current + 1 >= (Object.keys(images).length + 1)) ? setTimeout(() => { setloadingImages(false); }, 2000) : imagesLength.current++;
+    console.log(imagesLength);
+    (imagesLength + 1 >= (Object.keys(images).length + 1)) ? setTimeout(() => { setloadingImages(false); }, 2000) : setImagesLength(imagesLength + 1);
+    // count of images in landing (+1 is because splash is two)
   }
 
   const changeStatePromotion = () => { // set the state to hide the instructions of diamonds and bottom shop

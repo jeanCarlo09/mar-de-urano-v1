@@ -18,7 +18,7 @@ const ModalDiamond = ({ handleClose, show, loadingImg, loading, currentImage }) 
                 <Modal.Body>
                     {currentImage !== '' && (
                         <div className="container-image">
-                            <Image onLoad={loadingImg} fluid src={currentImage} alt="Image art" />
+                            <Image onLoad={loadingImg} onError={loadingImg} fluid src={currentImage} alt="Image art" />
                             {(!loading) &&
                                 <button className="btn-close" onClick={handleClose}>
                                     <i className="fa fa-remove btn-close-icon"></i>

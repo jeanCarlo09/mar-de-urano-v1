@@ -7,7 +7,7 @@ const Diamond = ({ selectDiamond, onLoadImgages, diamond }) => {
     return (
         <div className="diamond">
             <a href="/#" onClick={selectDiamond}>
-                <ImageRef className="diamond-img" src={diamond.image.fluid.src} alt="diamond" onLoad={onLoadImgages} />
+                <ImageRef className="diamond-img" src={diamond.image.fluid.src} alt="diamond" onLoad={onLoadImgages} onError={onLoadImgages} />
             </a>
         </div>
     )

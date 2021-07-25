@@ -15,7 +15,7 @@ import { fetchProducts } from '../redux/actions/productActions';
 
 const Custom = ({ data, location }) => {
 
-
+  const sliderData = get(data, 'allContentfulSliderCustomPage.nodes')[0];
   const nodes = get(data, "allShopifyProduct.nodes");
   let products = getProductsWithCustom(nodes);
 
@@ -46,7 +46,7 @@ const Custom = ({ data, location }) => {
   return (
     <Provider store={store}>
       <MarDeUranoApp>
-        <CustomApp relatedProducts={nodes.slice(0, 4)}></CustomApp>
+        <CustomApp relatedProducts={nodes.slice(0, 4)} sliderData={sliderData}></CustomApp>
       </MarDeUranoApp>
     </Provider>
   );
@@ -91,6 +91,21 @@ export const query = graphql`
                 src
               }
             }
+          }
+        }
+      }
+    }
+
+    allContentfulSliderCustomPage {
+      nodes {
+        title
+        subTitle
+        description
+        url
+        textButton
+        imageSlider {
+          fluid(maxWidth: 1920, quality: 80) {
+            src
           }
         }
       }

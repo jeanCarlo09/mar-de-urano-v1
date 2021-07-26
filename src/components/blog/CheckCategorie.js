@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { useDispatch } from 'react-redux';
 import { addActiveCategory, removeActiveCategory } from '../../redux/actions/blogActions';
 import { navigate } from 'gatsby';
+import PropTypes from "prop-types";
 
 export const CheckCategorie = ({ category, isChecked }) => {
 
@@ -29,4 +30,9 @@ export const CheckCategorie = ({ category, isChecked }) => {
         </>
     );
 
+}
+
+CheckCategorie.propTypes = {
+    category: PropTypes.object,
+    isChecked: PropTypes.bool
 }

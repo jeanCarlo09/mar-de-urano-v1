@@ -1,5 +1,6 @@
 import React from 'react';
 import moment from 'moment';
+import PropTypes from "prop-types";
 import { Link } from 'gatsby';
 
 export const BlogPostCard = ({ post }) => {
@@ -16,7 +17,6 @@ export const BlogPostCard = ({ post }) => {
 
                     <span className="post-author">
                         <span className="post-by">
-                            {/* <i class="far fa-user"></i> */}
                             <i className="fas fa-user-alt post-meta-icon"></i>{post.author.name}
                         </span>
                     </span>
@@ -32,11 +32,14 @@ export const BlogPostCard = ({ post }) => {
                 <div className="entry-content mt-2">
                     <p className="entry-content-description mb-4">{post.description.description}</p>
 
-                    {/* <div className=""></div> */}
                     <Link className="entry-content-readmore" to={`/blog?${post.handle}`} >Read More</Link>
                 </div>
             </div>
         </article>
     );
 
+}
+
+BlogPostCard.propTypes = {
+    post: PropTypes.object
 }

@@ -267,3 +267,11 @@ export const getProductsOutCustom = (products) => {
 export const getProductsWithCustom = (products) => {
   return products.filter((product) => product.productType === 'Custom');
 }
+
+
+export const equalsItems = (item, product) => {
+  return ((product.selectedProductColor ? (product.selectedProductColor === item.selectedProductColor) : true)
+    && (product.selectedProductSize ? (product.selectedProductSize === item.selectedProductSize) : true)
+    && (product.selectedProductMaterial ? (product.selectedProductMaterial === item.selectedProductMaterial) : true)
+    && (product.selectedProductPrint ? (product.selectedProductPrint === item.selectedProductPrint) : true));
+}

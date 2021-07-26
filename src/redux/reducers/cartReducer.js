@@ -1,4 +1,5 @@
 import uuid from "uuid/v4";
+import { equalsItems } from "../../helpers/product";
 
 import {
   ADD_TO_CART,
@@ -47,10 +48,7 @@ const cartReducer = (state = initState, action) => {
       const cartItem = cartItems.filter(item => {
         return (
           item.shopifyId === product.shopifyId
-          && (product.selectedProductColor ? (product.selectedProductColor === item.selectedProductColor) : true)
-          && (product.selectedProductSize ? (product.selectedProductSize === item.selectedProductSize) : true)
-          && (product.selectedProductMaterial ? (product.selectedProductMaterial === item.selectedProductMaterial) : true)
-          && (product.selectedProductPrint ? (product.selectedProductPrint === item.selectedProductPrint) : true)
+          && equalsItems(item, product)
         );
       })[0];
 
@@ -85,10 +83,7 @@ const cartReducer = (state = initState, action) => {
 
         return cartItems.map(item =>
           item.shopifyId === cartItem.shopifyId
-            && (product.selectedProductColor ? (product.selectedProductColor === item.selectedProductColor) : true)
-            && (product.selectedProductSize ? (product.selectedProductSize === item.selectedProductSize) : true)
-            && (product.selectedProductMaterial ? (product.selectedProductMaterial === item.selectedProductMaterial) : true)
-            && (product.selectedProductPrint ? (product.selectedProductPrint === item.selectedProductPrint) : true)
+            && equalsItems(item, product)
             ? {
               ...item,
               quantity: product.quantity
@@ -109,12 +104,13 @@ const cartReducer = (state = initState, action) => {
     if (product.quantity === 1) {
       const remainingItems = (cartItems, product) =>
         cartItems.filter(
-          cartItem => cartItem.cartItemId !== product.cartItemId
+          cartItem => cartItem.cartItemId === product.cartItemId ? !equalsItems(cartItem, product) : true
         );
       return remainingItems(cartItems, product);
     } else {
       return cartItems.map(item =>
         item.cartItemId === product.cartItemId
+          && equalsItems(item, product)
           ? { ...item, quantity: item.quantity - 1 }
           : item
       );
@@ -122,9 +118,10 @@ const cartReducer = (state = initState, action) => {
   }
 
   if (action.type === INCREASE_QUANTITY) {
-    if (product.quantity <= 10) {
+    if (product.quantity <= 6) {
       return cartItems.map(item =>
         item.cartItemId === product.cartItemId
+          && equalsItems(item, product)
           ? { ...item, quantity: item.quantity + 1 }
           : item
       );

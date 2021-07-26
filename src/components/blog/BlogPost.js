@@ -1,6 +1,7 @@
 import React from 'react';
 import moment from 'moment';
 import parse from 'html-react-parser';
+import PropTypes from "prop-types";
 
 export const BlogPost = ({ post }) => {
 
@@ -41,4 +42,8 @@ export const BlogPost = ({ post }) => {
 
         </div>
     );
+}
+
+BlogPost.propTypes = {
+    post: PropTypes.object
 }

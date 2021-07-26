@@ -21,7 +21,7 @@ const OurWorld = ({ data }) => {
   const ourWorldContent = get(data, 'allContentfulOurWorld.nodes')[0];
   const ideologyCards = get(ourWorldContent, 'ideologyCards');
 
-  console.log('ourWorldContent', ourWorldContent);
+  // console.log('ourWorldContent', ourWorldContent);
 
   if (typeof window !== `undefined`) {
     store = createStore(

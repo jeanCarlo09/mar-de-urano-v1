@@ -69,7 +69,8 @@ const BlogPostList = ({ posts, single, postActive, categoriesActives }) => {
 BlogPostList.propTypes = {
     posts: PropTypes.array.isRequired,
     single: PropTypes.bool.isRequired,
-    postActive: PropTypes.object.isRequired
+    postActive: PropTypes.object.isRequired,
+    categoriesActives: PropTypes.array
 }
 
 const mapStateToProps = (state) => {

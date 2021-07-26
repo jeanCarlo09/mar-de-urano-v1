@@ -1,7 +1,8 @@
-import PropTypes from "prop-types";
+
 import React from "react";
+import PropTypes from "prop-types";
 import parse from "html-react-parser";
-// import { SocialMedia } from "../social-media/social-media";
+import { SocialMedia } from "../social-media/social-media";
 
 const CollectionDescriptionInfo = ({
   collection
@@ -15,7 +16,7 @@ const CollectionDescriptionInfo = ({
         {parse(collection.descriptionHtml)}
       </div>
 
-      {/* <SocialMedia></SocialMedia> */}
+      <SocialMedia></SocialMedia>
 
     </div>
   );

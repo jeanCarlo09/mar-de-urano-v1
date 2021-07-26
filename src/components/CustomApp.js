@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import ShopLayout from '../components/layouts/ShopLayout';
+import PropTypes from 'prop-types';
 
 import RelatedProducts from '../wrappers/product/RelatedProducts';
 import ShopProducts from '../wrappers/product/ShopProducts';
@@ -34,5 +35,11 @@ const mapStateToProps = (state) => {
         products: state.productData.products,
     };
 };
+
+CustomApp.propTypes = {
+    relatedProducts: PropTypes.array.isRequired,
+    sliderData: PropTypes.object.isRequired,
+    products: PropTypes.array.isRequired
+}
 
 export default connect(mapStateToProps)(CustomApp)

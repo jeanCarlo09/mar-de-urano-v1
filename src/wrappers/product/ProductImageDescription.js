@@ -3,14 +3,12 @@ import React, { useState } from "react";
 import { connect, useSelector } from "react-redux";
 import { useToasts } from "react-toast-notifications";
 import get from "lodash/get";
+import parse from 'html-react-parser';
 
 import ProductDescriptionInfo from "../../components/product/ProductDescriptionInfo";
 import ProductImageGallerySideThumb from "../../components/product/ProductImageGallerySideThumb";
-import ProductgridList from "../../components/product/ProductgridList";
 import RelatedProducts from "./RelatedProducts";
 import { relatedProductsShop } from "../../helpers/relatedProducts";
-
-import parse from 'html-react-parser';
 
 const ProductImageDescription = ({
   spaceTopClass,
@@ -117,27 +115,16 @@ const ProductImageDescription = ({
             </ul>
 
             <div className="product-info-text mt-20">
-              {/* <p>
-                {productInfo}
-              </p> */}
-
               {
                 description
                   ?
                   parse(product.descriptionHtml)
                   :
-                  // <table>
-
-                  //   <tr>
-                  //     <th>Weight</th>
-                  //     <td><br /> 20,5 g</td>
-                  //   </tr>
-
-                  // </table>
-
-                  <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book</p>
+                  <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+                    Lorem Ipsum has been the industrys standard dummy text ever since the 1500s,
+                    when an unknown printer took a galley of type and scrambled it to make a type specimen book
+                  </p>
               }
-
             </div>
 
             <RelatedProducts relatedProducts={relatedProducts}></RelatedProducts>

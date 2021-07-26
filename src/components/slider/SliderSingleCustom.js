@@ -1,8 +1,9 @@
 import React from 'react';
 import { Link } from 'gatsby';
+import PropTypes from 'prop-types';
 
 const SliderSingleCustom = ({ sliderData }) => {
-    console.log(sliderData);
+    // console.log(sliderData);
     return (
         <div className="owl-stage-outer pt-95">
             <div className="owl-stage" >
@@ -30,6 +31,10 @@ const SliderSingleCustom = ({ sliderData }) => {
         </div>
     );
 
+}
+
+SliderSingleCustom.propTypes = {
+    sliderData: PropTypes.object.isRequired
 }
 
 export default SliderSingleCustom;

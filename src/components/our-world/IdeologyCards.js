@@ -1,5 +1,7 @@
 import React from 'react';
 import parse from 'html-react-parser';
+import PropTypes from 'prop-types';
+
 
 const IdeologyCards = ({ card }) => {
 
@@ -15,6 +17,10 @@ const IdeologyCards = ({ card }) => {
             </article>
         </div>
     );
+}
+
+IdeologyCards.propTypes = {
+    card: PropTypes.object
 }
 
 export default IdeologyCards;

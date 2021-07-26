@@ -1,5 +1,7 @@
 import React from 'react';
 import { CheckCategorie } from './CheckCategorie';
+import PropTypes from "prop-types";
+
 export const BlogSideBarCategories = ({ categories, categoriesActives }) => {
 
     return (
@@ -25,4 +27,9 @@ export const BlogSideBarCategories = ({ categories, categoriesActives }) => {
         </section>
     );
 
+}
+
+BlogSideBarCategories.propTypes = {
+    categories: PropTypes.array,
+    categoriesActives: PropTypes.array
 }

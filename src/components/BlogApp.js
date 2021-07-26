@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import ShopLayout from './layouts/ShopLayout';
 import BlogSideBar from './blog/BlogSideBar';
@@ -17,6 +18,10 @@ const BlogApp = ({ categories }) => {
             </div>
         </ShopLayout>
     );
+}
+
+BlogApp.propTypes = {
+    categories: PropTypes.array
 }
 
 export default BlogApp;

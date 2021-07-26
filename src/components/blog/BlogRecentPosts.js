@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'gatsby';
+import PropTypes from "prop-types";
 
 export const BlogRecentPosts = ({ posts }) => {
     return (
@@ -30,4 +31,8 @@ export const BlogRecentPosts = ({ posts }) => {
 
         </section>
     );
+}
+
+BlogRecentPosts.propTypes = {
+    posts: PropTypes.array
 }

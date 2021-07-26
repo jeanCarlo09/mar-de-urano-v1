@@ -17,5 +17,6 @@ export default Diamond;
 
 Diamond.propTypes = {
     selectDiamond: PropTypes.func.isRequired,
-    onLoadImgages: PropTypes.func.isRequired
+    onLoadImgages: PropTypes.func.isRequired,
+    diamond: PropTypes.object.isRequired
 }

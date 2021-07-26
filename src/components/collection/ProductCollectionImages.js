@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 export const ProductCollectionImages = ({ product }) => {
 
@@ -16,4 +17,8 @@ export const ProductCollectionImages = ({ product }) => {
         ))
     )
 
+}
+
+ProductCollectionImages.propTypes = {
+    product: PropTypes.object
 }

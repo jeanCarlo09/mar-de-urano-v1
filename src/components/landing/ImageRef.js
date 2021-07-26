@@ -1,4 +1,5 @@
 import React, { useEffect, useRef } from 'react';
+import PropTypes from 'prop-types';
 
 
 export const ImageRef = ({ ...props }) => {
@@ -18,4 +19,8 @@ export const ImageRef = ({ ...props }) => {
         />
     );
 
+}
+
+ImageRef.propTypes = {
+    props: PropTypes.object
 }

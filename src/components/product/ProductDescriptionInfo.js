@@ -31,7 +31,7 @@ const ProductDescriptionInfo = ({
   setImageCustomActive
 }) => {
 
-  console.log(colorsCustom, 'colorsCustom');
+  // console.log(colorsCustom, 'colorsCustom');
 
   const variants = {
     colors: [],

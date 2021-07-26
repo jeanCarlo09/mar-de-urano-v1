@@ -25,7 +25,7 @@ const Shop = ({ data }) => {
 
   const print = product.productType === 'Custom' ? get(data, 'allContentfulPrintCustom.nodes') : [];
   const colorsCustom = product.productType === 'Custom' ? get(data, 'allContentfulColorCustom.nodes') : [];
-  console.log('colorsCustom', colorsCustom);
+  // console.log('colorsCustom', colorsCustom);
 
   let store;
 

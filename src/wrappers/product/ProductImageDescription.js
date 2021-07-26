@@ -19,6 +19,7 @@ const ProductImageDescription = ({
   wishlistItems,
   compareItems,
   print,
+  colorsCustom
 }) => {
 
   const product = productActive.product[0];
@@ -100,6 +101,7 @@ const ProductImageDescription = ({
               addToast={addToast}
               images={imagesArray}
               print={print}
+              colorsCustom={colorsCustom}
               setImageCustomActive={setImageCustomActive}
             />
           </div>

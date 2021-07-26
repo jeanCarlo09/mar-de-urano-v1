@@ -8,7 +8,7 @@ import ShopLayout from "../components/layouts/ShopLayout";
 // import ProductDescriptionTab from "../wrappers/product/ProductDescriptionTab";
 import ProductImageDescription from "../wrappers/product/ProductImageDescription";
 
-const ProductTabLeft = ({ productActive, print }) => {
+const ProductTabLeft = ({ productActive, print, colorsCustom }) => {
 
   return (
     <ShopLayout headerTop="visible">
@@ -18,6 +18,7 @@ const ProductTabLeft = ({ productActive, print }) => {
         productActive={productActive}
         galleryType="leftThumb"
         print={print}
+        colorsCustom={colorsCustom}
       />
       {/* <ProductDescriptionTab
         spaceBottomClass="pb-90"

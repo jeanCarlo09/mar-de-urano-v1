@@ -24,6 +24,8 @@ const Shop = ({ data }) => {
   let relatedProducts = getProductsOutCustom(get(data, "allShopifyProduct.nodes"));
 
   const print = product.productType === 'Custom' ? get(data, 'allContentfulPrintCustom.nodes') : [];
+  const colorsCustom = product.productType === 'Custom' ? get(data, 'allContentfulColorCustom.nodes') : [];
+  console.log('colorsCustom', colorsCustom);
 
   let store;
 
@@ -45,7 +47,7 @@ const Shop = ({ data }) => {
   return (
     <Provider store={store}>
       <MarDeUranoApp>
-        <ShopProduct print={print}></ShopProduct>
+        <ShopProduct print={print} colorsCustom={colorsCustom}></ShopProduct>
       </MarDeUranoApp>
     </Provider>
   );
@@ -154,6 +156,14 @@ export const query = graphql`
         }
       }
     }
+
+    allContentfulColorCustom {
+      nodes {
+        color
+        colorId
+      }
+    }
+
   }
 `;
 export default Shop;

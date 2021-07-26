@@ -77,7 +77,7 @@ const cartReducer = (state = initState, action) => {
         //   ];
       } else {
 
-        if (cartItem.quantity >= 6) {
+        if (cartItem.quantity >= process.env.GATSBY_MAX_QUANTITY_PRODUCTS) {
           return state;
         }
 
@@ -118,7 +118,7 @@ const cartReducer = (state = initState, action) => {
   }
 
   if (action.type === INCREASE_QUANTITY) {
-    if (product.quantity <= 6) {
+    if (product.quantity <= process.env.GATSBY_MAX_QUANTITY_PRODUCTS) {
       return cartItems.map(item =>
         item.cartItemId === product.cartItemId
           && equalsItems(item, product)

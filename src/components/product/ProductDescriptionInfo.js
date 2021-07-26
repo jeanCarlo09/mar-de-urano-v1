@@ -27,10 +27,11 @@ const ProductDescriptionInfo = ({
   addToCompare,
   images,
   print,
+  colorsCustom,
   setImageCustomActive
 }) => {
 
-
+  console.log(colorsCustom, 'colorsCustom');
 
   const variants = {
     colors: [],
@@ -71,7 +72,7 @@ const ProductDescriptionInfo = ({
   variants.prints = uniq(variants.prints);
 
   let prints = print.filter((single) => variants.prints.includes(single.printId)).sort((a, b) => (b.printId === 'None' ? 1 : -1));
-
+  let colors = colorsCustom.filter((color) => variants.colors.includes(color.colorId)).sort((a, b) => (b.printId === 'White' ? 1 : -1));
 
   const allVariants = { ...variants };
 
@@ -91,7 +92,7 @@ const ProductDescriptionInfo = ({
 
 
   const [productCartQty, setProductCartQty] = useState(0);
-  const maxQuantity = useRef((product.availableForSale) ? 6 : 0);
+  const maxQuantity = useRef((product.availableForSale) ? process.env.GATSBY_MAX_QUANTITY_PRODUCTS : 0);
   product.maxQuantity = maxQuantity.current;
 
   const availableForSale = get(product, "availableForSale");
@@ -306,14 +307,14 @@ const ProductDescriptionInfo = ({
           <div className="pro-details-color-wrap">
             <span>Color</span>
             <div className="pro-details-color-content">
-              {productVariant.colors.map((single, key) => {
+              {colors.map((single, key) => {
                 let style;
 
-                if (single.indexOf("#") >= 0) {
-                  style = { background: single };
-                } else if (single.indexOf("http") >= 0) {
+                if (single.color.indexOf("#") >= 0) {
+                  style = { background: single.color };
+                } else if (single.color.indexOf("http") >= 0) {
                   style = {
-                    backgroundImage: `url(${single})`,
+                    backgroundImage: `url(${single.color})`,
                     backgroundPosition: "center",
                     backgroundSize: "contain",
                   };
@@ -321,17 +322,17 @@ const ProductDescriptionInfo = ({
 
                 return (
                   <label
-                    className={`pro-details-color-content--single ${single}`}
+                    className={`pro-details-color-content--single ${single.colorId}`}
                     key={key}
                     style={style}
                   >
                     <input
                       type="radio"
-                      value={single}
+                      value={single.colorId}
                       name="product-color"
                       checked={
                         productVariant.colors.length === 1 ||
-                          single === selectedProductColor
+                          single.colorId === selectedProductColor
                           ? "checked"
                           : ""
                       }
@@ -340,7 +341,7 @@ const ProductDescriptionInfo = ({
                         // filterByType(1, single);
                         setQuantityCount(1);
                         notInitialRender.current = false;
-                        setSelectedProductColor(single);
+                        setSelectedProductColor(single.colorId);
                       }}
                     />
                     <span className="checkmark"></span>

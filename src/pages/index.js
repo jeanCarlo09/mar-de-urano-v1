@@ -198,12 +198,12 @@ query ImagesLanding {
 
       wavesWithWebP {
         webP {
-          fluid(maxWidth: 1300) {
+          fluid(maxWidth: 1390, quality: 80) {
             src
           }
         }
         originalImage {
-          fluid(maxWidth: 1300) {
+          fluid(maxWidth: 1390, quality: 80) {
             src
           }
         }

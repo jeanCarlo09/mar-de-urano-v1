@@ -8,6 +8,7 @@ import Splash from '../components/landing/Splash';
 
 import "../assets/scss/mardeurano.scss";
 import { ImageRef } from '../components/landing/ImageRef';
+import { WebpIsSupported } from '../helpers/landing';
 
 export default function Index({ data }) {
 
@@ -16,8 +17,12 @@ export default function Index({ data }) {
   const diamonds = useMemo(() => get(landingPage, 'imageDiamonds.diamonds'));
   const imagesDiamonds = useMemo(() => get(landingPage, 'imageLandingArtDiamonds.images'));
 
+  // const supportedWebp = WebpIsSupported().then();
+  const [supportedWebp, setSupportedWebp] = useState(false);
+
   const countImages = useRef(0);
 
+  const [bitmap, setBitmap] = useState(null);
 
   const [show, setShow] = useState(false); //hook state to show modal with images art
   const [loading, setLoading] = useState(false); //state while image is charging in modal
@@ -39,14 +44,14 @@ export default function Index({ data }) {
   }
 
   const images = {
-    landingLogo: landingPage.landingLogo.fluid.src,
-    shopImg: landingPage.shopImg.fluid.src,
-    olasImg: landingPage.waves.fluid.src,
-    splash: landingPage.splash.fluid.src,
-    forest: landingPage.forest.fluid.src,
-    macaw: landingPage.macaw.fluid.src,
-    shark: landingPage.shark.fluid.src,
-    promotion: landingPage.promotion.fluid.src
+    landingLogo: supportedWebp ? landingPage.landingLogoWithWebP.webP.fluid.src : landingPage.landingLogoWithWebP.originalImage.fluid.src,
+    shopImg: supportedWebp ? landingPage.shopImgWithWebP.webP.fluid.src : landingPage.shopImgWithWebP.originalImage.fluid.src,
+    olasImg: supportedWebp ? landingPage.wavesWithWebP.webP.fluid.src : landingPage.wavesWithWebP.originalImage.fluid.src,
+    splash: supportedWebp ? landingPage.splashWithWebP.webP.fluid.src : landingPage.splashWithWebP.originalImage.fluid.src,
+    forest: supportedWebp ? landingPage.forestWithWebP.webP.fluid.src : landingPage.forestWithWebP.originalImage.fluid.src,
+    macaw: supportedWebp ? landingPage.macawWithWebP.webP.fluid.src : landingPage.macawWithWebP.originalImage.fluid.src,
+    shark: supportedWebp ? landingPage.sharkWithWebP.webP.fluid.src : landingPage.sharkWithWebP.originalImage.fluid.src,
+    promotion: supportedWebp ? landingPage.promotionWithWebP.webP.fluid.src : landingPage.promotionWithWebP.originalImage.fluid.src,
   }
 
   const imagesLength = useRef(Object.keys(images).length + diamonds.length);
@@ -60,6 +65,12 @@ export default function Index({ data }) {
   const changeStatePromotion = () => { // set the state to hide the instructions of diamonds and bottom shop
     setPromotion(true);
   }
+
+
+  useEffect(() => {
+    setBitmap(!window.createImageBitmap);
+    WebpIsSupported(bitmap, setSupportedWebp);
+  }, []);
 
   useEffect(() => { // hook to show the instructions of diamonds and bottom shop
     (promotion) && setTimeout(() => { setPromotion(false) }, 45000);
@@ -135,29 +146,22 @@ query ImagesLanding {
 
   allContentfulLandingPage {
     nodes {
-      macaw {
-        fluid(maxWidth: 500, quality: 80) {
-          src
-        }
-      }
-      splash {
-        fluid(maxWidth: 500, quality: 80) {
-          src
-        }
-      }
-      waves {
-        fluid(maxWidth: 1300, quality: 100) {
-          src
-        }
-      }
       imageDiamonds {
         diamonds {
           order
-          image {
-            fluid(quality: 80) {
-              src
+          imageWithWebP {
+            originalImage {
+              fluid {
+                src
+              }
+            }
+            webP {
+              fluid {
+                src
+              }
             }
           }
+
         }
       }
       imageLandingArtDiamonds {
@@ -170,31 +174,111 @@ query ImagesLanding {
           }
         }
       }
-      shark {
-        fluid {
-          src
+
+      landingLogoWithWebP{
+        originalImage {
+          fluid(maxWidth: 600, quality: 80) {
+            src
+          }
+        }
+        webP {
+          fluid(maxWidth: 600, quality: 80) {
+            src
+          }
         }
       }
-      promotion {
-        fluid(maxWidth: 500, quality: 80) {
-          src
+
+      wavesWithWebP {
+        webP {
+          fluid(maxWidth: 1300) {
+            src
+          }
+        }
+        originalImage {
+          fluid(maxWidth: 1300) {
+            src
+          }
         }
       }
-      landingLogo {
-        fluid(maxWidth: 600, quality: 80) {
-          src
+
+      forestWithWebP {
+        originalImage {
+          fluid {
+            src
+          }
+        }
+        webP {
+          fluid {
+            src
+          }
         }
       }
-      forest {
-        fluid {
-          src
+
+      macawWithWebP {
+        webP {
+          fluid(maxWidth: 500, quality: 80) {
+            src
+          }
+        }
+        originalImage {
+          fluid(maxWidth: 500, quality: 80) {
+            src
+          }
         }
       }
-      shopImg {
-        fluid(maxWidth: 99, quality: 100) {
-          src
+
+      promotionWithWebP {
+        webP {
+          fluid(maxWidth: 500, quality: 80) {
+            src
+          }
+        }
+        originalImage {
+          fluid(maxWidth: 500, quality: 80) {
+            src
+          }
         }
       }
+
+      sharkWithWebP {
+        originalImage {
+          fluid {
+            src
+          }
+        }
+        webP {
+          fluid {
+            src
+          }
+        }
+      }
+
+      shopImgWithWebP{
+        originalImage {
+          fluid(maxWidth: 99, quality: 100) {
+            src
+          }
+        }
+        webP {
+          fluid(maxWidth: 99, quality: 100) {
+            src
+          }
+        }
+      }
+
+      splashWithWebP{
+        originalImage {
+          fluid(maxWidth: 500, quality: 100) {
+            src
+          }
+        }
+        webP {
+          fluid(maxWidth: 500, quality: 100) {
+            src
+          }
+        }
+      }
+
     }
   }
 }

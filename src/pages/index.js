@@ -97,14 +97,14 @@ export default function Index({ data }) {
       <Splash img={images.splash} onLoadImgages={onLoadImgages} />
 
       <div className="landing-logo">
-        <ImageRef src={images.landingLogo} alt="logo mar de urano" className="landing-logo-img" onLoad={onLoadImgages} onError={onLoadImgages} />
+        <ImageRef src={images.landingLogo} alt="logo mar de urano" className="landing-logo-img" onLoad={onLoadImgages} onError={onLoadImgages} width="600" height="300" />
       </div>
 
 
       <div className="link">
         {(promotion) &&
           <div className="promotion">
-            <ImageRef src={images.promotion} alt="instructions" className="promotion-img" onLoad={onLoadImgages} onError={onLoadImgages} />
+            <ImageRef src={images.promotion} alt="instructions" className="promotion-img" onLoad={onLoadImgages} onError={onLoadImgages} width="300" height="208" />
             <div className="arrow bounce">
               <i className="fa fa-arrow-down fa-2x"></i>
             </div>
@@ -112,21 +112,21 @@ export default function Index({ data }) {
         }
 
         <Link to="/home">
-          <ImageRef src={images.shopImg} alt="img" className="link-img" onLoad={onLoadImgages} onError={onLoadImgages} />
+          <ImageRef src={images.shopImg} alt="img" className="link-img" onLoad={onLoadImgages} onError={onLoadImgages} width="130" height="80" />
         </Link>
       </div>
 
       <div className="contentOlas">
-        <ImageRef className="olas" src={images.olasImg} alt="waves" onLoad={onLoadImgages} onError={onLoadImgages} />
+        <ImageRef className="olas" src={images.olasImg} alt="waves" onLoad={onLoadImgages} onError={onLoadImgages} width="1550" height="500" />
       </div>
 
 
       <div className="contentBosque">
-        <ImageRef className="bosque" src={images.forest} alt="bosque" onLoad={onLoadImgages} onError={onLoadImgages} />
+        <ImageRef className="bosque" src={images.forest} alt="bosque" onLoad={onLoadImgages} onError={onLoadImgages} width="770" height="560" />
       </div>
 
       <div className="DIVGuacamaya">
-        <ImageRef className="Guacamaya" src={images.macaw} alt="Guacamaya" onLoad={onLoadImgages} onError={onLoadImgages} />
+        <ImageRef className="Guacamaya" src={images.macaw} alt="Guacamaya" onLoad={onLoadImgages} onError={onLoadImgages} width="310" height="110" />
       </div>
 
       <div className="contentTiburcio">

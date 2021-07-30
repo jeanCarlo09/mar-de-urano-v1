@@ -45,17 +45,6 @@ export default function Index({ data }) {
 
 
 
-  const imagesLength = useRef(Object.keys(images).length + diamonds.length);
-  // const [imagesLength, setImagesLength] = useState(Object.keys(images).length);
-
-  const onLoadImgages = () => { // when images in landing is charged, set state to stop charging in landing
-    (imagesLength.current <= 0) ? setTimeout(() => { setloadingImages(false); }, 2000) : imagesLength.current--;
-    // count of images in landing (+1 is because splash is two)
-  }
-
-  const changeStatePromotion = () => { // set the state to hide the instructions of diamonds and bottom shop
-    setPromotion(true);
-  }
 
 
   useEffect(() => {
@@ -81,6 +70,18 @@ export default function Index({ data }) {
     // macaw: landingPage.macawWithWebP.webP.fluid.src,
     // shark: landingPage.sharkWithWebP.webP.fluid.src,
     // promotion: landingPage.promotionWithWebP.webP.fluid.src,
+  }
+
+  const imagesLength = useRef(Object.keys(images).length + diamonds.length);
+  // const [imagesLength, setImagesLength] = useState(Object.keys(images).length);
+
+  const onLoadImgages = () => { // when images in landing is charged, set state to stop charging in landing
+    (imagesLength.current <= 0) ? setTimeout(() => { setloadingImages(false); }, 2000) : imagesLength.current--;
+    // count of images in landing (+1 is because splash is two)
+  }
+
+  const changeStatePromotion = () => { // set the state to hide the instructions of diamonds and bottom shop
+    setPromotion(true);
   }
 
   useEffect(() => { // hook to show the instructions of diamonds and bottom shop

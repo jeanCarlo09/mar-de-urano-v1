@@ -14,8 +14,8 @@ export const BlogRecentPosts = ({ posts }) => {
                         <li className="blog-sidebar-single mb-10 list-group-item" key={post.id}>
                             <div className="blog-sidebar-single-img">
 
-                                <Link to={`/blog?${post.handle}`} >
-                                    <img src={post.image.fixed.src} className="attachment-thumbnail size-thumbnail" alt="" loading="lazy" />
+                                <Link to={`/blog?${post.handle}`} >{''}
+                                    <img src={post.image.fixed.src} className="attachment-thumbnail size-thumbnail" alt={post.title} loading="lazy" />
                                 </Link>
                             </div>
 

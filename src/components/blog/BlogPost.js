@@ -31,7 +31,7 @@ export const BlogPost = ({ post }) => {
 
             <div className="blog-post-content">
                 <div className="blog-post-content-img mb-20">
-                    <img src={post.image.fixed.src} />
+                    <img src={post.image.fixed.src} alt={post.title} />
                 </div>
 
                 <span className="blog-post-content-description">

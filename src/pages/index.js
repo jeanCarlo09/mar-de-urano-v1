@@ -43,24 +43,7 @@ export default function Index({ data }) {
     setLoading(false);
   }
 
-  const images = {
-    // landingLogo: supportedWebp ? landingPage.landingLogoWithWebP.webP.fluid.src : landingPage.landingLogoWithWebP.originalImage.fluid.src,
-    // shopImg: supportedWebp ? landingPage.shopImgWithWebP.webP.fluid.src : landingPage.shopImgWithWebP.originalImage.fluid.src,
-    // olasImg: supportedWebp ? landingPage.wavesWithWebP.webP.fluid.src : landingPage.wavesWithWebP.originalImage.fluid.src,
-    // splash: supportedWebp ? landingPage.splashWithWebP.webP.fluid.src : landingPage.splashWithWebP.originalImage.fluid.src,
-    // forest: supportedWebp ? landingPage.forestWithWebP.webP.fluid.src : landingPage.forestWithWebP.originalImage.fluid.src,
-    // macaw: supportedWebp ? landingPage.macawWithWebP.webP.fluid.src : landingPage.macawWithWebP.originalImage.fluid.src,
-    // shark: supportedWebp ? landingPage.sharkWithWebP.webP.fluid.src : landingPage.sharkWithWebP.originalImage.fluid.src,
-    // promotion: supportedWebp ? landingPage.promotionWithWebP.webP.fluid.src : landingPage.promotionWithWebP.originalImage.fluid.src,
-    landingLogo: landingPage.landingLogoWithWebP.webP.fluid.src,
-    shopImg: landingPage.shopImgWithWebP.webP.fluid.src,
-    olasImg: landingPage.wavesWithWebP.webP.fluid.src,
-    splash: landingPage.splashWithWebP.webP.fluid.src,
-    forest: landingPage.forestWithWebP.webP.fluid.src,
-    macaw: landingPage.macawWithWebP.webP.fluid.src,
-    shark: landingPage.sharkWithWebP.webP.fluid.src,
-    promotion: landingPage.promotionWithWebP.webP.fluid.src,
-  }
+
 
   const imagesLength = useRef(Object.keys(images).length + diamonds.length);
   // const [imagesLength, setImagesLength] = useState(Object.keys(images).length);
@@ -80,6 +63,26 @@ export default function Index({ data }) {
     WebpIsSupported(bitmap, setSupportedWebp);
   }, []);
 
+
+  const images = {
+    landingLogo: supportedWebp ? landingPage.landingLogoWithWebP.webP.fluid.src : landingPage.landingLogoWithWebP.originalImage.fluid.src,
+    shopImg: supportedWebp ? landingPage.shopImgWithWebP.webP.fluid.src : landingPage.shopImgWithWebP.originalImage.fluid.src,
+    olasImg: supportedWebp ? landingPage.wavesWithWebP.webP.fluid.src : landingPage.wavesWithWebP.originalImage.fluid.src,
+    splash: supportedWebp ? landingPage.splashWithWebP.webP.fluid.src : landingPage.splashWithWebP.originalImage.fluid.src,
+    forest: supportedWebp ? landingPage.forestWithWebP.webP.fluid.src : landingPage.forestWithWebP.originalImage.fluid.src,
+    macaw: supportedWebp ? landingPage.macawWithWebP.webP.fluid.src : landingPage.macawWithWebP.originalImage.fluid.src,
+    shark: supportedWebp ? landingPage.sharkWithWebP.webP.fluid.src : landingPage.sharkWithWebP.originalImage.fluid.src,
+    promotion: supportedWebp ? landingPage.promotionWithWebP.webP.fluid.src : landingPage.promotionWithWebP.originalImage.fluid.src,
+    // landingLogo: landingPage.landingLogoWithWebP.webP.fluid.src,
+    // shopImg: landingPage.shopImgWithWebP.webP.fluid.src,
+    // olasImg: landingPage.wavesWithWebP.webP.fluid.src,
+    // splash: landingPage.splashWithWebP.webP.fluid.src,
+    // forest: landingPage.forestWithWebP.webP.fluid.src,
+    // macaw: landingPage.macawWithWebP.webP.fluid.src,
+    // shark: landingPage.sharkWithWebP.webP.fluid.src,
+    // promotion: landingPage.promotionWithWebP.webP.fluid.src,
+  }
+
   useEffect(() => { // hook to show the instructions of diamonds and bottom shop
     (promotion) && setTimeout(() => { setPromotion(false) }, 45000);
 
@@ -89,7 +92,7 @@ export default function Index({ data }) {
     <div className="index">
       {
         diamonds.map((diamond, key) => (
-          <Diamond key={key} selectDiamond={handleOnClick} onLoadImgages={onLoadImgages} diamond={diamond} />
+          <Diamond key={key} selectDiamond={handleOnClick} onLoadImgages={onLoadImgages} diamond={diamond} WebpIsSupported={supportedWebp} />
         ))
       }
 

@@ -8,7 +8,7 @@ const Diamond = ({ selectDiamond, onLoadImgages, diamond, WebpIsSupported = fals
     return (
         <div className="diamond">
             <a href="/#" onClick={selectDiamond}>
-                <ImageRef className="diamond-img" width="80" height="92" src={/*WebpIsSupported ?*/  diamond.imageWithWebP.webP.fluid.src /*: diamond.imageWithWebP.originalImage.fluid.src*/} alt="diamond" onLoad={onLoadImgages} onError={onLoadImgages} />
+                <ImageRef className="diamond-img" src={/*WebpIsSupported ?*/  diamond.imageWithWebP.webP.fluid.src /*: diamond.imageWithWebP.originalImage.fluid.src*/} alt="diamond" onLoad={onLoadImgages} onError={onLoadImgages} />
             </a>
         </div>
     )

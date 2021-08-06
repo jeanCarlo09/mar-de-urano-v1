@@ -163,12 +163,12 @@ query ImagesLanding {
           order
           imageWithWebP {
             originalImage {
-              fluid {
+              fluid(maxWidth: 90, quality: 100) {
                 src
               }
             }
             webP {
-              fluid {
+              fluid(maxWidth: 90, quality: 100) {
                 src
               }
             }

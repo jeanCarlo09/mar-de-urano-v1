@@ -1,6 +1,8 @@
-export const ADD_TO_WISHLIST = "ADD_TO_WISHLIST";
-export const DELETE_FROM_WISHLIST = "DELETE_FROM_WISHLIST";
-export const DELETE_ALL_FROM_WISHLIST = "DELETE_ALL_FROM_WISHLIST";
+import { types } from "../../types/types";
+
+// export const ADD_TO_WISHLIST = "ADD_TO_WISHLIST";
+// export const DELETE_FROM_WISHLIST = "DELETE_FROM_WISHLIST";
+// export const DELETE_ALL_FROM_WISHLIST = "DELETE_ALL_FROM_WISHLIST";
 
 // add to wishlist
 export const addToWishlist = (item, addToast) => {
@@ -11,7 +13,7 @@ export const addToWishlist = (item, addToast) => {
         autoDismiss: true,
       });
     }
-    dispatch({ type: ADD_TO_WISHLIST, payload: item });
+    dispatch({ type: types.addToWishlist, payload: item });
   };
 };
 
@@ -24,7 +26,7 @@ export const deleteFromWishlist = (item, addToast) => {
         autoDismiss: true,
       });
     }
-    dispatch({ type: DELETE_FROM_WISHLIST, payload: item });
+    dispatch({ type: types.deleteFromWishList, payload: item });
   };
 };
 
@@ -37,6 +39,6 @@ export const deleteAllFromWishlist = addToast => {
         autoDismiss: true,
       });
     }
-    dispatch({ type: DELETE_ALL_FROM_WISHLIST });
+    dispatch({ type: types.deleteAllFromWishList });
   };
 };

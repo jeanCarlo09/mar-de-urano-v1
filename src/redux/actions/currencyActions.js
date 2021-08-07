@@ -1,5 +1,6 @@
 import axios from "axios";
-export const SET_CURRENCY = "SET_CURRENCY";
+import { types } from "../../types/types";
+// export const SET_CURRENCY = "SET_CURRENCY";
 
 export const setCurrency = currencyName => {
   return dispatch => {
@@ -14,7 +15,7 @@ export const setCurrency = currencyName => {
           }
         }
         dispatch({
-          type: SET_CURRENCY,
+          type: types.setCurrency,
           payload: { currencyName, currencyRate },
         });
       })

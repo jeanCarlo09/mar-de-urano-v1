@@ -1,5 +1,7 @@
-export const ADD_TO_COMPARE = "ADD_TO_COMPARE";
-export const DELETE_FROM_COMPARE = "DELETE_FROM_COMPARE";
+// export const ADD_TO_COMPARE = "ADD_TO_COMPARE";
+// export const DELETE_FROM_COMPARE = "DELETE_FROM_COMPARE";
+
+import { types } from "../../types/types";
 
 // add to compare
 export const addToCompare = (item, addToast) => {
@@ -10,7 +12,7 @@ export const addToCompare = (item, addToast) => {
         autoDismiss: true,
       });
     }
-    dispatch({ type: ADD_TO_COMPARE, payload: item });
+    dispatch({ type: types.addToCompare, payload: item });
   };
 };
 
@@ -23,6 +25,6 @@ export const deleteFromCompare = (item, addToast) => {
         autoDismiss: true,
       });
     }
-    dispatch({ type: DELETE_FROM_COMPARE, payload: item });
+    dispatch({ type: types.deleteFromCompare, payload: item });
   };
 };

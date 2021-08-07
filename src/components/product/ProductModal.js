@@ -34,7 +34,7 @@ function ProductModal(props) {
   const [quantityCount, setQuantityCount] = useState(1);
 
   const [productCartQty, setProductCartQty] = useState(0);
-  const maxQuantity = useRef((product.availableForSale) ? 6 : 0);
+  const maxQuantity = useRef((product.availableForSale) ? process.env.GATSBY_MAX_QUANTITY_PRODUCTS : 0);
   product.maxQuantity = maxQuantity.current;
 
   const wishlistItem = props.wishlistitem;

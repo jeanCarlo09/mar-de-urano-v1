@@ -1,13 +1,14 @@
 import Client from "shopify-buy";
+import { types } from "../../types/types";
 
-export const INITIAL_CLIENT = "INITIAL_CLIENT";
-export const CREATE_CHECKOUT = "CREATE_CHECKOUT";
-export const UPDATE_CHECKOUT = "UPDATE_CHECKOUT";
+// export const INITIAL_CLIENT = "INITIAL_CLIENT";
+// export const CREATE_CHECKOUT = "CREATE_CHECKOUT";
+// export const UPDATE_CHECKOUT = "UPDATE_CHECKOUT";
 
-export const ADD_TO_CHECKOUT = "ADD_TO_CHECKOUT";
+// export const ADD_TO_CHECKOUT = "ADD_TO_CHECKOUT";
 
 const createShopifyClientSuccess = client => ({
-  type: INITIAL_CLIENT,
+  type: types.initialClient,
   payload: client,
 });
 
@@ -24,7 +25,7 @@ export const createShopifyClient = () => {
 export const addToCheckout = item => {
   return async dispatch => {
     dispatch({
-      type: ADD_TO_CHECKOUT,
+      type: types.addToCheckout,
       payload: item,
     });
   };

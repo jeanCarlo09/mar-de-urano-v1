@@ -1,8 +1,10 @@
-export const ADD_TO_CART = "ADD_TO_CART";
-export const DECREASE_QUANTITY = "DECREASE_QUANTITY";
-export const INCREASE_QUANTITY = "INCREASE_QUANTITY";
-export const DELETE_FROM_CART = "DELETE_FROM_CART";
-export const DELETE_ALL_FROM_CART = "DELETE_ALL_FROM_CART";
+import { types } from "../../types/types";
+
+// export const ADD_TO_CART = "ADD_TO_CART";
+// export const DECREASE_QUANTITY = "DECREASE_QUANTITY";
+// export const INCREASE_QUANTITY = "INCREASE_QUANTITY";
+// export const DELETE_FROM_CART = "DELETE_FROM_CART";
+// export const DELETE_ALL_FROM_CART = "DELETE_ALL_FROM_CART";
 
 //add to cart
 export const addToCart = (
@@ -21,7 +23,7 @@ export const addToCart = (
       addToast("Added To Cart", { appearance: "success", autoDismiss: true });
     }
     dispatch({
-      type: ADD_TO_CART,
+      type: types.addToCart,
       payload: {
         ...item,
         quantity: quantityCount,
@@ -60,7 +62,7 @@ export const decreaseQuantity = (item, addToast) => {
         autoDismiss: true,
       });
     }
-    dispatch({ type: DECREASE_QUANTITY, payload: item });
+    dispatch({ type: types.decreaseQuantity, payload: item });
   };
 };
 
@@ -73,7 +75,7 @@ export const increaseQuantity = (item, addToast) => {
         autoDismiss: true,
       });
     }
-    dispatch({ type: INCREASE_QUANTITY, payload: item });
+    dispatch({ type: types.increaseQuantity, payload: item });
   };
 };
 
@@ -83,7 +85,7 @@ export const deleteFromCart = (item, addToast) => {
     if (addToast) {
       addToast("Removed From Cart", { appearance: "error", autoDismiss: true });
     }
-    dispatch({ type: DELETE_FROM_CART, payload: item });
+    dispatch({ type: types.deleteFromCart, payload: item });
   };
 };
 //delete all from cart
@@ -95,7 +97,7 @@ export const deleteAllFromCart = addToast => {
         autoDismiss: true,
       });
     }
-    dispatch({ type: DELETE_ALL_FROM_CART });
+    dispatch({ type: types.deleteAllFromCart });
   };
 };
 

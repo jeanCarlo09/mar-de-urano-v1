@@ -219,6 +219,13 @@
         }
       }
 
+      &-header,
+      &-element {
+        display: flex;
+        display: flex;
+        align-items: center;
+      }
+
       &::after {
         display: block;
         content: "";

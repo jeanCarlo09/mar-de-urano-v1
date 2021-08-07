@@ -1,9 +1,10 @@
 import Client from "shopify-buy";
+import { types } from "../../types/types";
 
-import {
-  INITIAL_CLIENT,
-  ADD_TO_CHECKOUT,
-} from "../actions/shopifyCheckoutAction";
+// import {
+//   INITIAL_CLIENT,
+//   ADD_TO_CHECKOUT,
+// } from "../actions/shopifyCheckoutAction";
 
 const initState = {
   client: {},
@@ -13,13 +14,13 @@ const initState = {
 
 const shopifyCheckoutReducer = (state = initState, action) => {
   switch (action.type) {
-    case INITIAL_CLIENT:
+    case types.initialClient:
       return {
         ...state,
         client: action.payload,
       };
 
-    case ADD_TO_CHECKOUT:
+    case types.addToCheckout:
       const checkout = addToCheckout(state, action.payload);
 
       return {

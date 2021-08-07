@@ -15,16 +15,19 @@ export const BlogPostCard = ({ post }) => {
             <div className="blog-content-2">
                 <div className="post-meta">
 
-                    <span className="post-author">
-                        <span className="post-by">
-                            <i className="fas fa-user-alt post-meta-icon"></i>{post.author.name}
+                    <div className="post-meta-header">
+                        <span className="post-author post-meta-element">
+                            <span className="post-by">
+                                <i className="fas fa-user-alt post-meta-icon"></i>{post.author.name}
+                            </span>
                         </span>
-                    </span>
 
-                    <span className="posted-on ml-4">
-                        <i className="fas fa-calendar-alt post-meta-icon"></i>
-                        {moment(post.date).format('DD MMM, YYYY')}
-                    </span>
+
+                        <span className="posted-on ml-4 post-meta-element">
+                            <i className="fas fa-calendar-alt post-meta-icon"></i>
+                            {moment(post.date).format('DD MMM, YYYY')}
+                        </span>
+                    </div>
 
                     <h2 className="entry-title mt-4 mb-2"> <Link to={`/blog?${post.handle}`} >{post.title}</Link></h2>
                 </div>

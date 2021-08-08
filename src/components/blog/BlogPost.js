@@ -14,17 +14,19 @@ export const BlogPost = ({ post }) => {
 
                 <div className="blog-post-meta mt-20 mb-10">
 
-                    <span className="post-author">
-                        <span className="post-by">
-                            {/* <i class="far fa-user"></i> */}
-                            <i className="fas fa-user-alt blog-post-meta-icon"></i>{post.author.name}
+                    <div className="blog-post-meta-header">
+                        <span className="post-author blog-post-meta-element">
+                            <span className="post-by">
+                                {/* <i class="far fa-user"></i> */}
+                                <i className="fas fa-user-alt blog-post-meta-icon"></i>{post.author.name}
+                            </span>
                         </span>
-                    </span>
 
-                    <span className="posted-on ml-4">
-                        <i className="fas fa-calendar-alt blog-post-meta-icon"></i>
-                        {moment(post.date).format('DD MMM, YYYY')}
-                    </span>
+                        <span className="posted-on ml-4 blog-post-meta-element">
+                            <i className="fas fa-calendar-alt blog-post-meta-icon"></i>
+                            {moment(post.date).format('DD MMM, YYYY')}
+                        </span>
+                    </div>
 
                 </div>
             </div>

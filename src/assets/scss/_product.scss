@@ -2326,6 +2326,8 @@
     margin: 0;
     border-radius: 0;
     border: none;
+    display: flex;
+    align-items: center;
 
     &::before {
       box-shadow: none;
@@ -2343,6 +2345,7 @@
       margin: 0 15px 0;
       color: #666;
       cursor: pointer;
+      text-align: center;
     }
   }
 
@@ -2353,6 +2356,10 @@
     span {
       color: $black;
     }
+  }
+
+  &-text {
+    text-align: justify;
   }
 }
 

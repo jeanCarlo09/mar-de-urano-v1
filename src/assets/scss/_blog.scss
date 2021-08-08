@@ -498,6 +498,13 @@
         display: inline-block;
       }
     }
+
+    &-header,
+    &-element {
+      display: flex;
+      display: flex;
+      align-items: center;
+    }
   }
 
   .header-post {

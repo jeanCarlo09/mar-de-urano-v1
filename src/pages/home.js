@@ -12,6 +12,7 @@ import rootReducer from "../redux/reducers/rootReducer";
 
 import MarDeUranoApp from "../components/MarDeUranoApp";
 import HeaderApp from "../wrappers/header/HeaderApp";
+import "../assets/scss/style.scss";
 
 const Home = ({ data }) => {
   let store;

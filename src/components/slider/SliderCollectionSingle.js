@@ -12,7 +12,7 @@ const SliderCollectionSingle = ({ data, sliderClass }) => {
         >
             <div className="container">
                 <div className="row">
-                    <div className="col-xl-6 col-lg-7 col-md-8 col-12 ml-auto">
+                    <div className="col-xl-6 col-lg-7 col-md-8 col-12 content-slider-collections">
                         <div className="slider-content-3 slider-animated-1 text-center">
                             <h3 className="animated">{data.subTitle}</h3>
                             <h1 className="animated">{data.title}</h1>

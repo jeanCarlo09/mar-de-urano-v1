@@ -12,7 +12,6 @@ import { fetchCollectionDetails, fetchCollections } from "../redux/actions/colle
 import rootReducer from "../redux/reducers/rootReducer";
 import MarDeUranoApp from "../components/MarDeUranoApp";
 import CollectionsApp from "../components/CollectionsApp";
-import "../assets/scss/style.scss";
 
 const Collections = ({ data, location }) => {
 

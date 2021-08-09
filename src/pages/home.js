@@ -12,7 +12,7 @@ import rootReducer from "../redux/reducers/rootReducer";
 
 import MarDeUranoApp from "../components/MarDeUranoApp";
 import HeaderApp from "../wrappers/header/HeaderApp";
-import "../assets/scss/style.scss";
+import ShopLayout from "../components/layouts/ShopLayout";
 
 const Home = ({ data }) => {
   let store;
@@ -57,60 +57,62 @@ const Home = ({ data }) => {
   return (
     <Provider store={store}>
       <MarDeUranoApp>
-        <Fragment>
-          <div className="fullpage-slider-wrapper">
-            <Header>
-              <HeaderApp
-                logo={logoHeader}
-                layout="container-fluid"
-                headerPaddingClass="header-padding-1"
-                headerBgClass="bg-white"
-              />
-            </Header>
-            <SectionsContainer {...options} className="bg-gray-7">
-              {sliderData &&
-                sliderData.length > 0 &&
-                sliderData.map((single, key) => {
-                  const banner = get(single, "banner.fixed.src");
+        <ShopLayout headerTop="visible">
+          <Fragment>
+            <div className="fullpage-slider-wrapper">
+              <Header>
+                <HeaderApp
+                  logo={logoHeader}
+                  layout="container-fluid"
+                  headerPaddingClass="header-padding-1"
+                  headerBgClass="bg-white"
+                />
+              </Header>
+              <SectionsContainer {...options} className="bg-gray-7">
+                {sliderData &&
+                  sliderData.length > 0 &&
+                  sliderData.map((single, key) => {
+                    const banner = get(single, "banner.fixed.src");
 
-                  return (
-                    <div
-                      key={key}
-                      className="section-background-image"
-                      style={{ backgroundImage: `url(${banner})` }}
-                    >
-                      <Section>
-                        <div className="slider-section flone-fp-section">
-                          <div className="container">
-                            <div className="row fullpage-slider-wrap-mrg">
-                              <div className="col-lg-6 col-md-6 col-sm-6 col-12 d-flex align-items-center">
-                                <div className="slider-content-11 slider-animated-1 fullpage-slider-mrg fullpage-content">
-                                  <h3 className="animated text-white">
-                                    {single.title}
-                                  </h3>
-                                  <h1
-                                    className="animated text-white"
-                                    dangerouslySetInnerHTML={{
-                                      __html: single.subtitle,
-                                    }}
-                                  />
-                                  <div className="slider-btn-11 btn-hover border-white">
-                                    <a className="animated " href={single.url}>
-                                      {single.textoBotn}
-                                    </a>
+                    return (
+                      <div
+                        key={key}
+                        className="section-background-image"
+                        style={{ backgroundImage: `url(${banner})` }}
+                      >
+                        <Section>
+                          <div className="slider-section flone-fp-section">
+                            <div className="container">
+                              <div className="row fullpage-slider-wrap-mrg">
+                                <div className="col-lg-6 col-md-6 col-sm-6 col-12 d-flex align-items-center">
+                                  <div className="slider-content-11 slider-animated-1 fullpage-slider-mrg fullpage-content">
+                                    <h3 className="animated text-white">
+                                      {single.title}
+                                    </h3>
+                                    <h1
+                                      className="animated text-white"
+                                      dangerouslySetInnerHTML={{
+                                        __html: single.subtitle,
+                                      }}
+                                    />
+                                    <div className="slider-btn-11 btn-hover border-white">
+                                      <a className="animated " href={single.url}>
+                                        {single.textoBotn}
+                                      </a>
+                                    </div>
                                   </div>
                                 </div>
                               </div>
                             </div>
                           </div>
-                        </div>
-                      </Section>
-                    </div>
-                  );
-                })}
-            </SectionsContainer>
-          </div>
-        </Fragment>
+                        </Section>
+                      </div>
+                    );
+                  })}
+              </SectionsContainer>
+            </div>
+          </Fragment>
+        </ShopLayout>
       </MarDeUranoApp>
     </Provider>
   );

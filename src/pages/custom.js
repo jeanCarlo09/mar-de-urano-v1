@@ -1,17 +1,21 @@
 import React from 'react';
+
+import { graphql } from 'gatsby';
+import { Provider } from 'react-redux';
 import { applyMiddleware, createStore } from 'redux';
-import rootReducer from '../redux/reducers/rootReducer';
+import thunk from "redux-thunk";
 import { save, load } from "redux-localstorage-simple";
 import { composeWithDevTools } from "redux-devtools-extension";
-import { Provider } from 'react-redux';
-import thunk from "redux-thunk";
+import { get } from 'lodash';
+
+import rootReducer from '../redux/reducers/rootReducer';
+
+import { fetchProducts } from '../redux/actions/productActions';
 
 import MarDeUranoApp from '../components/MarDeUranoApp';
 import CustomApp from '../components/CustomApp';
-import { graphql } from 'gatsby';
+
 import { getProductsWithCustom } from '../helpers/product';
-import { get } from 'lodash';
-import { fetchProducts } from '../redux/actions/productActions';
 
 const Custom = ({ data, location }) => {
 

@@ -12,7 +12,6 @@ import { fetchProducts } from "../redux/actions/productActions";
 
 import MarDeUranoApp from "../components/MarDeUranoApp";
 import Cart from "../components/Cart";
-import ShopLayout from "../components/layouts/ShopLayout";
 
 const CartPage = () => {
   let store;
@@ -35,9 +34,7 @@ const CartPage = () => {
   return (
     <Provider store={store}>
       <MarDeUranoApp>
-        <ShopLayout headerTop="visible">
-          <Cart />
-        </ShopLayout>
+        <Cart />
       </MarDeUranoApp>
     </Provider>
   );

@@ -40,14 +40,14 @@ const CollectionDescriptionSticky = ({
             <div className="col-lg-6 col-md-6">
               <CollectionImageGallerySticky collection={collection} />
             </div>
-            <div className="col-lg-6 col-md-6 mt-30">
+            {/* <div className="col-lg-6 col-md-6 mt-30">
               <Sticky
                 boundaryElement=".container-fluid"
                 style={{ position: "relative", marginTop: '10px' }}
               >
                 <CollectionDescriptionInfo collection={collection}></CollectionDescriptionInfo>
               </Sticky>
-            </div>
+            </div> */}
           </div>
         </div>
 

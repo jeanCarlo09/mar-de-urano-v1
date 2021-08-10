@@ -6,8 +6,7 @@ import { connect } from "react-redux";
 
 import ShopLayout from "./layouts/ShopLayout";
 import CollectionList from "./collection/CollectionList";
-import CollectionDescriptionSticky from "./collection/CollectionDescriptionSticky";
-// import CollectionDescriptionSticky from "../wrappers/collection/CollectionDescriptionSticky";
+import CollectionDescriptionSticky from "../wrappers/collection/CollectionDescriptionSticky";
 
 
 const CollectionsApp = ({ collectionDetail }) => {

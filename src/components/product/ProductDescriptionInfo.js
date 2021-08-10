@@ -1,10 +1,10 @@
 import PropTypes from "prop-types";
-import React, { Fragment, useState, useEffect, useRef } from "react";
-import { Link } from "react-router-dom";
+import React, { useState, useEffect, useRef } from "react";
 import { connect } from "react-redux";
 import get from "lodash/get";
 import truncate from "lodash/truncate";
 import uniq from "lodash/uniq";
+import parse from 'html-react-parser';
 
 import { getProductQuantity } from "../../helpers/product";
 import { addToCart } from "../../redux/actions/cartActions";
@@ -291,16 +291,17 @@ const ProductDescriptionInfo = ({
       <h2>{product.title}</h2>
       <div className="product-details-price">
         {discountedPrice !== null && discountedPrice > 0 ? (
-          <Fragment>
+          <>
             <span>{currency + " " + finalDiscountedPrice}</span>{" "}
             <span className="old">{currency + finalProductPrice}</span>
-          </Fragment>
+          </>
         ) : (
           <span>{currency + " " + finalProductPrice} </span>
         )}
       </div>
       <div className="pro-details-list">
-        <p dangerouslySetInnerHTML={{ __html: shortDescription }}></p>
+        {/* <p dangerouslySetInnerHTML={{ __html: shortDescription }}></p> */}
+        {parse(product.descriptionHtml)}
       </div>
 
       <div className="pro-details-size-color">
@@ -528,7 +529,7 @@ const ProductDescriptionInfo = ({
         </div>
       </div>
 
-      {product.category ? (
+      {/* {product.category ? (
         <div className="pro-details-meta">
           <span>Categories :</span>
           <ul>
@@ -545,7 +546,7 @@ const ProductDescriptionInfo = ({
         </div>
       ) : (
         ""
-      )}
+      )} */}
 
       <SocialMedia></SocialMedia>
 

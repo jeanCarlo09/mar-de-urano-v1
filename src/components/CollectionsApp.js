@@ -5,17 +5,19 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 
 import ShopLayout from "./layouts/ShopLayout";
-import CollectionList from "./collection/CollectionList";
-import CollectionDescriptionSticky from "../wrappers/collection/CollectionDescriptionSticky";
+// import CollectionList from "./collection/CollectionList";
+// import CollectionDescriptionSticky from "../wrappers/collection/CollectionDescriptionSticky";
+import CollectionSection from "./collection/CollectionSection";
 
 
 const CollectionsApp = ({ collectionDetail }) => {
   return (
     <ShopLayout headerTop="visible">
-      {(collectionDetail)
+      {/* {(collectionDetail)
         ? <CollectionDescriptionSticky></CollectionDescriptionSticky>
         : <CollectionList></CollectionList>
-      }
+      } */}
+      <CollectionSection collectionDetail={collectionDetail} />
     </ShopLayout>
   );
 };

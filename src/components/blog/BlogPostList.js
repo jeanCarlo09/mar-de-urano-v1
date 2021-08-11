@@ -15,6 +15,7 @@ const BlogPostList = ({ posts, single, postActive, categoriesActives }) => {
     const [currentPage, setCurrentPage] = useState(1);
     const [currentData, setCurrentData] = useState([]);
     const [data, setData] = useState([...posts]);
+    const [client, setClient] = useState(false);
 
     useEffect(() => {
         categoriesActives && setData(postsWithCategoriesActives(posts, categoriesActives));
@@ -22,6 +23,11 @@ const BlogPostList = ({ posts, single, postActive, categoriesActives }) => {
 
 
     const pageLimit = 5;
+
+
+    useEffect(() => {
+        setClient(true);
+    }, []);
 
     useEffect(() => {
         setCurrentData(data.slice(offset, offset + pageLimit));
@@ -33,7 +39,7 @@ const BlogPostList = ({ posts, single, postActive, categoriesActives }) => {
 
             <div className="post">
                 {
-                    (single)
+                    client && ((single)
                         ?
                         <BlogPost post={postActive}></BlogPost>
                         :
@@ -59,6 +65,7 @@ const BlogPostList = ({ posts, single, postActive, categoriesActives }) => {
                                 />
                             </div>
                         </>
+                    )
                 }
             </div>
 

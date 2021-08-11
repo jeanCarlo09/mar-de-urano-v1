@@ -48,7 +48,6 @@ const Cart = props => {
     setClient(true);
   }, []);
 
-  console.log(client);
   return (
 
     <ShopLayout headerTop="visible">

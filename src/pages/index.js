@@ -17,6 +17,8 @@ export default function Index({ data }) {
   const diamonds = useMemo(() => get(landingPage, 'imageDiamonds.diamonds'));
   const imagesDiamonds = useMemo(() => get(landingPage, 'imageLandingArtDiamonds.images'));
 
+  // console.log(landingPage.landingLogoSmallWithWebP);
+
   // const supportedWebp = WebpIsSupported().then();
   const [supportedWebp, setSupportedWebp] = useState(false);
 
@@ -102,13 +104,14 @@ export default function Index({ data }) {
 
       <div className="landing-logo">
         <ImageRef src={images.landingLogo} alt="logo mar de urano" className="landing-logo-img" onLoad={onLoadImgages} onError={onLoadImgages} width="600" height="300" />
+        <ImageRef src={landingPage.landingLogoSmallWithWebP.webP.fluid.src} alt="logo mar de urano" className="landing-logo-small-img" onLoad={onLoadImgages} onError={onLoadImgages} />
       </div>
 
 
       <div className="link">
         {(promotion) &&
           <div className="promotion">
-            <ImageRef src={images.promotion} alt="instructions" className="promotion-img" onLoad={onLoadImgages} onError={onLoadImgages} width="300" height="208" />
+            <ImageRef src={images.promotion} alt="instructions" className="promotion-img" onLoad={onLoadImgages} onError={onLoadImgages} />
             <div className="arrow bounce">
               <i className="fa fa-arrow-down fa-2x"></i>
             </div>
@@ -285,6 +288,19 @@ query ImagesLanding {
           }
         }
         webP {
+          fluid(maxWidth: 500, quality: 100) {
+            src
+          }
+        }
+      }
+
+      landingLogoSmallWithWebP {
+        webP {
+          fluid(maxWidth: 400, quality: 100) {
+            src
+          }
+        }
+        originalImage {
           fluid(maxWidth: 500, quality: 100) {
             src
           }
